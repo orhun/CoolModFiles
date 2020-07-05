@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
+    <script type="text/javascript" src="js/chiptune2.js"></script>
+    <script type="text/javascript" src="js/libopenmpt.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <button id="btnPlay">play</button>
+    <button onclick="player.stop(); clearInterval(tick)">stop</button>
+    <input
+      id="seekbar"
+      type="range"
+      min="0"
+      max="100"
+      onchange="player.seek(document.getElementById('seekbar').value);"
+    />
+    <p id="play"></p>
+  </body>
+</html>
