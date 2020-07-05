@@ -1,0 +1,24 @@
+{
+  "name": "coolmodfiles",
+  "version": "1.0.0",
+  "description": "Cool & chill mod file player",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "keywords": [
+    "cool",
+    "chill",
+    "music",
+    "nostalgia"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "next": "^9.4.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
