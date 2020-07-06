@@ -3,13 +3,7 @@ var libopenmpt = { };
 
 libopenmpt.locateFile = function(name) {
     return `./bin/${name}`;
-  };
-
-function asciiToStack(str) {
-  var stackStr = stackAlloc(str.length + 1);
-  writeAsciiToMemory(str, stackStr);
-  return stackStr;
-}
+};
 
 // audio context
 ChiptuneAudioContext = AudioContext || webkitAudioContext;
@@ -131,7 +125,7 @@ ChiptuneJsPlayer.prototype.stop = function() {
 
 ChiptuneJsPlayer.prototype.setRepeatCount = function(repeatCount) {
     this.config.repeatCount = repeatCount;
-	libopenmpt._openmpt_module_set_repeat_count(this.currentPlayingNode.modulePtr, repeatCount);
+	  libopenmpt._openmpt_module_set_repeat_count(this.currentPlayingNode.modulePtr, repeatCount);
 }
 
 ChiptuneJsPlayer.prototype.createLibopenmptNode = function(buffer, config) {
@@ -154,6 +148,7 @@ ChiptuneJsPlayer.prototype.createLibopenmptNode = function(buffer, config) {
   processNode.paused = false;
   processNode.leftBufferPtr  = libopenmpt._malloc(4 * maxFramesPerChunk);
   processNode.rightBufferPtr = libopenmpt._malloc(4 * maxFramesPerChunk);
+
   processNode.cleanup = function() {
     if (this.modulePtr != 0) {
       libopenmpt._openmpt_module_destroy(this.modulePtr);
@@ -168,10 +163,12 @@ ChiptuneJsPlayer.prototype.createLibopenmptNode = function(buffer, config) {
       this.rightBufferPtr = 0;
     }
   }
+
   processNode.stop = function() {
     this.disconnect();
     this.cleanup();
   }
+
   processNode.onaudioprocess = function(e) {
     var outputL = e.outputBuffer.getChannelData(0);
     var outputR = e.outputBuffer.getChannelData(1);
@@ -223,4 +220,10 @@ ChiptuneJsPlayer.prototype.createLibopenmptNode = function(buffer, config) {
     }
   }
   return processNode;
+}
+
+function asciiToStack(str) {
+  var stackStr = stackAlloc(str.length + 1);
+  writeAsciiToMemory(str, stackStr);
+  return stackStr;
 }
