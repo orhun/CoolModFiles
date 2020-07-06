@@ -128,6 +128,12 @@ ChiptuneJsPlayer.prototype.stop = function() {
   }
 }
 
+ChiptuneJsPlayer.prototype.togglePause = function() {
+	if (this.currentPlayingNode != null) {
+    this.currentPlayingNode.togglePause();
+  }
+}
+
 ChiptuneJsPlayer.prototype.setRepeatCount = function(repeatCount) {
     this.config.repeatCount = repeatCount;
 	  libopenmpt._openmpt_module_set_repeat_count(this.currentPlayingNode.modulePtr, repeatCount);
@@ -170,6 +176,18 @@ ChiptuneJsPlayer.prototype.createLibopenmptNode = function(buffer, config) {
   processNode.stop = function() {
     this.disconnect();
     this.cleanup();
+  }
+
+  processNode.pause = function() {
+    this.paused = true;
+  }
+
+  processNode.unpause = function() {
+    this.paused = false;
+  }
+
+  processNode.togglePause = function() {
+    this.paused = !this.paused;
   }
 
   processNode.onaudioprocess = function(e) {

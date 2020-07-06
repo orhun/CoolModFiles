@@ -51,10 +51,10 @@ function Index() {
           <button
             onClick={() => {
               clearInterval(interval);
-              player.stop();
+              player.togglePause();
             }}
           >
-            stop
+            pause
           </button>
           <input
             type="range"
