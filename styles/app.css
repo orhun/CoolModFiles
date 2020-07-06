@@ -17,11 +17,20 @@ body {
     Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-weight: 400;
   line-height: 1.5;
-  background-color: var(--c-primary);
-  color: var(--c-text);
+  background-color: black;
+  color: white;
 }
 
 img {
   max-width: 100%;
   vertical-align: middle;
+}
+
+#app {
+  background-image: url("/images/bg.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  opacity: 0.7;
+  height: 100vh;
 }

@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }) {
         <script src="/chiptune2.js"></script>
         <script src="/libopenmpt.js"></script>
       </Head>
-      <Component {...pageProps} />
+      <Component {...pageProps}/>
     </div>
   );
 }

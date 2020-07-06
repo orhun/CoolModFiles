@@ -44,7 +44,7 @@ function Index() {
   };
 
   return (
-    <div>
+    <div id="app">
       <h1>Mod music player</h1>
       <button onClick={playRandom}>Play Random</button>
       {player?.currentPlayingNode && (
