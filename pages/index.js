@@ -12,6 +12,7 @@ function Index() {
   const [meteData, setMetaData] = React.useState({});
   const [duration, setDuration] = React.useState(-1);
   const [prog, setProg] = React.useState(0);
+  let interval;
 
   React.useEffect(() => {
     libopenmpt.onRuntimeInitialize = function () {
@@ -29,8 +30,13 @@ function Index() {
     player.load(`jsplayer.php?moduleid=${r}`, (buffer) => {
       player.play(buffer);
       setMetaData(player.metadata());
-      setDuration(player.duration())
+      setDuration(player.duration());
       setTrackId(r);
+      interval = setInterval(() => {
+        try {
+          setProg(player.getPosition());
+        } catch (error) {}
+      }, 500);
     });
   };
 
@@ -38,12 +44,29 @@ function Index() {
     <div>
       <h1>Mod music player</h1>
       <button onClick={playRandom}>Play Random</button>
-      <button onClick={() => player.stop()}>stop</button>
-      <input type="range" min="0" max={duration} value={prog} onChange={(e) => {{
-        setDuration(e.target.value);
-        player.seek(e.target.value)
-      }}}/>
-      <p>{JSON.stringify(meteData)}</p>
+      {player?.currentPlayingNode && (
+        <React.Fragment>
+          <button
+            onClick={() => {
+              clearInterval(interval);
+              player.stop();
+            }}
+          >
+            stop
+          </button>
+          <input
+            type="range"
+            min="0"
+            max={duration}
+            value={prog}
+            onChange={(e) => {
+              setProg(e.target.value);
+              player.seek(e.target.value);
+            }}
+          />
+          <p>{JSON.stringify(meteData)}</p>
+        </React.Fragment>
+      )}
     </div>
   );
 }
