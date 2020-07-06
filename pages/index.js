@@ -1,5 +1,7 @@
 import React from "react";
 
+const RANDOM_MAX = 189573;
+
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -26,12 +28,12 @@ function Index() {
   };
 
   const playRandom = function () {
-    const r = getRandomInt(0, 189573);
-    player.load(`jsplayer.php?moduleid=${r}`, (buffer) => {
+    const id = getRandomInt(0, RANDOM_MAX);
+    player.load(`jsplayer.php?moduleid=${id}`, (buffer) => {
       player.play(buffer);
       setMetaData(player.metadata());
       setDuration(player.duration());
-      setTrackId(r);
+      setTrackId(id);
       interval = setInterval(() => {
         try {
           setProg(player.getPosition());
