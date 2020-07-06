@@ -78,44 +78,7 @@ ChiptuneJsPlayer.prototype.metadata = function() {
   return data;
 }
 
-// playing, etc
-ChiptuneJsPlayer.prototype.unlock = function() {
-
-  var context = this.context;
-  var buffer = context.createBuffer(1, 1, 22050);
-  var unlockSource = context.createBufferSource();
-
-  unlockSource.buffer = buffer;
-  unlockSource.connect(context.destination);
-  unlockSource.start(0);
-
-  this.touchLocked = false;
-}
-
-ChiptuneJsPlayer.prototype.subsongs = function() {
-  var module = this.currentPlayingNode.modulePtr;
-  var subsongs = libopenmpt._openmpt_module_get_num_subsongs(module);
-  var names = []
-  for (var i = 0; i < subsongs; i++) {
-    var namePtr = libopenmpt._openmpt_module_get_subsong_name(module, i);
-    var name = UTF8ToString(namePtr);
-    if(name != "") {
-      names.push(name)
-    } else {
-      names.push("Subsong " + (i + 1));
-    }
-    libopenmpt._openmpt_free_string(namePtr);
-  }
-  return names;
-}
-
 ChiptuneJsPlayer.prototype.load = function(input, callback) {
-
-  if (this.touchLocked)
-  {
-    this.unlock();
-  }
-
   var player = this;
   if (input instanceof File) {
     var reader = new FileReader();
@@ -166,19 +129,9 @@ ChiptuneJsPlayer.prototype.stop = function() {
   }
 }
 
-ChiptuneJsPlayer.prototype.togglePause = function() {
-	if (this.currentPlayingNode != null) {
-    this.currentPlayingNode.togglePause();
-  }
-}
-
 ChiptuneJsPlayer.prototype.setRepeatCount = function(repeatCount) {
     this.config.repeatCount = repeatCount;
 	libopenmpt._openmpt_module_set_repeat_count(this.currentPlayingNode.modulePtr, repeatCount);
-}
-
-ChiptuneJsPlayer.prototype.selectSubsong = function(subsong) {
-	libopenmpt._openmpt_module_select_subsong(this.currentPlayingNode.modulePtr, subsong);
 }
 
 ChiptuneJsPlayer.prototype.createLibopenmptNode = function(buffer, config) {
@@ -218,15 +171,6 @@ ChiptuneJsPlayer.prototype.createLibopenmptNode = function(buffer, config) {
   processNode.stop = function() {
     this.disconnect();
     this.cleanup();
-  }
-  processNode.pause = function() {
-    this.paused = true;
-  }
-  processNode.unpause = function() {
-    this.paused = false;
-  }
-  processNode.togglePause = function() {
-    this.paused = !this.paused;
   }
   processNode.onaudioprocess = function(e) {
     var outputL = e.outputBuffer.getChannelData(0);
