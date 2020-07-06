@@ -15,6 +15,7 @@ function ChiptuneJsPlayer(config) {
   this.config = config;
   this.currentPlayingNode = null;
   this.handlers = [];
+  this.touchLocked = true;
 }
 
 ChiptuneJsPlayer.prototype.fireEvent = function (eventName, response) {
@@ -66,7 +67,20 @@ ChiptuneJsPlayer.prototype.metadata = function() {
   return data;
 }
 
+ChiptuneJsPlayer.prototype.unlock = function() {
+  var context = this.context;
+  var buffer = context.createBuffer(1, 1, 22050);
+  var unlockSource = context.createBufferSource();
+  unlockSource.buffer = buffer;
+  unlockSource.connect(context.destination);
+  unlockSource.start(0);
+  this.touchLocked = false;
+}
+
 ChiptuneJsPlayer.prototype.load = function(input, callback) {
+  if (this.touchLocked) {
+    this.unlock();
+  }
   var player = this;
   if (input instanceof File) {
     var reader = new FileReader();
