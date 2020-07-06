@@ -110,9 +110,9 @@ ChiptuneJsPlayer.prototype.load = function (input, callback) {
           return response.arrayBuffer();
         }
       })
-      .then((buffer) => callback(buffer))
+      .then((buffer) => callback(buffer, null))
       .catch((error) => {
-        console.error(error);
+        callback(buffer, error);
         player.fireEvent("onError", { type: "onxhr" });
       });
   }

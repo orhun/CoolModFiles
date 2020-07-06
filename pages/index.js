@@ -29,7 +29,11 @@ function Index() {
 
   const playRandom = function () {
     const id = getRandomInt(0, RANDOM_MAX);
-    player.load(`jsplayer.php?moduleid=${id}`, (buffer) => {
+    player.load(`jsplayer.php?moduleid=${id}`, (buffer, error) => {
+      if (error) {
+        playRandom();
+        return;
+      }
       player.play(buffer);
       setMetaData(player.metadata());
       setDuration(player.duration());
