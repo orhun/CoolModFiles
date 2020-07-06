@@ -17,10 +17,7 @@ function Index() {
   let interval;
 
   React.useEffect(() => {
-    libopenmpt.onRuntimeInitialize = function () {
-      initPlayer();
-    };
-    libopenmpt.onRuntimeInitialize();
+    initPlayer();
   }, []);
 
   const initPlayer = function () {
