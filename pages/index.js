@@ -24,7 +24,7 @@ function Index() {
   }, []);
 
   const initPlayer = function () {
-    setPlayer(new ChiptuneJsPlayer(new ChiptuneJsConfig(-1)));
+    setPlayer(new ChiptuneJsPlayer(new ChiptuneJsConfig(0)));
   };
 
   const playRandom = function () {
