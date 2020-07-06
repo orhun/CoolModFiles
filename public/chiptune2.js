@@ -1,19 +1,15 @@
-// based on https://deskjet.github.io/chiptune2.js/
 var libopenmpt = { };
 
 libopenmpt.locateFile = function(name) {
     return `./bin/${name}`;
 };
 
-// audio context
 ChiptuneAudioContext = AudioContext || webkitAudioContext;
 
-// config
 function ChiptuneJsConfig(repeatCount) {
   this.repeatCount = repeatCount;
 }
 
-// player
 function ChiptuneJsPlayer(config) {
   this.context = new ChiptuneAudioContext;
   this.config = config;
@@ -21,7 +17,6 @@ function ChiptuneJsPlayer(config) {
   this.handlers = [];
 }
 
-// event handlers section
 ChiptuneJsPlayer.prototype.fireEvent = function (eventName, response) {
   var  handlers = this.handlers;
   if (handlers.length) {
@@ -45,7 +40,6 @@ ChiptuneJsPlayer.prototype.onError = function (handler) {
   this.addHandler('onError', handler);
 }
 
-// metadata
 ChiptuneJsPlayer.prototype.duration = function() {
   return libopenmpt._openmpt_module_get_duration_seconds(this.currentPlayingNode.modulePtr);
 }
@@ -77,7 +71,7 @@ ChiptuneJsPlayer.prototype.load = function(input, callback) {
   if (input instanceof File) {
     var reader = new FileReader();
     reader.onload = function() {
-      return callback(reader.result); // no error
+      return callback(reader.result);
     }.bind(this);
     reader.readAsArrayBuffer(input);
   } else {
@@ -85,8 +79,8 @@ ChiptuneJsPlayer.prototype.load = function(input, callback) {
     xhr.open('GET', `https://modarchive.org/${input}`, true);
     xhr.responseType = 'arraybuffer';
     xhr.onload = function(e) {
-      if (xhr.status === 200 /*&& e.total*/) {
-        return callback(xhr.response); // no error
+      if (xhr.status === 200) {
+        return callback(xhr.response);
       } else {
         player.fireEvent('onError', {type: 'onxhr'});
       }
@@ -107,10 +101,7 @@ ChiptuneJsPlayer.prototype.play = function(buffer) {
   if (processNode == null) {
     return;
   }
-
-  // set config options on module
   libopenmpt._openmpt_module_set_repeat_count(processNode.modulePtr, this.config.repeatCount);
-
   this.currentPlayingNode = processNode;
   processNode.connect(this.context.destination);
 }
@@ -129,8 +120,6 @@ ChiptuneJsPlayer.prototype.setRepeatCount = function(repeatCount) {
 }
 
 ChiptuneJsPlayer.prototype.createLibopenmptNode = function(buffer, config) {
-  // TODO error checking in this whole function
-
   var maxFramesPerChunk = 4096;
   var processNode = this.context.createScriptProcessor(2048, 0, 2);
   processNode.config = config;
@@ -138,17 +127,17 @@ ChiptuneJsPlayer.prototype.createLibopenmptNode = function(buffer, config) {
   var byteArray = new Int8Array(buffer);
   var ptrToFile = libopenmpt._malloc(byteArray.byteLength);
   libopenmpt.HEAPU8.set(byteArray, ptrToFile);
-  processNode.modulePtr = libopenmpt._openmpt_module_create_from_memory(ptrToFile, byteArray.byteLength, 0, 0, 0);
-
+  processNode.modulePtr = libopenmpt._openmpt_module_create_from_memory(ptrToFile,
+    byteArray.byteLength, 0, 0, 0);
   var stack = stackSave();
-  libopenmpt._openmpt_module_ctl_set(processNode.modulePtr, asciiToStack('render.resampler.emulate_amiga'), asciiToStack('1'));
-  libopenmpt._openmpt_module_ctl_set(processNode.modulePtr, asciiToStack('render.resampler.emulate_amiga_type'), asciiToStack('a1200'));
+  libopenmpt._openmpt_module_ctl_set(processNode.modulePtr,
+    asciiToStack('render.resampler.emulate_amiga'), asciiToStack('1'));
+  libopenmpt._openmpt_module_ctl_set(processNode.modulePtr,
+    asciiToStack('render.resampler.emulate_amiga_type'), asciiToStack('a1200'));
   stackRestore(stack);
-
   processNode.paused = false;
   processNode.leftBufferPtr  = libopenmpt._malloc(4 * maxFramesPerChunk);
   processNode.rightBufferPtr = libopenmpt._malloc(4 * maxFramesPerChunk);
-
   processNode.cleanup = function() {
     if (this.modulePtr != 0) {
       libopenmpt._openmpt_module_destroy(this.modulePtr);
@@ -197,7 +186,6 @@ ChiptuneJsPlayer.prototype.createLibopenmptNode = function(buffer, config) {
       var actualFramesPerChunk = libopenmpt._openmpt_module_read_float_stereo(this.modulePtr, this.context.sampleRate, framesPerChunk, this.leftBufferPtr, this.rightBufferPtr);
       if (actualFramesPerChunk == 0) {
         ended = true;
-        // modulePtr will be 0 on openmpt: error: openmpt_module_read_float_stereo: ERROR: module * not valid or other openmpt error
         error = !this.modulePtr;
       }
       var rawAudioLeft = libopenmpt.HEAPF32.subarray(this.leftBufferPtr / 4, this.leftBufferPtr / 4 + actualFramesPerChunk);
