@@ -215,7 +215,8 @@ ChiptuneJsPlayer.prototype.createLibopenmptNode = function(buffer, config) {
     var error = false;
     while (framesToRender > 0) {
       var framesPerChunk = Math.min(framesToRender, maxFramesPerChunk);
-      var actualFramesPerChunk = libopenmpt._openmpt_module_read_float_stereo(this.modulePtr, this.context.sampleRate, framesPerChunk, this.leftBufferPtr, this.rightBufferPtr);
+      var actualFramesPerChunk = libopenmpt._openmpt_module_read_float_stereo(
+        this.modulePtr, this.context.sampleRate, framesPerChunk, this.leftBufferPtr, this.rightBufferPtr);
       if (actualFramesPerChunk == 0) {
         ended = true;
         error = !this.modulePtr;
