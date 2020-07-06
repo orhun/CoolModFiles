@@ -1,4 +1,6 @@
 import Head from "next/head";
+import "../styles/app.css"
+
 function MyApp({ Component, pageProps }) {
   return (
     <div>
