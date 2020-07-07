@@ -103,7 +103,6 @@ ChiptuneJsPlayer.prototype.load = function (input) {
       return Promise.resolve(buffer);
     })
     .catch((error) => {
-      console.log(error.status);
       player.fireEvent("onError", { type: "onxhr" });
       return Promise.reject(new Error(error));
     });
