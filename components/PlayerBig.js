@@ -6,8 +6,7 @@ import styles from "./PlayerBig.module.scss";
 import PlayButton from "../icons/PlayIcon";
 import PauseButton from "../icons/PauseIcon";
 import ArrowIcon from "../icons/ArrowIcon";
-import LoadingState from "./LoadingState"
-
+import LoadingState from "./LoadingState";
 
 function PlayerBig({
   title,
@@ -19,7 +18,8 @@ function PlayerBig({
   isPlay,
   player,
   setIsPlay,
-  setProgress
+  setProgress,
+  changeSize,
 }) {
   const togglePlay = () => {
     setIsPlay(!isPlay);
@@ -73,7 +73,12 @@ function PlayerBig({
           onClick={() => togglePlay()}
         />
       )}
-      <ArrowIcon className={styles.arrow} height="20" width="50" />
+      <ArrowIcon
+        className={styles.arrow}
+        height="20"
+        width="50"
+        onClick={() => changeSize()}
+      />
     </React.Fragment>
   );
 }

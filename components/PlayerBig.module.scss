@@ -1,43 +1,44 @@
 .banner {
-    width: 400px;
-    align-self: center;
+  width: 115px;
+  align-self: center;
+  margin: 15px 0 15px 0;
+}
+
+.metadata {
+  color: #8e8e8e;
+  padding: 0;
+  list-style-type: none;
+  max-height: 150px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.seekbar {
+  margin: 30px 0 10px 0;
+}
+.seekNumbers {
+  display: flex;
+  justify-content: space-between;
+
+  span {
+    font-size: 12px;
+    user-select: none;
   }
-  
-  .metadata {
-    color: #8e8e8e;
-    padding: 0;
-    list-style-type: none;
-    max-height: 150px;
-    overflow-y: auto;
-    overflow-x: hidden;
+}
+
+.actionbtn {
+  align-self: center;
+  margin: 30px 0 30px 0;
+  cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:active:hover {
+    opacity: 0.7;
   }
-  
-  .seekbar {
-    margin: 30px 0 10px 0;
-  }
-  .seekNumbers {
-    display: flex;
-    justify-content: space-between;
-  
-    span {
-      font-size: 12px;
-      user-select: none;
-    }
-  }
-  
-  .actionbtn {
-    align-self: center;
-    margin: 30px 0 30px 0;
-    cursor: pointer;
-    transition: opacity 0.2s;
-  
-    &:active:hover {
-      opacity: 0.7;
-    }
-  }
-  
-  .arrow {
-    align-self: center;
-    margin: 20px 0 10px 0;
-    cursor: pointer;
-  }
+}
+
+.arrow {
+  align-self: center;
+  margin: 20px 0 10px 0;
+  cursor: pointer;
+}
