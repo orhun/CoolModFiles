@@ -79,6 +79,9 @@ function PlayerBig({
         width="50"
         onClick={() => changeSize()}
       />
+      <a href={`https://api.modarchive.org/downloads.php?moduleid=${trackId}`}
+      className={styles.download}
+      >download</a>
     </React.Fragment>
   );
 }
