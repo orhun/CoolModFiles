@@ -6,23 +6,78 @@ import PlayButton from "../icons/PlayIcon";
 import PauseButton from "../icons/PauseIcon";
 import ArrowIcon from "../icons/ArrowIcon";
 
+const RANDOM_MAX = 189573;
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function LoadingState() {
+  return (
+    <ul className={styles.metadata}>
+      <li>███████</li>
+      <li>██████████████</li>
+      <li>█████████████████</li>
+    </ul>
+  );
+}
+
 function Player() {
   const [isPlay, setIsPlay] = React.useState(false);
+  const [player, setPlayer] = React.useState(null);
+  const [trackId, setTrackId] = React.useState(getRandomInt(0, RANDOM_MAX));
+  const [metaData, setMetaData] = React.useState({});
+  const [loading, setLoading] = React.useState(true);
+  const [title, setTitle] = React.useState("Loading");
+
+  React.useEffect(() => {
+    setPlayer(new ChiptuneJsPlayer(new ChiptuneJsConfig(0)));
+  }, []);
+
+  React.useEffect(() => {
+    if (player) {
+      playMusic();
+    }
+  }, [player]);
+
+  const playMusic = () => {
+    player
+      .load(`jsplayer.php?moduleid=${trackId}`)
+      .then((buffer) => {
+        player.play(buffer);
+        setMetaData(player.metadata());
+        setTitle(player.metadata().title);
+      })
+      .catch((err) => {
+        // if any error reload track id and replay
+        setTrackId(getRandomInt(0, RANDOM_MAX));
+        playMusic();
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   const togglePlay = () => {
     setIsPlay(!isPlay);
+    player.togglePause();
   };
 
   return (
     <div className={styles.player}>
       <img className={styles.banner} src="/images/disc_anim.gif" alt="anim" />
-      <h1>Help me!</h1>
-      <ul className={styles.metadata}>
-        <li>Type: Mod</li>
-        <li>Message: I'm pickle Rick</li>
-        <li>Date: 01.09.2020</li>
-      </ul>
-
+      <h1>{title}</h1>
+      {!loading ? (
+        <ul className={styles.metadata}>
+          <li>Type: {metaData.type}</li>
+          <li>Track Id: #{trackId}</li>
+          <li>Message: {metaData.message}</li>
+        </ul>
+      ) : (
+        <LoadingState />
+      )}
       <Slider
         railStyle={{ backgroundColor: "white", height: 6 }}
         trackStyle={{ backgroundColor: "#bd00ff", height: 6 }}

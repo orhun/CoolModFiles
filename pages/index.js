@@ -1,13 +1,7 @@
 import React from "react";
 import Player from "../components/Player";
 
-const RANDOM_MAX = 189573;
 
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 
 function Index() {
   const [player, setPlayer] = React.useState(undefined);
