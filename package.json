@@ -19,6 +19,7 @@
   "license": "ISC",
   "dependencies": {
     "next": "^9.4.4",
+    "rc-slider": "^9.3.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "sass": "^1.26.9"
