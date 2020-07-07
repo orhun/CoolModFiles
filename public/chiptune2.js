@@ -4,6 +4,9 @@ libopenmpt.locateFile = function (name) {
   return `./bin/${name}`;
 };
 
+ChiptuneAudioContext = {}
+
+
 ChiptuneAudioContext = AudioContext || webkitAudioContext;
 
 function ChiptuneJsConfig(repeatCount) {

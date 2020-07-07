@@ -17,7 +17,6 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-
 function LoadingState() {
   return (
     <ul className={styles.metadata}>
@@ -27,6 +26,7 @@ function LoadingState() {
     </ul>
   );
 }
+
 
 function Player() {
   const [isPlay, setIsPlay] = React.useState(false);
@@ -46,18 +46,19 @@ function Player() {
   );
 
   React.useEffect(() => {
+    console.log("asds");
     setPlayer(new ChiptuneJsPlayer(new ChiptuneJsConfig(0)));
   }, []);
 
   React.useEffect(() => {
     if (player) {
-      playMusic();
+      playMusic(trackId);
     }
   }, [player]);
 
-  const playMusic = () => {
+  const playMusic = (id) => {
     player
-      .load(`jsplayer.php?moduleid=${trackId}`)
+      .load(`jsplayer.php?moduleid=${id}`)
       .then((buffer) => {
         player.play(buffer);
         setMetaData(player.metadata());
@@ -66,10 +67,10 @@ function Player() {
         setIsPlay(true);
       })
       .catch((err) => {
-        console.log(err);
         // if any error reload track id and replay
-        setTrackId(getRandomInt(0, RANDOM_MAX));
-        playMusic();
+        const newId = getRandomInt(0, RANDOM_MAX);
+        setTrackId(newId);
+        playMusic(newId);
       })
       .finally(() => {
         setLoading(false);
@@ -84,7 +85,7 @@ function Player() {
   return (
     <div className={styles.player}>
       <img className={styles.banner} src="/images/disc_anim.gif" alt="anim" />
-      <h1>{title}</h1>
+      <h1>{title ? title : "[No Title]"}</h1>
       {!loading ? (
         <ul className={styles.metadata}>
           <li>Type: {metaData.type}</li>
@@ -104,6 +105,10 @@ function Player() {
         className={styles.seekbar}
         value={progress}
         max={max}
+        onChange={(val) => {
+          setProgress(val);
+          player.seek(val);
+        }}
       />
       <div className={styles.seekNumbers}>
         <span>{moment().startOf("day").seconds(progress).format("mm:ss")}</span>
