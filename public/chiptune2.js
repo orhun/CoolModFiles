@@ -88,34 +88,25 @@ ChiptuneJsPlayer.prototype.unlock = function () {
   this.touchLocked = false;
 };
 
-ChiptuneJsPlayer.prototype.load = function (input, callback) {
+ChiptuneJsPlayer.prototype.load = function (input) {
   if (this.touchLocked) {
     this.unlock();
   }
   var player = this;
-  if (input instanceof File) {
-    var reader = new FileReader();
-    reader.onload = function () {
-      return callback(reader.result);
-    }.bind(this);
-    reader.readAsArrayBuffer(input);
-  } else {
-    fetch(`https://modarchive.org/${input}`, {
-      method: "GET",
+  return fetch(`https://modarchive.org/${input}`, {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.arrayBuffer();
     })
-      .then((response) => {
-        if (!response.ok) {
-          player.fireEvent("onError", { type: "onxhr" });
-        } else {
-          return response.arrayBuffer();
-        }
-      })
-      .then((buffer) => callback(buffer, null))
-      .catch((error) => {
-        callback(buffer, error);
-        player.fireEvent("onError", { type: "onxhr" });
-      });
-  }
+    .then((buffer) => {
+      return Promise.resolve(buffer);
+    })
+    .catch((error) => {
+      console.log(error.status);
+      player.fireEvent("onError", { type: "onxhr" });
+      return Promise.reject(new Error(error));
+    });
 };
 
 ChiptuneJsPlayer.prototype.play = function (buffer) {
