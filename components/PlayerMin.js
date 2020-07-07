@@ -18,6 +18,7 @@ function PlayerMin({
   player,
   setIsPlay,
   setProgress,
+  changeSize,
 }) {
   const togglePlay = () => {
     setIsPlay(!isPlay);
@@ -74,7 +75,12 @@ function PlayerMin({
           />
         )}
       </div>
-      <ArrowIcon className={styles.arrow} height="20" width="50" />
+      <ArrowIcon
+        className={styles.arrow}
+        height="20"
+        width="50"
+        onClick={() => changeSize()}
+      />
     </React.Fragment>
   );
 }

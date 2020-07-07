@@ -23,6 +23,7 @@ function Player() {
   const [title, setTitle] = React.useState("Loading");
   const [progress, setProgress] = React.useState(0);
   const [max, setMax] = React.useState(100);
+  const [size, setSize] = React.useState("big");
 
   useInterval(
     () => {
@@ -63,32 +64,41 @@ function Player() {
       });
   };
 
+  const changeSize = () => {
+    setSize(size === "big" ? "small" : "big");
+  };
+
   return (
     <div className={styles.player}>
-{/*       <PlayerBig
-        title={title}
-        loading={loading}
-        metaData={metaData}
-        trackId={trackId}
-        progress={progress}
-        max={max}
-        isPlay={isPlay}
-        player={player}
-        setIsPlay={setIsPlay}
-        setProgress={setProgress}
-      /> */}
-      <PlayerMin
-        title={title}
-        loading={loading}
-        metaData={metaData}
-        trackId={trackId}
-        progress={progress}
-        max={max}
-        isPlay={isPlay}
-        player={player}
-        setIsPlay={setIsPlay}
-        setProgress={setProgress}
-      />
+      {size === "big" ? (
+        <PlayerBig
+          title={title}
+          loading={loading}
+          metaData={metaData}
+          trackId={trackId}
+          progress={progress}
+          max={max}
+          isPlay={isPlay}
+          player={player}
+          setIsPlay={setIsPlay}
+          setProgress={setProgress}
+          changeSize={changeSize}
+        />
+      ) : (
+        <PlayerMin
+          title={title}
+          loading={loading}
+          metaData={metaData}
+          trackId={trackId}
+          progress={progress}
+          max={max}
+          isPlay={isPlay}
+          player={player}
+          setIsPlay={setIsPlay}
+          setProgress={setProgress}
+          changeSize={changeSize}
+        />
+      )}
     </div>
   );
 }
