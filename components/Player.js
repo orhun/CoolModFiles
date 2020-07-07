@@ -1,10 +1,13 @@
 import React from "react";
 import Slider from "rc-slider";
+import moment from "moment";
 
 import styles from "./Player.module.scss";
 import PlayButton from "../icons/PlayIcon";
 import PauseButton from "../icons/PauseIcon";
 import ArrowIcon from "../icons/ArrowIcon";
+
+import { useInterval } from "../hooks";
 
 const RANDOM_MAX = 189573;
 
@@ -13,6 +16,7 @@ function getRandomInt(min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
 
 function LoadingState() {
   return (
@@ -31,6 +35,15 @@ function Player() {
   const [metaData, setMetaData] = React.useState({});
   const [loading, setLoading] = React.useState(true);
   const [title, setTitle] = React.useState("Loading");
+  const [progress, setProgress] = React.useState(0);
+  const [max, setMax] = React.useState(100);
+
+  useInterval(
+    () => {
+      setProgress(player.getPosition());
+    },
+    isPlay ? 500 : null
+  );
 
   React.useEffect(() => {
     setPlayer(new ChiptuneJsPlayer(new ChiptuneJsConfig(0)));
@@ -49,8 +62,11 @@ function Player() {
         player.play(buffer);
         setMetaData(player.metadata());
         setTitle(player.metadata().title);
+        setMax(player.duration());
+        setIsPlay(true);
       })
       .catch((err) => {
+        console.log(err);
         // if any error reload track id and replay
         setTrackId(getRandomInt(0, RANDOM_MAX));
         playMusic();
@@ -86,10 +102,12 @@ function Player() {
           backgroundColor: "#bd00ff",
         }}
         className={styles.seekbar}
+        value={progress}
+        max={max}
       />
       <div className={styles.seekNumbers}>
-        <span>00.00</span>
-        <span>04.21</span>
+        <span>{moment().startOf("day").seconds(progress).format("mm:ss")}</span>
+        <span>{moment().startOf("day").seconds(max).format("mm:ss")}</span>
       </div>
       {isPlay ? (
         <PlayButton
