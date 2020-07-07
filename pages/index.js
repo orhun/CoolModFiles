@@ -1,4 +1,5 @@
 import React from "react";
+import Player from "../components/Player";
 
 const RANDOM_MAX = 189573;
 
@@ -45,7 +46,7 @@ function Index() {
 
   return (
     <div id="app">
-      <h1>Mod music player</h1>
+      {/*       <h1>Mod music player</h1>
       <button onClick={playRandom}>Play Random</button>
       {player?.currentPlayingNode && (
         <React.Fragment>
@@ -69,7 +70,8 @@ function Index() {
           />
           <p>{JSON.stringify(meteData)}</p>
         </React.Fragment>
-      )}
+      )} */}
+      <Player />
     </div>
   );
 }

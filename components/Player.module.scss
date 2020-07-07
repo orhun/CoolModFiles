@@ -1,0 +1,83 @@
+.player {
+  display: flex;
+  background-color: black;
+  flex-direction: column;
+  width: 450px;
+  padding: 10px 20px 10px 20px;
+  color: white;
+  opacity: 1;
+  border-radius: 5px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.banner {
+  width: 400px;
+  align-self: center;
+}
+
+.metadata {
+  color: #8e8e8e;
+  padding: 0;
+  list-style-type: none;
+}
+
+.seekbar {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 8px; /* Specified height */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
+  transition: opacity 0.2s;
+  margin: 30px 0 10px 0;
+
+  &::-moz-range-thumb {
+    transition: 0.2s;
+  }
+
+  &:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+
+    &::-moz-range-thumb {
+      width: 15px; /* Set a specific slider handle width */
+      height: 15px; /* Slider handle height */
+    }
+  }
+
+  &::-moz-range-progress {
+    height: 8px;
+    background-color: #bd00ff;
+  }
+
+  &::-moz-range-thumb {
+    width: 9px; /* Set a specific slider handle width */
+    height: 9px; /* Slider handle height */
+    background: #bd00ff; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+    border: 0;
+  }
+}
+
+.actionbtn {
+  align-self: center;
+  margin: 30px 0 30px 0;
+  cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:active:hover {
+    opacity: 0.7;
+  }
+}
+
+.arrow {
+  align-self: center;
+  margin: 20px 0 10px 0;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .player {
+    max-width: 90%;
+  }
+}

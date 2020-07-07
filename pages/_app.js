@@ -1,5 +1,5 @@
 import Head from "next/head";
-import "../styles/app.css"
+import "../styles/app.css";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }) {
         <script src="/chiptune2.js"></script>
         <script src="/libopenmpt.js"></script>
       </Head>
-      <Component {...pageProps}/>
+      <Component {...pageProps} />
     </div>
   );
 }
