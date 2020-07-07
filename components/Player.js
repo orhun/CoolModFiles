@@ -23,14 +23,6 @@ function Player() {
         <li>Date: 01.09.2020</li>
       </ul>
 
-      {/*       <input
-        className={styles.seekbar}
-        type="range"
-        name="seekbar"
-        id="seekbar"
-        min="0"
-        max="100"
-      /> */}
       <Slider
         railStyle={{ backgroundColor: "white", height: 6 }}
         trackStyle={{ backgroundColor: "#bd00ff", height: 6 }}
@@ -40,6 +32,10 @@ function Player() {
         }}
         className={styles.seekbar}
       />
+      <div className={styles.seekNumbers}>
+        <span>00.00</span>
+        <span>04.21</span>
+      </div>
       {isPlay ? (
         <PlayButton
           className={styles.actionbtn}

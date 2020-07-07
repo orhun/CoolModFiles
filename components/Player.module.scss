@@ -24,6 +24,15 @@
 .seekbar {
   margin: 30px 0 10px 0;
 }
+.seekNumbers {
+  display: flex;
+  justify-content: space-between;
+
+  span {
+    font-size: 12px;
+    user-select: none;
+  }
+}
 
 .actionbtn {
   align-self: center;
