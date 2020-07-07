@@ -19,6 +19,7 @@ function PlayerBig({
   isPlay,
   player,
   setIsPlay,
+  setProgress
 }) {
   const togglePlay = () => {
     setIsPlay(!isPlay);
