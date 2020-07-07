@@ -1,11 +1,7 @@
 import React from "react";
-import Slider from "rc-slider";
-import moment from "moment";
 
 import styles from "./Player.module.scss";
-import PlayButton from "../icons/PlayIcon";
-import PauseButton from "../icons/PauseIcon";
-import ArrowIcon from "../icons/ArrowIcon";
+import PlayerBig from "./PlayerBig";
 
 import { useInterval } from "../hooks";
 
@@ -16,17 +12,6 @@ function getRandomInt(min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
-function LoadingState() {
-  return (
-    <ul className={styles.metadata}>
-      <li>███████</li>
-      <li>██████████████</li>
-      <li>█████████████████</li>
-    </ul>
-  );
-}
-
 
 function Player() {
   const [isPlay, setIsPlay] = React.useState(false);
@@ -46,7 +31,6 @@ function Player() {
   );
 
   React.useEffect(() => {
-    console.log("asds");
     setPlayer(new ChiptuneJsPlayer(new ChiptuneJsConfig(0)));
   }, []);
 
@@ -68,6 +52,7 @@ function Player() {
       })
       .catch((err) => {
         // if any error reload track id and replay
+        console.log("restaring player");
         const newId = getRandomInt(0, RANDOM_MAX);
         setTrackId(newId);
         playMusic(newId);
@@ -77,59 +62,20 @@ function Player() {
       });
   };
 
-  const togglePlay = () => {
-    setIsPlay(!isPlay);
-    player.togglePause();
-  };
-
   return (
     <div className={styles.player}>
-      <img className={styles.banner} src="/images/disc_anim.gif" alt="anim" />
-      <h1>{title ? title : "[No Title]"}</h1>
-      {!loading ? (
-        <ul className={styles.metadata}>
-          <li>Type: {metaData.type}</li>
-          <li>Track Id: #{trackId}</li>
-          <li>Message: {metaData.message}</li>
-        </ul>
-      ) : (
-        <LoadingState />
-      )}
-      <Slider
-        railStyle={{ backgroundColor: "white", height: 6 }}
-        trackStyle={{ backgroundColor: "#bd00ff", height: 6 }}
-        handleStyle={{
-          borderColor: "#bd00ff",
-          backgroundColor: "#bd00ff",
-        }}
-        className={styles.seekbar}
-        value={progress}
+      <PlayerBig
+        title={title}
+        loading={loading}
+        metaData={metaData}
+        trackId={trackId}
+        progress={progress}
         max={max}
-        onChange={(val) => {
-          setProgress(val);
-          player.seek(val);
-        }}
+        isPlay={isPlay}
+        player={player}
+        setIsPlay={setIsPlay}
+        setProgress={setProgress}
       />
-      <div className={styles.seekNumbers}>
-        <span>{moment().startOf("day").seconds(progress).format("mm:ss")}</span>
-        <span>{moment().startOf("day").seconds(max).format("mm:ss")}</span>
-      </div>
-      {isPlay ? (
-        <PlayButton
-          className={styles.actionbtn}
-          height="130"
-          width="130"
-          onClick={() => togglePlay()}
-        />
-      ) : (
-        <PauseButton
-          className={styles.actionbtn}
-          height="130"
-          width="130"
-          onClick={() => togglePlay()}
-        />
-      )}
-      <ArrowIcon className={styles.arrow} height="20" width="50" />
     </div>
   );
 }
