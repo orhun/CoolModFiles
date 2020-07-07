@@ -2,6 +2,7 @@ import React from "react";
 
 import styles from "./Player.module.scss";
 import PlayerBig from "./PlayerBig";
+import PlayerMin from "./PlayerMin";
 
 import { useInterval } from "../hooks";
 
@@ -64,7 +65,19 @@ function Player() {
 
   return (
     <div className={styles.player}>
-      <PlayerBig
+{/*       <PlayerBig
+        title={title}
+        loading={loading}
+        metaData={metaData}
+        trackId={trackId}
+        progress={progress}
+        max={max}
+        isPlay={isPlay}
+        player={player}
+        setIsPlay={setIsPlay}
+        setProgress={setProgress}
+      /> */}
+      <PlayerMin
         title={title}
         loading={loading}
         metaData={metaData}

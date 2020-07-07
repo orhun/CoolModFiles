@@ -1,6 +1,9 @@
+.header {
+  display: flex;
+}
+
 .banner {
-  width: 400px;
-  align-self: center;
+  width: 50px;
 }
 
 .metadata {
@@ -12,9 +15,25 @@
   overflow-x: hidden;
 }
 
-.seekbar {
-  margin: 30px 0 10px 0;
+.titleWrap {
+  margin-left: 15px;
+
+  p {
+    color: #8e8e8e;
+  }
 }
+
+.seekbarWrapper {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+}
+
+.seekbar {
+  margin: 10px 0 10px 0;
+}
+
 .seekNumbers {
   display: flex;
   justify-content: space-between;
@@ -27,7 +46,7 @@
 
 .actionbtn {
   align-self: center;
-  margin: 30px 0 30px 0;
+  margin-right: 15px;
   cursor: pointer;
   transition: opacity 0.2s;
 
@@ -38,6 +57,16 @@
 
 .arrow {
   align-self: center;
-  margin: 20px 0 10px 0;
+  margin: 5px 0 0px 0;
   cursor: pointer;
 }
+
+@media screen and (max-width: 600px) {
+    .header {
+      flex-direction: column;
+    }
+    .banner {
+        align-self: center;
+        width: 100px;
+      }
+  }
