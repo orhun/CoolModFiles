@@ -22,41 +22,7 @@
 }
 
 .seekbar {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%; /* Full-width */
-  height: 8px; /* Specified height */
-  outline: none; /* Remove outline */
-  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-  -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
-  transition: opacity 0.2s;
   margin: 30px 0 10px 0;
-
-  &::-moz-range-thumb {
-    transition: 0.2s;
-  }
-
-  &:hover {
-    opacity: 1; /* Fully shown on mouse-over */
-
-    &::-moz-range-thumb {
-      width: 15px; /* Set a specific slider handle width */
-      height: 15px; /* Slider handle height */
-    }
-  }
-
-  &::-moz-range-progress {
-    height: 8px;
-    background-color: #bd00ff;
-  }
-
-  &::-moz-range-thumb {
-    width: 9px; /* Set a specific slider handle width */
-    height: 9px; /* Slider handle height */
-    background: #bd00ff; /* Green background */
-    cursor: pointer; /* Cursor on hover */
-    border: 0;
-  }
 }
 
 .actionbtn {
