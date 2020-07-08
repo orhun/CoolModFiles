@@ -46,6 +46,7 @@ function Player() {
         setTitle(player.metadata().title);
         setMax(player.duration());
         setIsPlay(true);
+        document.title = `🎶 ${player.metadata().title} - CoolModFiles`
       })
       .catch((err) => {
         // if any error reload track id and replay
