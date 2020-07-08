@@ -61,3 +61,11 @@ img {
     transform: scale(1.1);
   }
 }
+
+@media screen and (max-width: 600px) {
+  .randombtn {
+    max-width: 90%;
+    text-align: center;
+  }
+}
+
