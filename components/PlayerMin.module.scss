@@ -24,6 +24,11 @@
 
 .titleWrap {
   margin-left: 5px;
+
+  h3 {
+    word-break: break-all;
+  }
+
   p {
     color: #8e8e8e;
   }
