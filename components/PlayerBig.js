@@ -6,6 +6,7 @@ import styles from "./PlayerBig.module.scss";
 import PlayButton from "../icons/PlayIcon";
 import PauseButton from "../icons/PauseIcon";
 import ArrowIcon from "../icons/ArrowIcon";
+import DownloadButton from "../icons/DownloadIcon";
 import LoadingState from "./LoadingState";
 
 function PlayerBig({
@@ -28,7 +29,19 @@ function PlayerBig({
 
   return (
     <React.Fragment>
-      <img className={styles.banner} src="/images/disc_anim.gif" alt="anim" />
+      <div className={styles.wheader}>
+        <div className={styles.empty}></div>
+        <img className={styles.banner} src="/images/disc_anim.gif" alt="anim" />
+        <div className={styles.downloadWrap}>
+          <DownloadButton
+            height="20"
+            width="50"
+            onClick={() => {
+              window.location.href = `https://api.modarchive.org/downloads.php?moduleid=${trackId}`;
+            }}
+          />
+        </div>
+      </div>
       <h1>{title ? title : "[No Title]"}</h1>
       {!loading ? (
         <ul className={styles.metadata}>
@@ -79,9 +92,6 @@ function PlayerBig({
         width="50"
         onClick={() => changeSize()}
       />
-      <a href={`https://api.modarchive.org/downloads.php?moduleid=${trackId}`}
-      className={styles.download}
-      >download</a>
     </React.Fragment>
   );
 }

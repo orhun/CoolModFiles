@@ -1,9 +1,16 @@
 .header {
   display: flex;
+  justify-content: space-between;
+
+  svg {
+    margin-right: -15px;
+    cursor: pointer;
+  }
 }
 
 .banner {
   width: 50px;
+  align-self: center;
 }
 
 .metadata {
@@ -16,8 +23,7 @@
 }
 
 .titleWrap {
-  margin-left: 15px;
-
+  margin-left: 5px;
   p {
     color: #8e8e8e;
   }

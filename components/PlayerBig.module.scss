@@ -4,6 +4,26 @@
   margin: 15px 0 15px 0;
 }
 
+.wheader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.empty {
+  flex: 1
+}
+
+.downloadWrap {
+  flex: 1;
+  display: flex;
+  justify-content: right;
+
+  svg {
+    margin-right: -15px;
+    cursor: pointer;
+  }
+}
+
 .metadata {
   color: #8e8e8e;
   padding: 0;
@@ -60,8 +80,4 @@
   align-self: center;
   margin: 20px 0 10px 0;
   cursor: pointer;
-}
-
-.download {
-  align-self: center;
 }
