@@ -42,7 +42,7 @@ function PlayerBig({
           />
         </div>
       </div>
-      <h1>{title ? title : "[No Title]"}</h1>
+      <h1 className={styles.title}>{title ? title : "[No Title]"}</h1>
       {!loading ? (
         <ul className={styles.metadata}>
           <li>Type: {metaData.type}</li>
