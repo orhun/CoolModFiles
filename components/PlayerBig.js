@@ -28,7 +28,10 @@ function PlayerBig({
 
   return (
     <React.Fragment>
-      <img className={styles.banner} src="/images/disc_anim.gif" alt="anim" />
+      <img
+        className={styles.banner}
+        src={`/images/disc_${isPlay ? "anim" : "idle"}.gif`}
+        alt="anim" />
       <h1>{title ? title : "[No Title]"}</h1>
       {!loading ? (
         <ul className={styles.metadata}>

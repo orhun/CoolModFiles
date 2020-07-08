@@ -27,7 +27,10 @@ function PlayerMin({
   return (
     <React.Fragment>
       <div className={styles.header}>
-        <img className={styles.banner} src="/images/disc_anim.gif" alt="anim" />
+      <img
+        className={styles.banner}
+        src={`/images/disc_${isPlay ? "anim" : "idle"}.gif`}
+        alt="anim" />
         <div className={styles.titleWrap}>
           <h3>{title}</h3>
           <ul className={styles.metadata}>
