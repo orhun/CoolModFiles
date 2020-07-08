@@ -1,5 +1,5 @@
 import Head from "next/head";
-import "../styles/app.css";
+import "../styles/app.scss";
 import "rc-slider/assets/index.css";
 
 function MyApp({ Component, pageProps }) {

@@ -11,9 +11,29 @@
   -webkit-box-shadow: 5px 5px 24px 3px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 5px 5px 24px 3px rgba(0, 0, 0, 0.75);
   box-shadow: 5px 5px 24px 3px rgba(0, 0, 0, 0.75);
+  animation-name: bounceIn;
+  animation-duration: 1s;
+
 
   h1 {
     word-break: break-all;
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 

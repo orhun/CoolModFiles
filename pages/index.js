@@ -3,10 +3,18 @@ import Player from "../components/Player";
 
 function Index() {
   const [start, setStart] = React.useState(false);
+  if (start) {
+    return (
+      <div id="app">
+          <Player />
+      </div>
+    );
+  }
   return (
     <div id="app">
-      <button onClick={() => setStart(true)}>Aç</button>
-      {start && <Player />}
+      <div className="randombtn" onClick={() => setStart(true)}>
+        <p>Give me random song!</p>
+      </div>
     </div>
   );
 }
