@@ -6,7 +6,7 @@ function Index() {
   if (start) {
     return (
       <div id="app">
-          <Player />
+        <Player />
       </div>
     );
   }

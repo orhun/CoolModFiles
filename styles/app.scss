@@ -44,6 +44,7 @@ img {
   background-color: black;
   border-radius: 30px;
   cursor: pointer;
+  transition: scale 0.5s;
 
   p {
     background: linear-gradient(to left, #c200ff, #00b8ff);
@@ -54,5 +55,9 @@ img {
 
   &:active:hover {
     opacity: 0.9;
+  }
+
+  &:hover {
+    scale: 1.1;
   }
 }
