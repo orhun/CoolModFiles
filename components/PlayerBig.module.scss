@@ -4,6 +4,26 @@
   margin: 15px 0 15px 0;
 }
 
+.wheader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.empty {
+  flex: 1;
+}
+
+.downloadWrap {
+  flex: 1;
+  display: flex;
+  justify-content: right;
+
+  svg {
+    margin-right: -15px;
+    cursor: pointer;
+  }
+}
+
 .metadata {
   color: #8e8e8e;
   padding: 0;
@@ -27,9 +47,7 @@
     border-radius: 5px;
     background-color: #bd00ff;
   }
-
 }
-
 
 .seekbar {
   margin: 30px 0 10px 0;
@@ -43,7 +61,6 @@
     user-select: none;
   }
 }
-
 
 .actionbtn {
   align-self: center;
@@ -62,6 +79,18 @@
   cursor: pointer;
 }
 
-.download {
-  align-self: center;
+@media screen and (max-width: 600px) {
+  .title {
+    font-size: 24px;
+  }
+  .metadata {
+    font-size: 14px;
+  }
+  .banner {
+    width: 80px;
+  }
+  .actionbtn {
+    height: 90px;
+    width: 90px;
+  }
 }

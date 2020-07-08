@@ -6,6 +6,7 @@ import styles from "./PlayerMin.module.scss";
 import PlayButton from "../icons/PlayIcon";
 import PauseButton from "../icons/PauseIcon";
 import ArrowIcon from "../icons/ArrowIcon";
+import DownloadButton from "../icons/DownloadIcon";
 
 function PlayerMin({
   title,
@@ -37,6 +38,14 @@ function PlayerMin({
             <li>Track Id: #{trackId}</li>
           </ul>
         </div>
+        <DownloadButton
+          style={{alignSelf: 'right'}}
+          height="20"
+          width="50"
+          onClick={() => {
+            window.location.href = `https://api.modarchive.org/downloads.php?moduleid=${trackId}`;
+          }}
+        />
       </div>
       <div className={styles.seekbarWrapper}>
         <div style={{ flex: 1 }}>
