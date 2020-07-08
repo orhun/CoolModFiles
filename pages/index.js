@@ -1,5 +1,6 @@
 import React from "react";
 import Player from "../components/Player";
+import {getRandomFromArray, MESSAGES} from "../utils";
 
 function Index() {
   const [start, setStart] = React.useState(false);
@@ -13,7 +14,7 @@ function Index() {
   return (
     <div id="app">
       <div className="randombtn" onClick={() => setStart(true)}>
-        <p>Give me random song!</p>
+      <p>{getRandomFromArray(MESSAGES)}</p>
       </div>
     </div>
   );
