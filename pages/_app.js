@@ -1,8 +1,16 @@
+import { useEffect } from "react";
 import Head from "next/head";
 import "../styles/app.scss";
 import "rc-slider/assets/index.css";
 
+import {getRandomInt} from "../utils";
+
+
 function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+    document.body.style.backgroundImage = `url('/images/bg_${getRandomInt(0, 2)}.jpg')`
+  }, [])
+
   return (
     <div>
       <Head>

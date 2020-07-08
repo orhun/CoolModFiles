@@ -13,12 +13,13 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 body {
   font-size: 1rem;
   font-family: "Press Start 2P", cursive;
   font-weight: 400;
   line-height: 1.5;
-  background: url("/images/bg.jpg");
+  background: url("/images/bg_1.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -44,7 +45,7 @@ img {
   background-color: black;
   border-radius: 30px;
   cursor: pointer;
-  transition: transform .2s;
+  transition: transform 0.2s;
 
   p {
     background: linear-gradient(to left, #c200ff, #00b8ff);
@@ -68,4 +69,3 @@ img {
     text-align: center;
   }
 }
-
