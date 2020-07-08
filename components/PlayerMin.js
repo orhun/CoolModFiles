@@ -76,7 +76,7 @@ function PlayerMin({
             className={styles.actionbtn}
             height="50"
             width="50"
-            onClick={() => togglePlay()}
+            onClick={!loading ? () => togglePlay() : null}
           />
         ) : (
           <PauseButton

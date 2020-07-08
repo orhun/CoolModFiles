@@ -76,7 +76,7 @@ function PlayerBig({
           className={styles.actionbtn}
           height="130"
           width="130"
-          onClick={() => togglePlay()}
+          onClick={!loading ? () => togglePlay() : null}
         />
       ) : (
         <PauseButton
