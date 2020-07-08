@@ -16,7 +16,8 @@
 .downloadWrap {
   flex: 1;
   display: flex;
-  justify-content: right;
+  justify-content: flex-end;
+  align-items: flex-start;
 
   svg {
     margin-right: -15px;
