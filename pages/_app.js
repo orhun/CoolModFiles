@@ -3,13 +3,14 @@ import Head from "next/head";
 import "../styles/app.scss";
 import "rc-slider/assets/index.css";
 
-import {getRandomInt} from "../utils";
-
+import { getRandomFromArray, BG_IMAGES } from "../utils";
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
-    document.body.style.backgroundImage = `url('/images/bg_${getRandomInt(0, 2)}.jpg')`
-  }, [])
+    document.body.style.backgroundImage = `url('/images/${getRandomFromArray(
+      BG_IMAGES
+    )}')`;
+  }, []);
 
   return (
     <div>

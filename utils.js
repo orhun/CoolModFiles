@@ -1,6 +1,9 @@
 const BG_IMAGES = [
   "bg_1.jpg",
   "bg_2.png",
+  "bg_3.jpg",
+  "bg_4.jpg",
+  "bg_5.jpg",
 ]
 
 const MESSAGES = [
@@ -22,4 +25,4 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-export { getRandomInt, getRandomFromArray, MESSAGES };
+export { getRandomInt, getRandomFromArray, MESSAGES, BG_IMAGES };
