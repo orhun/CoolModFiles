@@ -33,7 +33,7 @@ function PlayerMin({
         src={`/images/disc_${isPlay ? "anim" : "idle"}.gif`}
         alt="anim" />
         <div className={styles.titleWrap}>
-          <h3>{title}</h3>
+          <h3>{title ? title : "[No Title]"}</h3>
           <ul className={styles.metadata}>
             <li>Track Id: #{trackId}</li>
           </ul>
