@@ -15,6 +15,20 @@ const MESSAGES = [
   "Let's dance!",
 ]
 
+const EE_MESSAGES = [
+  "bom HInob.",
+  "ivegay emay ayay ongsay.",
+  "xyzzy",
+  "open the pod bay doors",
+  "42",
+  "1337",
+  "rm -rf",
+  "apt-get moo",
+  "sudo give me a song",
+  "beam me up, mr. scott!",
+  "PApus33bRMI"
+]
+
 function getRandomFromArray(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
@@ -25,4 +39,4 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-export { getRandomInt, getRandomFromArray, MESSAGES, BG_IMAGES };
+export { getRandomInt, getRandomFromArray, MESSAGES, EE_MESSAGES, BG_IMAGES };

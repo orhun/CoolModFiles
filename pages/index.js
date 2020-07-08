@@ -1,6 +1,6 @@
 import React from "react";
 import Player from "../components/Player";
-import {getRandomFromArray, MESSAGES} from "../utils";
+import {getRandomInt, getRandomFromArray, MESSAGES, EE_MESSAGES} from "../utils";
 
 function Index() {
   const [start, setStart] = React.useState(false);
@@ -14,7 +14,7 @@ function Index() {
   return (
     <div id="app">
       <div className="randombtn" onClick={() => setStart(true)}>
-      <p>{getRandomFromArray(MESSAGES)}</p>
+      <p>{getRandomFromArray(getRandomInt(0, 1000) ? MESSAGES : EE_MESSAGES)}</p>
       </div>
     </div>
   );
