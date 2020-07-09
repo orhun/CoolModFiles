@@ -37,6 +37,28 @@ function Player() {
     }
   }, [player]);
 
+  const playNext = () => {
+    if (currentId < prevIds.length) {
+      let cid = currentId + 1;
+      setTrackId(prevIds[cid]);
+      playMusic(prevIds[cid]);
+      setCurrentId(cid);
+    } else {
+      const newId = getRandomInt(0, RANDOM_MAX);
+      setTrackId(newId);
+      playMusic(newId);
+    }
+  }
+
+  const playPrevious = () => {
+    if (currentId != 0) {
+      let cid = currentId - 1;
+      setTrackId(prevIds[cid]);
+      playMusic(prevIds[cid]);
+      setCurrentId(cid);
+    }
+  }
+
   const playMusic = (id) => {
     player
       .load(`jsplayer.php?moduleid=${id}`)
@@ -85,10 +107,8 @@ function Player() {
           setIsPlay={setIsPlay}
           setProgress={setProgress}
           changeSize={changeSize}
-          playMusic={playMusic}
-          prevIds={prevIds}
-          currentId={currentId}
-          setCurrentId={setCurrentId}
+          playPrevious={playPrevious}
+          playNext={playNext}
         />
       ) : (
         <PlayerMin
