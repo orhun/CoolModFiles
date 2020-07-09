@@ -73,6 +73,10 @@
   transform: rotate(180deg);
 }
 
+.downloadButton {
+  align-self: flex-start;
+}
+
 @media screen and (max-width: 600px) {
     .header {
       flex-direction: column;
@@ -82,4 +86,8 @@
         align-self: center;
         width: 100px;
       }
+
+    .downloadButton {
+      display: none;
+    }
   }

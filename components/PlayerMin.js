@@ -3,10 +3,13 @@ import Slider from "rc-slider";
 import moment from "moment";
 
 import styles from "./PlayerMin.module.scss";
-import PlayButton from "../icons/PlayIcon";
-import PauseButton from "../icons/PauseIcon";
-import ArrowIcon from "../icons/ArrowIcon";
-import DownloadButton from "../icons/DownloadIcon";
+import {
+  ArrowIcon,
+  DownloadButton,
+  PauseButton,
+  PlayButton,
+} from "../icons";
+
 
 function PlayerMin({
   title,
@@ -19,9 +22,7 @@ function PlayerMin({
   player,
   setIsPlay,
   setProgress,
-  changeSize,
-  playPrevious,
-  playNext
+  changeSize
 }) {
   const togglePlay = () => {
     setIsPlay(!isPlay);
@@ -41,7 +42,7 @@ function PlayerMin({
           </ul>
         </div>
         <DownloadButton
-          style={{alignSelf: 'right'}}
+          className={styles.downloadButton}
           height="20"
           width="50"
           onClick={() => {
@@ -95,8 +96,6 @@ function PlayerMin({
         width="50"
         onClick={() => changeSize()}
       />
-      <p onClick={!loading ? () => playPrevious() : null}>prev</p>
-      <p onClick={!loading ? () => playNext() : null}>next</p>
     </React.Fragment>
   );
 }
