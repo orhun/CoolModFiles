@@ -45,8 +45,8 @@ function PlayerBig({
         />
         <div className={styles.downloadWrap}>
           <DownloadButton
-            height="20"
-            width="50"
+            height="30"
+            width="60"
             onClick={() => {
               window.location.href = `https://api.modarchive.org/downloads.php?moduleid=${trackId}`;
             }}
