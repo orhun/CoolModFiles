@@ -3,10 +3,14 @@ import Slider from "rc-slider";
 import moment from "moment";
 
 import styles from "./PlayerBig.module.scss";
-import PlayButton from "../icons/PlayIcon";
-import PauseButton from "../icons/PauseIcon";
-import ArrowIcon from "../icons/ArrowIcon";
-import DownloadButton from "../icons/DownloadIcon";
+import {
+  ArrowIcon,
+  DownloadButton,
+  LeftButton,
+  RightButton,
+  PauseButton,
+  PlayButton,
+} from "../icons";
 import LoadingState from "./LoadingState";
 
 function PlayerBig({
@@ -22,7 +26,8 @@ function PlayerBig({
   setProgress,
   changeSize,
   playPrevious,
-  playNext
+  playNext,
+  currentId
 }) {
   const togglePlay = () => {
     setIsPlay(!isPlay);
@@ -33,7 +38,11 @@ function PlayerBig({
     <React.Fragment>
       <div className={styles.wheader}>
         <div className={styles.empty}></div>
-        <img className={styles.banner} src={`/images/disc_${isPlay ? "anim" : "idle"}.gif`} alt="anim" />
+        <img
+          className={styles.banner}
+          src={`/images/disc_${isPlay ? "anim" : "idle"}.gif`}
+          alt="anim"
+        />
         <div className={styles.downloadWrap}>
           <DownloadButton
             height="20"
@@ -73,29 +82,40 @@ function PlayerBig({
         <span>{moment().startOf("day").seconds(progress).format("mm:ss")}</span>
         <span>{moment().startOf("day").seconds(max).format("mm:ss")}</span>
       </div>
-      {!isPlay ? (
-        <PlayButton
-          className={styles.actionbtn}
-          height="130"
-          width="130"
-          onClick={!loading ? () => togglePlay() : null}
+      <div className={styles.actionButtonsWrapper}>
+        <LeftButton
+          height="70"
+          width="70"
+          onClick={!loading ? () => playPrevious() : null}
+          disable={currentId === 0 ? "true" : "false"}
         />
-      ) : (
-        <PauseButton
-          className={styles.actionbtn}
-          height="130"
-          width="130"
-          onClick={() => togglePlay()}
+        {!isPlay ? (
+          <PlayButton
+            className={styles.actionbtn}
+            height="130"
+            width="130"
+            onClick={!loading ? () => togglePlay() : null}
+          />
+        ) : (
+          <PauseButton
+            className={styles.actionbtn}
+            height="130"
+            width="130"
+            onClick={() => togglePlay()}
+          />
+        )}
+        <RightButton
+          height="70"
+          width="70"
+          onClick={!loading ? () => playNext() : null}
         />
-      )}
+      </div>
       <ArrowIcon
         className={styles.arrow}
         height="20"
         width="50"
         onClick={() => changeSize()}
       />
-      <p onClick={!loading ? () => playPrevious() : null}>prev</p>
-      <p onClick={!loading ? () => playNext() : null}>next</p>
     </React.Fragment>
   );
 }

@@ -109,6 +109,7 @@ function Player() {
           changeSize={changeSize}
           playPrevious={playPrevious}
           playNext={playNext}
+          currentId={currentId}
         />
       ) : (
         <PlayerMin
@@ -123,8 +124,6 @@ function Player() {
           setIsPlay={setIsPlay}
           setProgress={setProgress}
           changeSize={changeSize}
-          playPrevious={playPrevious}
-          playNext={playNext}
         />
       )}
     </div>

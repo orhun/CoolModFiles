@@ -64,6 +64,25 @@
   }
 }
 
+.actionButtonsWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  svg {
+    cursor: pointer;
+
+    &:active:hover {
+      opacity: 0.7;
+    }
+    &[disable="true"] {
+      opacity: 0.7;
+      cursor: default;
+    }
+  }
+}
+
 .actionbtn {
   align-self: center;
   margin: 30px 0 30px 0;
