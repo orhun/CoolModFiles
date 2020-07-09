@@ -95,8 +95,8 @@ function PlayerBig({
         width="50"
         onClick={() => changeSize()}
       />
-      <p onClick={() => playPrevious()}>prev</p>
-      <p onClick={() => playNext()}>next</p>
+      <p onClick={!loading ? () => playPrevious() : null}>prev</p>
+      <p onClick={!loading ? () => playNext() : null}>next</p>
     </React.Fragment>
   );
 }
