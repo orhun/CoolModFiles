@@ -1,3 +1,5 @@
+const RANDOM_MAX = 189573;
+
 const BG_IMAGES = [
   "bg_1.jpg",
   "bg_2.png",
@@ -82,4 +84,5 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-export { getRandomInt, getRandomFromArray, MESSAGES, EE_MESSAGES, BG_IMAGES };
+export { getRandomInt, getRandomFromArray, RANDOM_MAX,
+  MESSAGES, EE_MESSAGES, BG_IMAGES };

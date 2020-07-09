@@ -5,9 +5,7 @@ import PlayerBig from "./PlayerBig";
 import PlayerMin from "./PlayerMin";
 
 import { useInterval } from "../hooks";
-import { getRandomInt } from "../utils";
-
-const RANDOM_MAX = 189573;
+import { getRandomInt, RANDOM_MAX } from "../utils";
 
 function Player() {
   const [isPlay, setIsPlay] = React.useState(false);
