@@ -17,6 +17,8 @@ function Player() {
   const [progress, setProgress] = React.useState(0);
   const [max, setMax] = React.useState(100);
   const [size, setSize] = React.useState("big");
+  const [prevIds, setPrevIds] = React.useState([]);
+  const [currentId, setCurrentId] = React.useState(-1);
 
   useInterval(
     () => {
@@ -44,6 +46,11 @@ function Player() {
         setTitle(player.metadata().title);
         setMax(player.duration());
         setIsPlay(true);
+        if (!prevIds.includes(id)) {
+          let cid = currentId + 1;
+          setCurrentId(cid);
+          setPrevIds([...prevIds, id]);
+        }
         document.title = `🎶 ${player.metadata().title} - CoolModFiles`
       })
       .catch((err) => {
@@ -70,6 +77,7 @@ function Player() {
           loading={loading}
           metaData={metaData}
           trackId={trackId}
+          setTrackId={setTrackId}
           progress={progress}
           max={max}
           isPlay={isPlay}
@@ -77,6 +85,10 @@ function Player() {
           setIsPlay={setIsPlay}
           setProgress={setProgress}
           changeSize={changeSize}
+          playMusic={playMusic}
+          prevIds={prevIds}
+          currentId={currentId}
+          setCurrentId={setCurrentId}
         />
       ) : (
         <PlayerMin

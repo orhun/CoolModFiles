@@ -8,12 +8,14 @@ import PauseButton from "../icons/PauseIcon";
 import ArrowIcon from "../icons/ArrowIcon";
 import DownloadButton from "../icons/DownloadIcon";
 import LoadingState from "./LoadingState";
+import {getRandomInt, RANDOM_MAX} from "../utils";
 
 function PlayerBig({
   title,
   loading,
   metaData,
   trackId,
+  setTrackId,
   progress,
   max,
   isPlay,
@@ -21,6 +23,10 @@ function PlayerBig({
   setIsPlay,
   setProgress,
   changeSize,
+  playMusic,
+  prevIds,
+  currentId,
+  setCurrentId
 }) {
   const togglePlay = () => {
     setIsPlay(!isPlay);
@@ -92,6 +98,28 @@ function PlayerBig({
         width="50"
         onClick={() => changeSize()}
       />
+      <p onClick={() => {
+        if (currentId != 0) {
+          let cid = currentId - 1;
+          setTrackId(prevIds[cid]);
+          playMusic(prevIds[cid]);
+          setCurrentId(cid);
+          console.log(`${prevIds} -> ${currentId} [${prevIds[currentId]}]`);
+        }
+      }}>prev</p>
+      <p onClick={() => {
+        console.log(`${prevIds.length} < ${currentId}`);
+        if (currentId < prevIds.length) {
+          let cid = currentId + 1;
+          setTrackId(prevIds[cid]);
+          playMusic(prevIds[cid]);
+          setCurrentId(cid);
+        } else {
+          const newId = getRandomInt(0, RANDOM_MAX);
+          setTrackId(newId);
+          playMusic(newId);
+        }
+      }}>next</p>
     </React.Fragment>
   );
 }
