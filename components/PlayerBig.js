@@ -14,7 +14,6 @@ function PlayerBig({
   loading,
   metaData,
   trackId,
-  setTrackId,
   progress,
   max,
   isPlay,
