@@ -8,11 +8,39 @@ const BG_IMAGES = [
 
 const MESSAGES = [
   "Give me random song!",
-  "Can I get uhhh...",
+  "Can I get... uhhh...",
   "Pass the mods, babe!",
   "Entertain me!",
   "Shoot one!",
   "Let's dance!",
+  "Play a new random mod file.",
+  "Roll next.",
+  "playRandom();",
+  "Gib song.",
+  "Where the mods at?",
+  "The party must go on!",
+  "Click me.",
+  "Any mods online?",
+  "Move it! / Let's move it!",
+  "Crank it up, mate!",
+  "=play music",
+  "JMP playmod",
+  "CLICK HERE TO CLAIM YOUR FREE RANDOM MOD!",
+  "Rumor says you can play mods here.",
+  "I would like to get one mod file, please.",
+  "In the mood for a mod!",
+  "Wanna see my mods?",
+  "Can I get some?",
+  "Mod pls",
+  "Drop the beats!",
+  "And the next song is...",
+  "It's a bird! It's a plane! It's...",
+  "Unleash the wonders!",
+  "Just play it already.",
+  "Let the modules hit the floor!",
+  "Play sth nice!",
+  "Let's roll!",
+  "Stop refreshing, just click me!",
 ]
 
 const EE_MESSAGES = [
@@ -26,7 +54,17 @@ const EE_MESSAGES = [
   "apt-get moo",
   "sudo give me a song",
   "beam me up, mr. scott!",
-  "PApus33bRMI"
+  "HAI, CAN HAZ SONG?",
+  "What if we listened to a cool mod file together? Haha, just kidding! Unless...",
+  "Hello world.",
+  "That's so sad Alexa, play a mod.",
+  "Kowalski, module.",
+  "ALL YOUR MOD ARE BELONG TO US",
+  "Tell me, Mr. Anderson, what good is a mod archive if you are unable to choose?",
+  "When life gives you lemons, play a mod file!",
+  "/playsound module",
+  "/tableflip",
+  "oturmaya mi geldik?"
 ]
 
 function getRandomFromArray(array) {
