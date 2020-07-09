@@ -30,7 +30,7 @@ const MESSAGES = [
   "Any mods online?",
   "Move it! / Let's move it!",
   "Crank it up, mate!",
-  "=play music",
+  "=music play",
   "JMP playmod",
   "CLICK HERE TO CLAIM YOUR FREE RANDOM MOD!",
   "Rumor says you can play mods here.",
