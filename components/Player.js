@@ -123,6 +123,8 @@ function Player() {
           setIsPlay={setIsPlay}
           setProgress={setProgress}
           changeSize={changeSize}
+          playPrevious={playPrevious}
+          playNext={playNext}
         />
       )}
     </div>

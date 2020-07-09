@@ -20,6 +20,8 @@ function PlayerMin({
   setIsPlay,
   setProgress,
   changeSize,
+  playPrevious,
+  playNext
 }) {
   const togglePlay = () => {
     setIsPlay(!isPlay);
@@ -93,6 +95,8 @@ function PlayerMin({
         width="50"
         onClick={() => changeSize()}
       />
+      <p onClick={!loading ? () => playPrevious() : null}>prev</p>
+      <p onClick={!loading ? () => playNext() : null}>next</p>
     </React.Fragment>
   );
 }
