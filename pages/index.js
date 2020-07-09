@@ -14,7 +14,7 @@ function Index() {
   return (
     <div id="app">
       <div className="randombtn" onClick={() => setStart(true)}>
-      <p>{getRandomFromArray(getRandomInt(0, 1000) ? MESSAGES : EE_MESSAGES)}</p>
+      <p suppressHydrationWarning>{getRandomFromArray(getRandomInt(0, 1000) ? MESSAGES : EE_MESSAGES)}</p>
       </div>
     </div>
   );
