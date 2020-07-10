@@ -19,10 +19,19 @@ function Player() {
   const [size, setSize] = React.useState("big");
   const [prevIds, setPrevIds] = React.useState([]);
   const [currentId, setCurrentId] = React.useState(-1);
+  const [repeat, setRepeat] = React.useState(false);
 
   useInterval(
     () => {
       setProgress(player.getPosition());
+      if (player.getPosition() === 0 && player.duration() === 0) {
+        setIsPlay(false);
+        if (repeat) {
+         playMusic(prevIds[currentId]);
+        } else {
+          playNext();
+        }
+      }
     },
     isPlay ? 500 : null
   );
@@ -73,6 +82,7 @@ function Player() {
         setTitle(player.metadata().title);
         setMax(player.duration());
         setIsPlay(true);
+        player.seek(0);
         if (!prevIds.includes(id)) {
           let cid = currentId + 1;
           setCurrentId(cid);
