@@ -21,13 +21,10 @@ function PlayerMin({
   isPlay,
   player,
   setIsPlay,
+  togglePlay,
   setProgress,
   changeSize
 }) {
-  const togglePlay = () => {
-    setIsPlay(!isPlay);
-    player.togglePause();
-  };
   return (
     <React.Fragment>
       <div className={styles.header}>

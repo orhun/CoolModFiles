@@ -37,6 +37,11 @@ function Player() {
     }
   }, [player]);
 
+  const togglePlay = () => {
+    setIsPlay(!isPlay);
+    player.togglePause();
+  };
+
   const playNext = () => {
     if (currentId < prevIds.length) {
       let cid = currentId + 1;
@@ -102,9 +107,10 @@ function Player() {
           setTrackId={setTrackId}
           progress={progress}
           max={max}
-          isPlay={isPlay}
           player={player}
+          isPlay={isPlay}
           setIsPlay={setIsPlay}
+          togglePlay={togglePlay}
           setProgress={setProgress}
           changeSize={changeSize}
           playPrevious={playPrevious}
@@ -122,6 +128,7 @@ function Player() {
           isPlay={isPlay}
           player={player}
           setIsPlay={setIsPlay}
+          togglePlay={togglePlay}
           setProgress={setProgress}
           changeSize={changeSize}
         />

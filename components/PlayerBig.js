@@ -20,20 +20,16 @@ function PlayerBig({
   trackId,
   progress,
   max,
-  isPlay,
   player,
+  isPlay,
   setIsPlay,
+  togglePlay,
   setProgress,
   changeSize,
   playPrevious,
   playNext,
-  currentId
+  currentId,
 }) {
-  const togglePlay = () => {
-    setIsPlay(!isPlay);
-    player.togglePause();
-  };
-
   return (
     <React.Fragment>
       <div className={styles.wheader}>
