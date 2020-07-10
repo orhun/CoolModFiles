@@ -28,7 +28,7 @@ const MESSAGES = [
   "The party must go on!",
   "Click me.",
   "Any mods online?",
-  "Move it! / Let's move it!",
+  "Move it!",
   "Crank it up, mate!",
   "=music play",
   "JMP playmod",
