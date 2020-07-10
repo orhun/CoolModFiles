@@ -1,13 +1,12 @@
 var libopenmpt = {};
 
-libopenmpt.locateFile = function (name) {
+libopenmpt.locateFile = function(name) {
   return `./bin/${name}`;
 };
 
-ChiptuneAudioContext = {}
+let ChiptuneAudioContext = {};
 
-
-ChiptuneAudioContext = AudioContext || webkitAudioContext;
+ChiptuneAudioContext = window.AudioContext || window.webkitAudioContext;
 
 function ChiptuneJsConfig(repeatCount) {
   this.repeatCount = repeatCount;
@@ -21,10 +20,10 @@ function ChiptuneJsPlayer(config) {
   this.touchLocked = true;
 }
 
-ChiptuneJsPlayer.prototype.fireEvent = function (eventName, response) {
+ChiptuneJsPlayer.prototype.fireEvent = function(eventName, response) {
   var handlers = this.handlers;
   if (handlers.length) {
-    handlers.forEach(function (handler) {
+    handlers.forEach(function(handler) {
       if (handler.eventName === eventName) {
         handler.handler(response);
       }
@@ -32,38 +31,38 @@ ChiptuneJsPlayer.prototype.fireEvent = function (eventName, response) {
   }
 };
 
-ChiptuneJsPlayer.prototype.addHandler = function (eventName, handler) {
+ChiptuneJsPlayer.prototype.addHandler = function(eventName, handler) {
   this.handlers.push({ eventName: eventName, handler: handler });
 };
 
-ChiptuneJsPlayer.prototype.onEnded = function (handler) {
+ChiptuneJsPlayer.prototype.onEnded = function(handler) {
   this.addHandler("onEnded", handler);
 };
 
-ChiptuneJsPlayer.prototype.onError = function (handler) {
+ChiptuneJsPlayer.prototype.onError = function(handler) {
   this.addHandler("onError", handler);
 };
 
-ChiptuneJsPlayer.prototype.duration = function () {
+ChiptuneJsPlayer.prototype.duration = function() {
   return libopenmpt._openmpt_module_get_duration_seconds(
     this.currentPlayingNode.modulePtr
   );
 };
 
-ChiptuneJsPlayer.prototype.seek = function (position) {
+ChiptuneJsPlayer.prototype.seek = function(position) {
   libopenmpt._openmpt_module_set_position_seconds(
     this.currentPlayingNode.modulePtr,
     position
   );
 };
 
-ChiptuneJsPlayer.prototype.getPosition = function () {
+ChiptuneJsPlayer.prototype.getPosition = function() {
   return libopenmpt._openmpt_module_get_position_seconds(
     this.currentPlayingNode.modulePtr
   );
 };
 
-ChiptuneJsPlayer.prototype.metadata = function () {
+ChiptuneJsPlayer.prototype.metadata = function() {
   var module = this.currentPlayingNode.modulePtr;
   var data = {};
   var keys = UTF8ToString(
@@ -81,7 +80,7 @@ ChiptuneJsPlayer.prototype.metadata = function () {
   return data;
 };
 
-ChiptuneJsPlayer.prototype.unlock = function () {
+ChiptuneJsPlayer.prototype.unlock = function() {
   var context = this.context;
   var buffer = context.createBuffer(1, 1, 22050);
   var unlockSource = context.createBufferSource();
@@ -91,27 +90,27 @@ ChiptuneJsPlayer.prototype.unlock = function () {
   this.touchLocked = false;
 };
 
-ChiptuneJsPlayer.prototype.load = function (input) {
+ChiptuneJsPlayer.prototype.load = function(input) {
   if (this.touchLocked) {
     this.unlock();
   }
   var player = this;
   return fetch(`https://modarchive.org/${input}`, {
-    method: "GET",
+    method: "GET"
   })
-    .then((response) => {
+    .then(response => {
       return response.arrayBuffer();
     })
-    .then((buffer) => {
+    .then(buffer => {
       return Promise.resolve(buffer);
     })
-    .catch((error) => {
+    .catch(error => {
       player.fireEvent("onError", { type: "onxhr" });
       return Promise.reject(new Error(error));
     });
 };
 
-ChiptuneJsPlayer.prototype.play = function (buffer) {
+ChiptuneJsPlayer.prototype.play = function(buffer) {
   this.stop();
   var processNode = this.createLibopenmptNode(buffer, this.config);
   if (processNode == null) {
@@ -125,7 +124,7 @@ ChiptuneJsPlayer.prototype.play = function (buffer) {
   processNode.connect(this.context.destination);
 };
 
-ChiptuneJsPlayer.prototype.stop = function () {
+ChiptuneJsPlayer.prototype.stop = function() {
   if (this.currentPlayingNode != null) {
     this.currentPlayingNode.disconnect();
     this.currentPlayingNode.cleanup();
@@ -133,13 +132,13 @@ ChiptuneJsPlayer.prototype.stop = function () {
   }
 };
 
-ChiptuneJsPlayer.prototype.togglePause = function () {
+ChiptuneJsPlayer.prototype.togglePause = function() {
   if (this.currentPlayingNode != null) {
     this.currentPlayingNode.togglePause();
   }
 };
 
-ChiptuneJsPlayer.prototype.setRepeatCount = function (repeatCount) {
+ChiptuneJsPlayer.prototype.setRepeatCount = function(repeatCount) {
   this.config.repeatCount = repeatCount;
   libopenmpt._openmpt_module_set_repeat_count(
     this.currentPlayingNode.modulePtr,
@@ -147,7 +146,7 @@ ChiptuneJsPlayer.prototype.setRepeatCount = function (repeatCount) {
   );
 };
 
-ChiptuneJsPlayer.prototype.createLibopenmptNode = function (buffer, config) {
+ChiptuneJsPlayer.prototype.createLibopenmptNode = function(buffer, config) {
   var maxFramesPerChunk = 4096;
   var processNode = this.context.createScriptProcessor(2048, 0, 2);
   processNode.config = config;
@@ -177,7 +176,7 @@ ChiptuneJsPlayer.prototype.createLibopenmptNode = function (buffer, config) {
   processNode.paused = false;
   processNode.leftBufferPtr = libopenmpt._malloc(4 * maxFramesPerChunk);
   processNode.rightBufferPtr = libopenmpt._malloc(4 * maxFramesPerChunk);
-  processNode.cleanup = function () {
+  processNode.cleanup = function() {
     if (this.modulePtr != 0) {
       libopenmpt._openmpt_module_destroy(this.modulePtr);
       this.modulePtr = 0;
@@ -192,24 +191,24 @@ ChiptuneJsPlayer.prototype.createLibopenmptNode = function (buffer, config) {
     }
   };
 
-  processNode.stop = function () {
+  processNode.stop = function() {
     this.disconnect();
     this.cleanup();
   };
 
-  processNode.pause = function () {
+  processNode.pause = function() {
     this.paused = true;
   };
 
-  processNode.unpause = function () {
+  processNode.unpause = function() {
     this.paused = false;
   };
 
-  processNode.togglePause = function () {
+  processNode.togglePause = function() {
     this.paused = !this.paused;
   };
 
-  processNode.onaudioprocess = function (e) {
+  processNode.onaudioprocess = function(e) {
     var outputL = e.outputBuffer.getChannelData(0);
     var outputR = e.outputBuffer.getChannelData(1);
     var framesToRender = outputL.length;
