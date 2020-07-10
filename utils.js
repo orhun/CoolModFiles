@@ -10,7 +10,6 @@ const BG_IMAGES = [
   "bg_7.png",
   "bg_8.jpg",
   "bg_9.jpg",
-  "bg_10.jpg",
 ]
 
 const MESSAGES = [
