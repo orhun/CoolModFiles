@@ -1,0 +1,17 @@
+.footer {
+    position: fixed;
+    bottom: 0;
+    margin: 0 0 10px 0;
+
+    svg + svg{
+        margin-left: 20px; 
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+    .footer {
+      position: relative;
+    }
+  }
+  

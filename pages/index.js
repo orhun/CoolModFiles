@@ -1,5 +1,6 @@
 import React from "react";
 import Player from "../components/Player";
+import Footer from "../components/Footer";
 import {
   getRandomInt,
   getRandomFromArray,
@@ -13,6 +14,7 @@ function Index() {
     return (
       <div id="app">
         <Player />
+        <Footer />
       </div>
     );
   }
