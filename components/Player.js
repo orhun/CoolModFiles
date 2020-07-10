@@ -27,7 +27,7 @@ function Player() {
       if (player.getPosition() === 0 && player.duration() === 0) {
         setIsPlay(false);
         if (repeat) {
-         playMusic(prevIds[currentId]);
+          playMusic(prevIds[currentId]);
         } else {
           playNext();
         }
@@ -62,7 +62,7 @@ function Player() {
       setTrackId(newId);
       playMusic(newId);
     }
-  }
+  };
 
   const playPrevious = () => {
     if (currentId != 0) {
@@ -71,7 +71,7 @@ function Player() {
       playMusic(prevIds[cid]);
       setCurrentId(cid);
     }
-  }
+  };
 
   const playMusic = (id) => {
     player
@@ -88,7 +88,7 @@ function Player() {
           setCurrentId(cid);
           setPrevIds([...prevIds, id]);
         }
-        document.title = `🎶 ${player.metadata().title} - CoolModFiles`
+        document.title = `🎶 ${player.metadata().title} - CoolModFiles`;
       })
       .catch((err) => {
         // if any error reload track id and replay
