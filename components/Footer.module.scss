@@ -1,13 +1,12 @@
 .footer {
-    position: fixed;
-    bottom: 0;
-    margin: 0 0 20px 0;
+  position: fixed;
+  bottom: 0;
+  margin: 0 0 20px 0;
 
-    svg + svg{
-        margin-left: 20px; 
-    }
+  svg + svg {
+    margin-left: 20px;
+  }
 }
-
 
 @media screen and (max-width: 600px) {
   .footer {
@@ -19,5 +18,3 @@
     position: relative;
   }
 }
-  
-  
