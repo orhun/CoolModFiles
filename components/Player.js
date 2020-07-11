@@ -76,9 +76,14 @@ function Player({ sharedTrackId }) {
   };
 
   const playMusic = (id) => {
+    setLoading(true);
+    setIsPlay(false);
+    setTitle("Loading...");
+    player.pause();
     player
       .load(`jsplayer.php?moduleid=${id}`)
       .then((buffer) => {
+        setLoading(false);
         player.play(buffer);
         setMetaData(player.metadata());
         setTitle(player.metadata().title);
@@ -97,9 +102,6 @@ function Player({ sharedTrackId }) {
         const newId = getRandomInt(0, RANDOM_MAX);
         setTrackId(newId);
         playMusic(newId);
-      })
-      .finally(() => {
-        setLoading(false);
       });
   };
 
