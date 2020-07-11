@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <div>
       <Head>
-        <title>CoolModFiles</title>
+        <title>CoolModFiles.com - Play some cool MOD files!</title>
         <link rel="icon" type="image/x-icon" href="./favicon.ico"/>
         <script src="/chiptune2.js"></script>
         <script src="/libopenmpt.js"></script>

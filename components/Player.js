@@ -91,7 +91,7 @@ function Player({ sharedTrackId }) {
           setCurrentId(cid);
           setPrevIds([...prevIds, id]);
         }
-        document.title = `🎶 ${player.metadata().title} - CoolModFiles`;
+        document.title = `🎶 ${player.metadata().title} - CoolModFiles.com 🎶`;
       })
       .catch(() => {
         const newId = getRandomInt(0, RANDOM_MAX);
