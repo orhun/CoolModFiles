@@ -89,7 +89,7 @@ function PlayerBig({
           height="70"
           width="70"
           onClick={!loading ? () => playPrevious() : null}
-          disable={currentId === 0 ? "true" : "false"}
+          disable={currentId === 0 || loading ? "true" : "false"}
         />
         {!isPlay ? (
           <PlayButton
@@ -110,6 +110,7 @@ function PlayerBig({
           height="70"
           width="70"
           onClick={!loading ? () => playNext() : null}
+          disable={loading ? "true" : "false"}
         />
       </div>
       <ArrowIcon
