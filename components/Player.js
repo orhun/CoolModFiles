@@ -85,6 +85,7 @@ function Player({ sharedTrackId }) {
         setMax(player.duration());
         setIsPlay(true);
         player.seek(0);
+        window.history.pushState({trackId: trackId}, "", `?trackId=${id}`);
         if (!prevIds.includes(id)) {
           let cid = currentId + 1;
           setCurrentId(cid);

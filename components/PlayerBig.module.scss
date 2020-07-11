@@ -9,8 +9,16 @@
   justify-content: space-between;
 }
 
-.empty {
+.shareWrap {
   flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  svg {
+    margin-left: -15px;
+    cursor: pointer;
+  }
 }
 
 .downloadWrap {

@@ -5,7 +5,6 @@ import EmbedPlayer from "../../components/embed/EmbedPlayer";
 
 function Embed() {
   const router = useRouter();
-  console.log(router.query);
   return (
     <EmbedPlayer
       sharedTrackId={router.query.trackId}

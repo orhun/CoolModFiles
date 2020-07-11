@@ -10,6 +10,7 @@ import {
   RightButton,
   PauseButton,
   PlayButton,
+  ShareIcon,
 } from "../icons";
 import LoadingState from "./LoadingState";
 
@@ -32,13 +33,7 @@ function PlayerBig({
   return (
     <React.Fragment>
       <div className={styles.wheader}>
-        <div className={styles.empty}></div>
-        <img
-          className={styles.banner}
-          src={`/images/disc_${isPlay ? "anim" : "idle"}.gif`}
-          alt="anim"
-        />
-        <div className={styles.downloadWrap}>
+        <div className={styles.shareWrap}>
           <DownloadButton
             height="30"
             width="60"
@@ -46,6 +41,14 @@ function PlayerBig({
               window.location.href = `https://api.modarchive.org/downloads.php?moduleid=${trackId}`;
             }}
           />
+        </div>
+        <img
+          className={styles.banner}
+          src={`/images/disc_${isPlay ? "anim" : "idle"}.gif`}
+          alt="anim"
+        />
+        <div className={styles.downloadWrap}>
+          <ShareIcon height="30" width="60" />
         </div>
       </div>
       <h1 className={styles.title}>{title ? title : "[No Title]"}</h1>
