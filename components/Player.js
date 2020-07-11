@@ -29,7 +29,6 @@ function Player({ sharedTrackId }) {
       if (player.getPosition() === 0 && player.duration() === 0) {
         setIsPlay(false);
         if (repeat) {
-          console.log("asdas");
           playMusic(prevIds[currentId]);
         } else {
           playNext();
@@ -93,9 +92,7 @@ function Player({ sharedTrackId }) {
         }
         document.title = `🎶 ${player.metadata().title} - CoolModFiles`;
       })
-      .catch((err) => {
-        // if any error reload track id and replay
-        console.log("restaring player");
+      .catch(() => {
         const newId = getRandomInt(0, RANDOM_MAX);
         setTrackId(newId);
         playMusic(newId);
