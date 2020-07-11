@@ -51,7 +51,7 @@ function PlayerBig({
           <ShareIcon height="30" width="60" />
         </div>
       </div>
-      <h1 className={styles.title}>{title ? title : "[No Title]"}</h1>
+      <h2 className={styles.title}>{title ? title : "[No Title]"}</h2>
       {!loading ? (
         <ul className={styles.metadata}>
           {metaData.artist ? <li>Artist: {metaData.artist}</li> : null}
