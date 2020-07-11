@@ -6,8 +6,12 @@ import { TwitterIcon, GithubIcon } from "../icons";
 function Footer() {
   return (
     <footer className={styles.footer}>
-      <TwitterIcon height="40" width="40" />
-      <GithubIcon height="40" width="40" />
+      <a href="https://twitter.com/CoolModFiles" target="_blank">
+        <TwitterIcon height="40" width="40" />
+      </a>
+      <a href="https://github.com/orhun/CoolModFiles" target="_blank">
+        <GithubIcon height="40" width="40" />
+      </a>
     </footer>
   );
 }
