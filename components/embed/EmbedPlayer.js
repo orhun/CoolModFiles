@@ -71,16 +71,18 @@ function EmbedPlayer({ sharedTrackId, sharedTitle }) {
   return (
     <div className={styles.player}>
       <div className={styles.header}>
-        <img
-          className={styles.banner}
-          src={`/images/disc_${isPlay ? "anim" : "idle"}.gif`}
-          alt="anim"
-        />
-        <div className={styles.titleWrap}>
-          <h3>{title ? title : "[No Title]"}</h3>
-          <ul className={styles.metadata}>
-            <li>Track Id: #{trackId}</li>
-          </ul>
+        <div className={styles.imgWrapper}>
+          <img
+            className={styles.banner}
+            src={`/images/disc_${isPlay ? "anim" : "idle"}.gif`}
+            alt="anim"
+          />
+          <div className={styles.titleWrap}>
+            <h3>{title ? title : "[No Title]"}</h3>
+            <ul className={styles.metadata}>
+              <li>Track Id: #{trackId}</li>
+            </ul>
+          </div>
         </div>
         <DownloadButton
           className={styles.downloadButton}

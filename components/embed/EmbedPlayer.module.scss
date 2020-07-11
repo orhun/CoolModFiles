@@ -33,6 +33,10 @@
   align-self: center;
 }
 
+.imgWrapper {
+  display: flex;
+}
+
 .metadata {
   color: #8e8e8e;
   padding: 0;
@@ -43,7 +47,8 @@
 }
 
 .titleWrap {
-  margin-left: 5px;
+  margin-left: 10px;
+  align-self: flex-start;
 
   h3 {
     word-break: break-all;
