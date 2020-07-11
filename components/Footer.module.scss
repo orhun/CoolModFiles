@@ -3,8 +3,16 @@
   bottom: 0;
   margin: 0 0 20px 0;
 
-  svg + svg {
+  a + a {
     margin-left: 20px;
+  }
+
+  a > svg {
+    transition: 0.2s;
+  }
+
+  a > svg:hover {
+    transform: scale(1.15);
   }
 }
 

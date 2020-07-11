@@ -59,7 +59,9 @@ function PlayerBig({
           {metaData.date ? <li>Date: {metaData.date}</li> : null}
           <li>Type: {metaData.type}</li>
           <li>Track Id: #{trackId}</li>
-          <li>Message: {metaData.message.replace(/\n{2,}/g, "\n")}</li>
+          {metaData.message ? (
+            <li>Message: {metaData.message.replace(/\n{2,}/g, "\n")}</li>
+          ) : null}
         </ul>
       ) : (
         <LoadingState />
