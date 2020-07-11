@@ -6,10 +6,16 @@ import {
   getRandomFromArray,
   MESSAGES,
   EE_MESSAGES,
+  BG_IMAGES,
 } from "../utils";
 
 function Index({ trackId }) {
   const [start, setStart] = React.useState(false);
+  React.useEffect(() => {
+    document.getElementById(
+      "app"
+    ).style.backgroundImage = `url('/images/${getRandomFromArray(BG_IMAGES)}')`;
+  }, []);
   if (start) {
     return (
       <div id="app">

@@ -1,16 +1,12 @@
-import { useEffect } from "react";
+import React from "react";
 import Head from "next/head";
 import "../styles/app.scss";
 import "rc-slider/assets/index.css";
 
-import { getRandomFromArray, BG_IMAGES } from "../utils";
+import Embed from "../components/embed/EmbedPlayer";
+
 
 function MyApp({ Component, pageProps }) {
-  useEffect(() => {
-    document.body.style.backgroundImage = `url('/images/${getRandomFromArray(
-      BG_IMAGES
-    )}')`;
-  }, []);
 
   return (
     <div>

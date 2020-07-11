@@ -1,7 +1,7 @@
 var libopenmpt = {};
 
 libopenmpt.locateFile = function(name) {
-  return `./bin/${name}`;
+  return `../bin/${name}`;
 };
 
 let ChiptuneAudioContext = {};
