@@ -52,6 +52,8 @@ function PlayerBig({
       <h1 className={styles.title}>{title ? title : "[No Title]"}</h1>
       {!loading ? (
         <ul className={styles.metadata}>
+          {metaData.artist ? <li>Artist: {metaData.artist}</li> : null}
+          {metaData.date ? <li>Date: {metaData.date}</li> : null}
           <li>Type: {metaData.type}</li>
           <li>Track Id: #{trackId}</li>
           <li>Message: {metaData.message}</li>
