@@ -3,16 +3,12 @@ import Head from "next/head";
 import "../styles/app.scss";
 import "rc-slider/assets/index.css";
 
-import Embed from "../components/embed/EmbedPlayer";
-
-
 function MyApp({ Component, pageProps }) {
-
   return (
     <div>
       <Head>
         <title>CoolModFiles.com - Play some cool MOD files!</title>
-        <link rel="icon" type="image/x-icon" href="./favicon.ico"/>
+        <link rel="icon" type="image/x-icon" href="./favicon.ico" />
         <script src="/chiptune2.js"></script>
         <script src="/libopenmpt.js"></script>
       </Head>
