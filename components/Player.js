@@ -7,10 +7,12 @@ import PlayerMin from "./PlayerMin";
 import { useInterval } from "../hooks";
 import { getRandomInt, RANDOM_MAX } from "../utils";
 
-function Player() {
+function Player({ sharedTrackId }) {
   const [isPlay, setIsPlay] = React.useState(false);
   const [player, setPlayer] = React.useState(null);
-  const [trackId, setTrackId] = React.useState(getRandomInt(0, RANDOM_MAX));
+  const [trackId, setTrackId] = React.useState(
+    sharedTrackId ? sharedTrackId : getRandomInt(0, RANDOM_MAX)
+  );
   const [metaData, setMetaData] = React.useState({});
   const [loading, setLoading] = React.useState(true);
   const [title, setTitle] = React.useState("Loading");
@@ -27,6 +29,7 @@ function Player() {
       if (player.getPosition() === 0 && player.duration() === 0) {
         setIsPlay(false);
         if (repeat) {
+          console.log("asdas");
           playMusic(prevIds[currentId]);
         } else {
           playNext();

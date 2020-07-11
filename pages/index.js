@@ -8,17 +8,16 @@ import {
   EE_MESSAGES,
 } from "../utils";
 
-function Index() {
+function Index({ trackId }) {
   const [start, setStart] = React.useState(false);
   if (start) {
     return (
       <div id="app">
-        <Player />
+        <Player sharedTrackId={trackId} />
         <Footer />
       </div>
     );
   }
-
   return (
     <div id="app">
       <div className="randombtn" onClick={() => setStart(true)}>
@@ -29,5 +28,9 @@ function Index() {
     </div>
   );
 }
+
+Index.getInitialProps = async ({ query }) => {
+  return { trackId: query.trackId };
+};
 
 export default Index;
