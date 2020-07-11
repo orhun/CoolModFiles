@@ -119,7 +119,6 @@ function Player({ sharedTrackId }) {
           max={max}
           player={player}
           isPlay={isPlay}
-          setIsPlay={setIsPlay}
           togglePlay={togglePlay}
           setProgress={setProgress}
           changeSize={changeSize}
@@ -137,7 +136,6 @@ function Player({ sharedTrackId }) {
           max={max}
           isPlay={isPlay}
           player={player}
-          setIsPlay={setIsPlay}
           togglePlay={togglePlay}
           setProgress={setProgress}
           changeSize={changeSize}

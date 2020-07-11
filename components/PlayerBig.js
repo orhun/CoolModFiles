@@ -22,7 +22,6 @@ function PlayerBig({
   max,
   player,
   isPlay,
-  setIsPlay,
   togglePlay,
   setProgress,
   changeSize,

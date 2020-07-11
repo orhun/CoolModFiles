@@ -20,7 +20,6 @@ function PlayerMin({
   max,
   isPlay,
   player,
-  setIsPlay,
   togglePlay,
   setProgress,
   changeSize
