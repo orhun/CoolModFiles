@@ -6,6 +6,7 @@ import RightButton from "./RightIcon";
 import LeftButton from "./LeftIcon";
 import GithubIcon from "./GithubIcon";
 import TwitterIcon from "./TwitterIcon";
+import ShareIcon from "./ShareIcon";
 
 export {
   PlayButton,
@@ -15,5 +16,6 @@ export {
   RightButton,
   LeftButton,
   GithubIcon,
+  ShareIcon,
   TwitterIcon,
 };
