@@ -133,7 +133,6 @@ function Player({ sharedTrackId }) {
         <PlayerMin
           title={title}
           loading={loading}
-          metaData={metaData}
           trackId={trackId}
           progress={progress}
           max={max}

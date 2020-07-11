@@ -14,7 +14,6 @@ import {
 function PlayerMin({
   title,
   loading,
-  metaData,
   trackId,
   progress,
   max,
