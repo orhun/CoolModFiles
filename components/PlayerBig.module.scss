@@ -36,6 +36,10 @@
   scrollbar-width: thin;
   font-size: 14px;
 
+  li {
+    white-space: pre-line;
+  }
+
   &::-webkit-scrollbar-track {
     border-radius: 10px;
     background-color: transparent;
