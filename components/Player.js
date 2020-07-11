@@ -15,7 +15,7 @@ function Player({ sharedTrackId }) {
   );
   const [metaData, setMetaData] = React.useState({});
   const [loading, setLoading] = React.useState(true);
-  const [title, setTitle] = React.useState("Loading");
+  const [title, setTitle] = React.useState("Loading...");
   const [progress, setProgress] = React.useState(0);
   const [max, setMax] = React.useState(100);
   const [size, setSize] = React.useState("big");
