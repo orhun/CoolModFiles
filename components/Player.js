@@ -37,7 +37,7 @@ function Player({ sharedTrackId }) {
     useKeyPress("j"),
   ];
   const [rightKey, rightKeyVim] = [useKeyPress("ArrowRight"), useKeyPress("l")];
-  const [leftKey, leftKeyVim] = [useKeyPress("ArrowLeft"),   useKeyPress("h")];
+  const [leftKey, leftKeyVim] = [useKeyPress("ArrowLeft"), useKeyPress("h")];
 
   React.useEffect(() => {
     if (spaceKey) togglePlay();
@@ -149,7 +149,7 @@ function Player({ sharedTrackId }) {
 
   const downloadTrack = () => {
     window.location.href = `https://api.modarchive.org/downloads.php?moduleid=${trackId}`;
-  }
+  };
 
   const changeSize = () => {
     setSize(size === "big" ? "small" : "big");
