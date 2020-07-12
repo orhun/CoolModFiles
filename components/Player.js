@@ -25,19 +25,48 @@ function Player({ sharedTrackId }) {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [backClass, setBackClass] = React.useState([styles.playerBack]);
 
-  const spaceKey = useKeyPress("space");
-  const nextKey = useKeyPress("n");
-  const backKey = useKeyPress("p");
-  const rightKey = useKeyPress("ArrowRight");
-  const leftKey = useKeyPress("ArrowLeft");
+  const [spaceKey, enterKey] = [useKeyPress(" "), useKeyPress("Enter")];
+  const tabKey = useKeyPress("Tab");
+  const downloadKey = useKeyPress("d");
+  const [upKey, nextKey, nextKeyVim] = [
+    useKeyPress("ArrowUp"),
+    useKeyPress("n"),
+    useKeyPress("k"),
+  ];
+  const [downKey, backKey, backKeyVim] = [
+    useKeyPress("ArrowDown"),
+    useKeyPress("p"),
+    useKeyPress("j"),
+  ];
+  const [rightKey, rightKeyVim] = [useKeyPress("ArrowRight"), useKeyPress("l")];
+  const [leftKey, leftKeyVim] = [useKeyPress("ArrowLeft"), useKeyPress("h")];
 
   React.useEffect(() => {
-    if (spaceKey) togglePlay();
-    if (nextKey) playNext();
-    if (backKey) playPrevious();
-    if (rightKey && isPlay) player.seek(player.getPosition() + 5);
-    if (leftKey && isPlay) player.seek(player.getPosition() - 5);
-  }, [spaceKey, nextKey, backKey, rightKey, leftKey]);
+    if (spaceKey || enterKey) togglePlay();
+    if (tabKey) changeSize();
+    if (downloadKey) downloadTrack();
+    if (upKey || nextKey || nextKeyVim) playNext();
+    if (downKey || backKey || backKeyVim) playPrevious();
+    if ((rightKey || rightKeyVim) && isPlay)
+      player.seek(player.getPosition() + 5);
+    if ((leftKey || leftKeyVim) && isPlay)
+      player.seek(player.getPosition() - 5);
+  }, [
+    spaceKey,
+    enterKey,
+    tabKey,
+    downloadKey,
+    upKey,
+    nextKey,
+    nextKeyVim,
+    downKey,
+    backKey,
+    backKeyVim,
+    rightKey,
+    rightKeyVim,
+    leftKey,
+    leftKeyVim,
+  ]);
 
   useInterval(
     () => {
@@ -132,6 +161,10 @@ function Player({ sharedTrackId }) {
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
+  }
+
+  const downloadTrack = () => {
+    window.location.href = `https://api.modarchive.org/downloads.php?moduleid=${trackId}`;
   };
 
   const changeSize = () => {
@@ -160,6 +193,7 @@ function Player({ sharedTrackId }) {
               playNext={playNext}
               currentId={currentId}
               toggleDrawer={toggleDrawer}
+              downloadTrack={downloadTrack}
             />
           </div>
           <div id="backside" className={backClass.join(" ")}>
@@ -207,6 +241,7 @@ function Player({ sharedTrackId }) {
             togglePlay={togglePlay}
             setProgress={setProgress}
             changeSize={changeSize}
+            downloadTrack={downloadTrack}
           />
         </div>
       )}

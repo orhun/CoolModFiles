@@ -17,7 +17,11 @@ import {
   TwitterOutlineIcon,
 } from "../icons";
 import LoadingState from "./LoadingState";
-import { generateEmbedString } from "../utils";
+import {
+  generateEmbedString,
+  getRandomFromArray,
+  SHARE_MESSAGES,
+} from "../utils";
 
 const dropDownOpen = [styles.dropdownContent, styles.dropdownOpen].join(" ");
 const dropDownClose = styles.dropdownContent;
@@ -38,6 +42,7 @@ function PlayerBig({
   playNext,
   currentId,
   toggleDrawer,
+  downloadTrack,
 }) {
   const [drowdownClass, setDrowdownClass] = React.useState(dropDownClose);
   React.useEffect(() => {
@@ -54,9 +59,7 @@ function PlayerBig({
           <DownloadButton
             height="30"
             width="60"
-            onClick={() => {
-              window.location.href = `https://api.modarchive.org/downloads.php?moduleid=${trackId}`;
-            }}
+            onClick={() => downloadTrack()}
           />
         </div>
         <img
@@ -80,12 +83,12 @@ function PlayerBig({
               width="30"
               onClick={() => {
                 const twUrl = new URL("https://twitter.com/intent/tweet");
-                // Todo: write cool share message
                 twUrl.searchParams.append(
                   "text",
-                  `Check this out ${process.env.DOMAIN}/trackId=${trackId}`
+                  `${getRandomFromArray(SHARE_MESSAGES)} ${
+                    process.env.DOMAIN
+                  }/trackId=${trackId}`
                 );
-
                 window.open(twUrl.href, "_blank").focus();
               }}
             />

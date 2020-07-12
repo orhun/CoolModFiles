@@ -3,13 +3,7 @@ import Slider from "rc-slider";
 import moment from "moment";
 
 import styles from "./PlayerMin.module.scss";
-import {
-  ArrowIcon,
-  DownloadButton,
-  PauseButton,
-  PlayButton,
-} from "../icons";
-
+import { ArrowIcon, DownloadButton, PauseButton, PlayButton } from "../icons";
 
 function PlayerMin({
   title,
@@ -21,15 +15,17 @@ function PlayerMin({
   player,
   togglePlay,
   setProgress,
-  changeSize
+  changeSize,
+  downloadTrack,
 }) {
   return (
     <React.Fragment>
       <div className={styles.header}>
-      <img
-        className={styles.banner}
-        src={`/images/disc_${isPlay ? "anim" : "idle"}.gif`}
-        alt="anim" />
+        <img
+          className={styles.banner}
+          src={`/images/disc_${isPlay ? "anim" : "idle"}.gif`}
+          alt="anim"
+        />
         <div className={styles.titleWrap}>
           <h3>{title ? title : "[No Title]"}</h3>
           <ul className={styles.metadata}>
@@ -40,9 +36,7 @@ function PlayerMin({
           className={styles.downloadButton}
           height="20"
           width="50"
-          onClick={() => {
-            window.location.href = `https://api.modarchive.org/downloads.php?moduleid=${trackId}`;
-          }}
+          onClick={() => downloadTrack()}
         />
       </div>
       <div className={styles.seekbarWrapper}>

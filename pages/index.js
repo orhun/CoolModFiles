@@ -1,4 +1,5 @@
 import React from "react";
+import ReactGA from "react-ga";
 import Player from "../components/Player";
 import Footer from "../components/Footer";
 import {
@@ -8,10 +9,23 @@ import {
   EE_MESSAGES,
   BG_IMAGES,
 } from "../utils";
+import { useKeyPress } from "../hooks";
 
 function Index({ trackId }) {
   const [start, setStart] = React.useState(false);
+  const [randomMsg, setRandomMsg] = React.useState(
+    getRandomFromArray(getRandomInt(0, 1000) ? MESSAGES : EE_MESSAGES)
+  );
+
+  const enterKey = useKeyPress("Enter");
+
   React.useEffect(() => {
+    if (enterKey) setStart(true);
+  }, [enterKey]);
+
+  React.useEffect(() => {
+    ReactGA.initialize("UA-172416216-1");
+    ReactGA.pageview(window.location.pathname + window.location.search);
     document.getElementById(
       "app"
     ).style.backgroundImage = `url('/images/${getRandomFromArray(BG_IMAGES)}')`;
@@ -27,9 +41,7 @@ function Index({ trackId }) {
   return (
     <div id="app">
       <div className="randombtn" onClick={() => setStart(true)}>
-        <p suppressHydrationWarning>
-          {getRandomFromArray(getRandomInt(0, 1000) ? MESSAGES : EE_MESSAGES)}
-        </p>
+        <p suppressHydrationWarning>{randomMsg}</p>
       </div>
     </div>
   );
