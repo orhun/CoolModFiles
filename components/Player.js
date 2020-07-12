@@ -24,18 +24,40 @@ function Player({ sharedTrackId }) {
   const [repeat, setRepeat] = React.useState(false);
 
   const spaceKey = useKeyPress("space");
-  const nextKey = useKeyPress("n");
-  const backKey = useKeyPress("p");
-  const rightKey = useKeyPress("ArrowRight");
-  const leftKey = useKeyPress("ArrowLeft");
+  const [upKey, nextKey, nextKeyVim] = [
+    useKeyPress("ArrowUp"),
+    useKeyPress("n"),
+    useKeyPress("k"),
+  ];
+  const [downKey, backKey, backKeyVim] = [
+    useKeyPress("ArrowDown"),
+    useKeyPress("p"),
+    useKeyPress("j"),
+  ];
+  const [rightKey, rightKeyVim] = [useKeyPress("ArrowRight"), useKeyPress("l")];
+  const [leftKey, leftKeyVim] = [useKeyPress("ArrowLeft"), useKeyPress("h")];
 
-  React.useEffect(() => {   
+  React.useEffect(() => {
     if (spaceKey) togglePlay();
-    if (nextKey) playNext();
-    if (backKey) playPrevious();
-    if (rightKey && isPlay) player.seek(player.getPosition() + 5);
-    if (leftKey && isPlay) player.seek(player.getPosition() - 5);
-  }, [spaceKey, nextKey, backKey, rightKey, leftKey]);
+    if (upKey || nextKey || nextKeyVim) playNext();
+    if (downKey || backKey || backKeyVim) playPrevious();
+    if ((rightKey || rightKeyVim) && isPlay)
+      player.seek(player.getPosition() + 5);
+    if ((leftKey || leftKeyVim) && isPlay)
+      player.seek(player.getPosition() - 5);
+  }, [
+    spaceKey,
+    upKey,
+    nextKey,
+    nextKeyVim,
+    downKey,
+    backKey,
+    backKeyVim,
+    rightKey,
+    rightKeyVim,
+    leftKey,
+    leftKeyVim,
+  ]);
 
   useInterval(
     () => {
