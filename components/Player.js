@@ -25,6 +25,7 @@ function Player({ sharedTrackId }) {
 
   const spaceKey = useKeyPress("space");
   const tabKey = useKeyPress("Tab");
+  const downloadKey = useKeyPress("d");
   const [upKey, nextKey, nextKeyVim] = [
     useKeyPress("ArrowUp"),
     useKeyPress("n"),
@@ -36,11 +37,12 @@ function Player({ sharedTrackId }) {
     useKeyPress("j"),
   ];
   const [rightKey, rightKeyVim] = [useKeyPress("ArrowRight"), useKeyPress("l")];
-  const [leftKey, leftKeyVim] = [useKeyPress("ArrowLeft"), useKeyPress("h")];
+  const [leftKey, leftKeyVim] = [useKeyPress("ArrowLeft"),   useKeyPress("h")];
 
   React.useEffect(() => {
     if (spaceKey) togglePlay();
     if (tabKey) changeSize();
+    if (downloadKey) downloadTrack();
     if (upKey || nextKey || nextKeyVim) playNext();
     if (downKey || backKey || backKeyVim) playPrevious();
     if ((rightKey || rightKeyVim) && isPlay)
@@ -50,6 +52,7 @@ function Player({ sharedTrackId }) {
   }, [
     spaceKey,
     tabKey,
+    downloadKey,
     upKey,
     nextKey,
     nextKeyVim,
@@ -143,6 +146,10 @@ function Player({ sharedTrackId }) {
         playMusic(newId);
       });
   };
+
+  const downloadTrack = () => {
+    window.location.href = `https://api.modarchive.org/downloads.php?moduleid=${trackId}`;
+  }
 
   const changeSize = () => {
     setSize(size === "big" ? "small" : "big");
