@@ -8,9 +8,20 @@ import {
   EE_MESSAGES,
   BG_IMAGES,
 } from "../utils";
+import { useKeyPress } from "../hooks";
 
 function Index({ trackId }) {
   const [start, setStart] = React.useState(false);
+  const [randomMsg, setRandomMsg] = React.useState(
+    getRandomFromArray(getRandomInt(0, 1000) ? MESSAGES : EE_MESSAGES)
+  );
+
+  const enterKey = useKeyPress("Enter");
+
+  React.useEffect(() => {
+    if (enterKey) setStart(true);
+  }, [enterKey]);
+
   React.useEffect(() => {
     document.getElementById(
       "app"
@@ -27,9 +38,7 @@ function Index({ trackId }) {
   return (
     <div id="app">
       <div className="randombtn" onClick={() => setStart(true)}>
-        <p suppressHydrationWarning>
-          {getRandomFromArray(getRandomInt(0, 1000) ? MESSAGES : EE_MESSAGES)}
-        </p>
+        <p suppressHydrationWarning>{randomMsg}</p>
       </div>
     </div>
   );
