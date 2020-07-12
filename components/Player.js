@@ -4,7 +4,7 @@ import styles from "./Player.module.scss";
 import PlayerBig from "./PlayerBig";
 import PlayerMin from "./PlayerMin";
 
-import { useInterval } from "../hooks";
+import { useInterval, useKeyPress } from "../hooks";
 import { getRandomInt, RANDOM_MAX } from "../utils";
 
 function Player({ sharedTrackId }) {
@@ -22,6 +22,13 @@ function Player({ sharedTrackId }) {
   const [prevIds, setPrevIds] = React.useState([]);
   const [currentId, setCurrentId] = React.useState(-1);
   const [repeat, setRepeat] = React.useState(false);
+
+
+
+  const spaceKey = useKeyPress("space");
+  React.useEffect(() => {
+    if (spaceKey) togglePlay();
+  }, [spaceKey]);
 
   useInterval(
     () => {
@@ -90,7 +97,7 @@ function Player({ sharedTrackId }) {
         setMax(player.duration());
         setIsPlay(true);
         player.seek(0);
-        window.history.pushState({trackId: trackId}, "", `?trackId=${id}`);
+        window.history.pushState({ trackId: trackId }, "", `?trackId=${id}`);
         if (!prevIds.includes(id)) {
           let cid = currentId + 1;
           setCurrentId(cid);
