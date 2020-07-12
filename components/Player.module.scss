@@ -1,4 +1,9 @@
+.playerWrapper {
+  position: relative;
+}
+
 .player {
+  position: relative;
   display: flex;
   background-color: black;
   flex-direction: column;
@@ -13,6 +18,77 @@
   box-shadow: 5px 5px 24px 3px rgba(0, 0, 0, 0.75);
   animation-name: bounceIn;
   animation-duration: 1s;
+  z-index: 50;
+}
+
+.playerBack {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 0%;
+  left: 0%;
+  z-index: 49;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  border-radius: 5px;
+  visibility: hidden;
+  padding: 10px 10px 10px 10px;
+}
+
+.backSideContent {
+  overflow-y: auto;
+  margin: 10px 5px 10px 5px;
+  scrollbar-color: #bd00ff transparent;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar {
+    width: 5px;
+    margin-right: 10px;
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #bd00ff;
+  }
+}
+
+.slideRight {
+  animation-name: slideRight;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.slideLeft {
+  animation-name: slideLeft;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.fancyHr {
+  color: #bd00ff;
+}
+
+@keyframes slideRight {
+  0% {
+    left: 0%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes slideLeft {
+  0% {
+    left: 100%;
+  }
+  100% {
+    left: 0%;
+  }
 }
 
 @keyframes bounceIn {
@@ -34,6 +110,10 @@
 
 @media screen and (max-width: 600px) {
   .player {
+    max-width: 90%;
+  }
+
+  .playerBack {
     max-width: 90%;
   }
 }

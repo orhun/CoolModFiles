@@ -13,7 +13,7 @@ import {
   PlayButton,
   ShareIcon,
   CodeIcon,
-  TwitterIcon,
+  QuestionIcon,
   TwitterOutlineIcon,
 } from "../icons";
 import LoadingState from "./LoadingState";
@@ -37,9 +37,16 @@ function PlayerBig({
   playPrevious,
   playNext,
   currentId,
+  toggleDrawer,
 }) {
   const [drowdownClass, setDrowdownClass] = React.useState(dropDownClose);
-
+  React.useEffect(() => {
+    setTimeout(() => {
+      try {
+        document.getElementById("backside").style.visibility = "visible";
+      } catch (error) {}
+    }, 1000);
+  });
   return (
     <React.Fragment>
       <div className={styles.wheader}>
@@ -154,12 +161,21 @@ function PlayerBig({
           disable={loading ? "true" : "false"}
         />
       </div>
-      <ArrowIcon
-        className={styles.arrow}
-        height="20"
-        width="50"
-        onClick={() => changeSize()}
-      />
+      <div className={styles.footer}>
+        <QuestionIcon className={styles.hidden} height="30" width="30" />
+        <ArrowIcon
+          className={styles.arrow}
+          height="20"
+          width="50"
+          onClick={() => changeSize()}
+        />
+        <QuestionIcon
+          className={styles.question}
+          height="30"
+          width="30"
+          onClick={() => toggleDrawer()}
+        />
+      </div>
     </React.Fragment>
   );
 }

@@ -22,6 +22,8 @@ function Player({ sharedTrackId }) {
   const [prevIds, setPrevIds] = React.useState([]);
   const [currentId, setCurrentId] = React.useState(-1);
   const [repeat, setRepeat] = React.useState(false);
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const [backClass, setBackClass] = React.useState([styles.playerBack]);
 
   const spaceKey = useKeyPress("space");
   const nextKey = useKeyPress("n");
@@ -29,7 +31,7 @@ function Player({ sharedTrackId }) {
   const rightKey = useKeyPress("ArrowRight");
   const leftKey = useKeyPress("ArrowLeft");
 
-  React.useEffect(() => {   
+  React.useEffect(() => {
     if (spaceKey) togglePlay();
     if (nextKey) playNext();
     if (backKey) playPrevious();
@@ -61,6 +63,15 @@ function Player({ sharedTrackId }) {
       playMusic(trackId);
     }
   }, [player]);
+
+  React.useEffect(() => {
+    console.log(backClass);
+    if (drawerOpen) {
+      setBackClass([backClass[0], styles.slideRight]);
+    } else {
+      setBackClass([backClass[0], styles.slideLeft]);
+    }
+  }, [drawerOpen]);
 
   const togglePlay = () => {
     setIsPlay(!isPlay);
@@ -119,43 +130,85 @@ function Player({ sharedTrackId }) {
       });
   };
 
+  const toggleDrawer = () => {
+    setDrawerOpen(!drawerOpen);
+  };
+
   const changeSize = () => {
     setSize(size === "big" ? "small" : "big");
   };
 
   return (
-    <div className={styles.player}>
+    <div>
       {size === "big" ? (
-        <PlayerBig
-          title={title}
-          loading={loading}
-          metaData={metaData}
-          trackId={trackId}
-          setTrackId={setTrackId}
-          progress={progress}
-          max={max}
-          player={player}
-          isPlay={isPlay}
-          togglePlay={togglePlay}
-          setProgress={setProgress}
-          changeSize={changeSize}
-          playPrevious={playPrevious}
-          playNext={playNext}
-          currentId={currentId}
-        />
+        <div className={styles.playerWrapper}>
+          <div className={styles.player}>
+            <PlayerBig
+              title={title}
+              loading={loading}
+              metaData={metaData}
+              trackId={trackId}
+              setTrackId={setTrackId}
+              progress={progress}
+              max={max}
+              player={player}
+              isPlay={isPlay}
+              togglePlay={togglePlay}
+              setProgress={setProgress}
+              changeSize={changeSize}
+              playPrevious={playPrevious}
+              playNext={playNext}
+              currentId={currentId}
+              toggleDrawer={toggleDrawer}
+            />
+          </div>
+          <div id="backside" className={backClass.join(" ")}>
+            <h1>Help</h1>
+            <hr className={styles.fancyHr} />
+            <div className={styles.backSideContent}>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Praesent gravida viverra diam at tempus. Sed sit amet convallis
+                lectus. Nunc convallis nisl a convallis tincidunt. Nulla sit
+                amet libero non dui consequat luctus. Sed pellentesque lobortis
+                turpis, sit amet tempor risus ultricies nec. Nulla a molestie
+                elit, nec eleifend ligula. Etiam in hendrerit urna. Sed dapibus
+                purus eget semper venenatis. Maecenas et enim nulla. Sed gravida
+                luctus sem, ut convallis tellus feugiat vel. Morbi et maximus
+                diam. Vivamus tristique lacinia sollicitudin. Fusce eleifend
+                facilisis sapien, non eleifend ante lacinia ut. Sed efficitur
+                eros at sapien eleifend, eu placerat leo finibus. Pellentesque
+                habitant morbi tristique senectus et netus et malesuada fames ac
+                turpis egestas. Fusce dapibus suscipit mi quis consectetur.
+                Integer varius molestie bibendum. Donec gravida tortor et erat
+                volutpat aliquam. Nunc vel felis suscipit, lobortis erat at,
+                volutpat felis. Fusce metus orci, tempor in turpis in,
+                vestibulum ornare metus. Morbi tortor libero, mattis vitae
+                aliquet at, aliquam id lectus. Pellentesque mi tellus, congue
+                vel commodo et, laoreet eget massa. Etiam iaculis efficitur
+                magna quis lacinia. Interdum et malesuada fames ac ante ipsum
+                primis in faucibus. Pellentesque vitae quam vitae massa ornare
+                posuere. Curabitur congue ipsum sed elit facilisis lacinia.
+                Nullam malesuada feugiat nulla in viverra. Etiam vitae eros
+              </p>
+            </div>
+          </div>
+        </div>
       ) : (
-        <PlayerMin
-          title={title}
-          loading={loading}
-          trackId={trackId}
-          progress={progress}
-          max={max}
-          isPlay={isPlay}
-          player={player}
-          togglePlay={togglePlay}
-          setProgress={setProgress}
-          changeSize={changeSize}
-        />
+        <div className={styles.player}>
+          <PlayerMin
+            title={title}
+            loading={loading}
+            trackId={trackId}
+            progress={progress}
+            max={max}
+            isPlay={isPlay}
+            player={player}
+            togglePlay={togglePlay}
+            setProgress={setProgress}
+            changeSize={changeSize}
+          />
+        </div>
       )}
     </div>
   );
