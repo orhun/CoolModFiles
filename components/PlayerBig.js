@@ -1,6 +1,7 @@
 import React from "react";
 import Slider from "rc-slider";
 import moment from "moment";
+import copy from "copy-to-clipboard";
 
 import styles from "./PlayerBig.module.scss";
 import {
@@ -11,8 +12,15 @@ import {
   PauseButton,
   PlayButton,
   ShareIcon,
+  CodeIcon,
+  TwitterIcon,
+  TwitterOutlineIcon,
 } from "../icons";
 import LoadingState from "./LoadingState";
+import { generateEmbedString } from "../utils";
+
+const dropDownOpen = [styles.dropdownContent, styles.dropdownOpen].join(" ");
+const dropDownClose = styles.dropdownContent;
 
 function PlayerBig({
   title,
@@ -31,10 +39,12 @@ function PlayerBig({
   playNext,
   currentId,
 }) {
+  const [drowdownClass, setDrowdownClass] = React.useState(dropDownClose);
+
   return (
     <React.Fragment>
       <div className={styles.wheader}>
-        <div className={styles.shareWrap}>
+        <div className={styles.downloadWrap}>
           <DownloadButton
             height="30"
             width="60"
@@ -48,8 +58,39 @@ function PlayerBig({
           src={`/images/disc_${isPlay ? "anim" : "idle"}.gif`}
           alt="anim"
         />
-        <div className={styles.downloadWrap}>
-          <ShareIcon height="30" width="60" />
+        <div className={styles.shareWrap}>
+          <ShareIcon
+            height="30"
+            width="60"
+            onClick={() => {
+              setDrowdownClass(
+                drowdownClass === dropDownClose ? dropDownOpen : dropDownClose
+              );
+            }}
+          />
+          <div className={drowdownClass}>
+            <TwitterOutlineIcon
+              height="30"
+              width="30"
+              onClick={() => {
+                const twUrl = new URL("https://twitter.com/intent/tweet");
+                // Todo: write cool share message
+                twUrl.searchParams.append(
+                  "text",
+                  `Check this out ${process.env.DOMAIN}/trackId=${trackId}`
+                );
+
+                window.open(twUrl.href, "_blank").focus();
+              }}
+            />
+            <CodeIcon
+              height="30"
+              width="30"
+              onClick={() => {
+                copy(generateEmbedString(trackId, title));
+              }}
+            />
+          </div>
         </div>
       </div>
       <h1 className={styles.title}>{title ? title : "[No Title]"}</h1>

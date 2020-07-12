@@ -10,7 +10,7 @@ const BG_IMAGES = [
   "bg_7.png",
   "bg_8.jpg",
   "bg_9.jpg",
-]
+];
 
 const MESSAGES = [
   "Give me random song!",
@@ -47,7 +47,7 @@ const MESSAGES = [
   "Play sth nice!",
   "Let's roll!",
   "Stop refreshing, just click me!",
-]
+];
 
 const EE_MESSAGES = [
   "bom HInob.",
@@ -70,8 +70,17 @@ const EE_MESSAGES = [
   "When life gives you lemons, play a mod file!",
   "/playsound module",
   "/tableflip",
-  "oturmaya mi geldik?"
-]
+  "oturmaya mi geldik?",
+];
+
+function generateEmbedString(id, title) {
+  return `<iframe
+  width="100%"
+  height="200"
+  src="${process.env.DOMAIN}/embed/${id}?title=${title}"
+  frameborder="0"
+></iframe>`;
+}
 
 function getRandomFromArray(array) {
   return array[Math.floor(Math.random() * array.length)];
@@ -83,5 +92,12 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-export { getRandomInt, getRandomFromArray, RANDOM_MAX,
-  MESSAGES, EE_MESSAGES, BG_IMAGES };
+export {
+  getRandomInt,
+  getRandomFromArray,
+  generateEmbedString,
+  RANDOM_MAX,
+  MESSAGES,
+  EE_MESSAGES,
+  BG_IMAGES,
+};

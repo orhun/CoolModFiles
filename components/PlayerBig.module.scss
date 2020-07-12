@@ -1,3 +1,47 @@
+.dropdownContent {
+  position: absolute;
+  top: 40px;
+  display: none;
+  flex-direction: column;
+  width: 30%;
+
+  svg {
+    align-self: center;
+    animation-name: bounceIn;
+    animation-duration: 0.5s;
+
+    &:active:hover {
+      opacity: 0.7;
+    }
+  }
+
+  svg + svg {
+    margin-top: 10px;
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.dropdownOpen {
+  display: flex;
+  justify-content: center;
+}
+
 .banner {
   width: 115px;
   align-self: center;
@@ -9,7 +53,7 @@
   justify-content: space-between;
 }
 
-.shareWrap {
+.downloadWrap {
   flex: 1;
   display: flex;
   justify-content: flex-start;
@@ -18,18 +62,29 @@
   svg {
     margin-left: -15px;
     cursor: pointer;
+
+    &:active:hover {
+      opacity: 0.7;
+    }
   }
 }
 
-.downloadWrap {
+.shareWrap {
   flex: 1;
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
+  position: relative;
 
   svg {
     margin-right: -15px;
     cursor: pointer;
+  }
+
+  &:active:hover {
+    .dropdownContent {
+      display: flex;
+    }
   }
 }
 
