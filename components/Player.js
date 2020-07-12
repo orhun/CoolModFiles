@@ -23,7 +23,7 @@ function Player({ sharedTrackId }) {
   const [currentId, setCurrentId] = React.useState(-1);
   const [repeat, setRepeat] = React.useState(false);
 
-  const spaceKey = useKeyPress("space");
+  const spaceKey = useKeyPress(" ");
   const tabKey = useKeyPress("Tab");
   const downloadKey = useKeyPress("d");
   const [upKey, nextKey, nextKeyVim] = [
