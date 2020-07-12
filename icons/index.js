@@ -10,6 +10,9 @@ import ShareIcon from "./ShareIcon";
 import CodeIcon from "./CodeIcon";
 import ClipIcon from "./ClipIcon";
 import TwitterOutlineIcon from "./TwitterOutlineIcon";
+import ArrowSimpleIcon from "./ArrowSimpleIcon";
+import QuestionIcon from "./QuestionIcon";
+import PatreonIcon from "./PatreonIcon";
 
 export {
   PlayButton,
@@ -23,5 +26,8 @@ export {
   TwitterIcon,
   CodeIcon,
   ClipIcon,
-  TwitterOutlineIcon
+  TwitterOutlineIcon,
+  ArrowSimpleIcon,
+  QuestionIcon,
+  PatreonIcon,
 };
