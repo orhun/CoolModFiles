@@ -29,7 +29,7 @@ function Player({ sharedTrackId }) {
   const rightKey = useKeyPress("ArrowRight");
   const leftKey = useKeyPress("ArrowLeft");
 
-  React.useEffect(() => {
+  React.useEffect(() => {   
     if (spaceKey) togglePlay();
     if (nextKey) playNext();
     if (backKey) playPrevious();
