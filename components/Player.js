@@ -24,6 +24,7 @@ function Player({ sharedTrackId }) {
   const [repeat, setRepeat] = React.useState(false);
 
   const spaceKey = useKeyPress("space");
+  const tabKey = useKeyPress("Tab");
   const [upKey, nextKey, nextKeyVim] = [
     useKeyPress("ArrowUp"),
     useKeyPress("n"),
@@ -39,6 +40,7 @@ function Player({ sharedTrackId }) {
 
   React.useEffect(() => {
     if (spaceKey) togglePlay();
+    if (tabKey) changeSize();
     if (upKey || nextKey || nextKeyVim) playNext();
     if (downKey || backKey || backKeyVim) playPrevious();
     if ((rightKey || rightKeyVim) && isPlay)
@@ -47,6 +49,7 @@ function Player({ sharedTrackId }) {
       player.seek(player.getPosition() - 5);
   }, [
     spaceKey,
+    tabKey,
     upKey,
     nextKey,
     nextKeyVim,
