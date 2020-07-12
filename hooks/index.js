@@ -29,6 +29,7 @@ function useKeyPress(targetKey) {
 
   function downHandler({ key, keyCode }) {
     if (keyCode === 32 && targetKey === "space") {
+      // todo: refactor this
       //  handle space
       setKeyPressed(true);
     }

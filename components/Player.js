@@ -23,12 +23,21 @@ function Player({ sharedTrackId }) {
   const [currentId, setCurrentId] = React.useState(-1);
   const [repeat, setRepeat] = React.useState(false);
 
-
-
   const spaceKey = useKeyPress("space");
+  const nextKey = useKeyPress("n");
+  const backKey = useKeyPress("p");
+
   React.useEffect(() => {
     if (spaceKey) togglePlay();
   }, [spaceKey]);
+
+  React.useEffect(() => {
+    if (nextKey) playNext();
+  }, [nextKey]);
+
+  React.useEffect(() => {
+    if (backKey) playPrevious();
+  }, [backKey]);
 
   useInterval(
     () => {
