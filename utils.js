@@ -73,6 +73,47 @@ const EE_MESSAGES = [
   "oturmaya mi geldik?",
 ];
 
+const SHARE_MESSAGES = [
+  "Check this out:",
+  "Look what I've found:",
+  "Here's a cool track:",
+  "Simply wonderful.",
+  "Listen to this!",
+  "Don't miss this!",
+  "Cool mod:",
+  "Loved it!",
+  "You have to see this one:",
+  "This one is my favorite!",
+  "Kinda liked it.",
+  "Such an amazing track!",
+  "Have this on loop right now.",
+  "Good one:",
+  "Cool vibes:",
+  "Addicting:",
+  "It's alright, I guess...",
+  "Nice stuff:",
+  "Underrated:",
+  "Add this to your playlist!",
+  "EPIC.",
+  "Best track ever.",
+  "If this isn't the coolest thing ever, I don't know what is:",
+  "Magical!",
+  "Incredible track!",
+  "This is art:",
+  "Can't stop listening!",
+  "10/10",
+  "I've found the perfect track.",
+  "You might enjoy this:",
+  "I wish it was longer:",
+  "Have some of this!",
+  "DAYUM!",
+  "Slaps hard:",
+  "Out of this world:",
+  "Impressive.",
+  "Wow!",
+  "OMG!",
+];
+
 function generateEmbedString(id, title) {
   return `<iframe
   width="100%"
@@ -97,7 +138,8 @@ export {
   getRandomFromArray,
   generateEmbedString,
   RANDOM_MAX,
+  BG_IMAGES,
   MESSAGES,
   EE_MESSAGES,
-  BG_IMAGES,
+  SHARE_MESSAGES,
 };
