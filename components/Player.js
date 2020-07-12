@@ -94,7 +94,6 @@ function Player({ sharedTrackId }) {
   }, [player]);
 
   React.useEffect(() => {
-    console.log(backClass);
     if (drawerOpen) {
       setBackClass([backClass[0], styles.slideRight]);
     } else {
