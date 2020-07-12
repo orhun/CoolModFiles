@@ -132,6 +132,12 @@ ChiptuneJsPlayer.prototype.stop = function() {
   }
 };
 
+ChiptuneJsPlayer.prototype.pause = function() {
+  if (this.currentPlayingNode != null) {
+    this.currentPlayingNode.pause();
+  }
+};
+
 ChiptuneJsPlayer.prototype.togglePause = function() {
   if (this.currentPlayingNode != null) {
     this.currentPlayingNode.togglePause();

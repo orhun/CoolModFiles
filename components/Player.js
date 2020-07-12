@@ -17,7 +17,7 @@ function Player({ sharedTrackId }) {
   const [loading, setLoading] = React.useState(true);
   const [title, setTitle] = React.useState("Loading...");
   const [progress, setProgress] = React.useState(0);
-  const [max, setMax] = React.useState(100);
+  const [max, setMax] = React.useState(0);
   const [size, setSize] = React.useState("big");
   const [prevIds, setPrevIds] = React.useState([]);
   const [currentId, setCurrentId] = React.useState(-1);
@@ -76,9 +76,14 @@ function Player({ sharedTrackId }) {
   };
 
   const playMusic = (id) => {
+    setLoading(true);
+    setIsPlay(false);
+    setTitle("Loading...");
+    player.pause();
     player
       .load(`jsplayer.php?moduleid=${id}`)
       .then((buffer) => {
+        setLoading(false);
         player.play(buffer);
         setMetaData(player.metadata());
         setTitle(player.metadata().title);
@@ -91,15 +96,12 @@ function Player({ sharedTrackId }) {
           setCurrentId(cid);
           setPrevIds([...prevIds, id]);
         }
-        document.title = `🎶 ${player.metadata().title} - CoolModFiles`;
+        document.title = `🎶 ${player.metadata().title} - CoolModFiles.com 🎶`;
       })
       .catch(() => {
         const newId = getRandomInt(0, RANDOM_MAX);
         setTrackId(newId);
         playMusic(newId);
-      })
-      .finally(() => {
-        setLoading(false);
       });
   };
 
@@ -120,7 +122,6 @@ function Player({ sharedTrackId }) {
           max={max}
           player={player}
           isPlay={isPlay}
-          setIsPlay={setIsPlay}
           togglePlay={togglePlay}
           setProgress={setProgress}
           changeSize={changeSize}
@@ -132,13 +133,11 @@ function Player({ sharedTrackId }) {
         <PlayerMin
           title={title}
           loading={loading}
-          metaData={metaData}
           trackId={trackId}
           progress={progress}
           max={max}
           isPlay={isPlay}
           player={player}
-          setIsPlay={setIsPlay}
           togglePlay={togglePlay}
           setProgress={setProgress}
           changeSize={changeSize}

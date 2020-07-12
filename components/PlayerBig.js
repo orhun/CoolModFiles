@@ -31,7 +31,6 @@ function PlayerBig({
   max,
   player,
   isPlay,
-  setIsPlay,
   togglePlay,
   setProgress,
   changeSize,
@@ -93,7 +92,7 @@ function PlayerBig({
           </div>
         </div>
       </div>
-      <h1 className={styles.title}>{title ? title : "[No Title]"}</h1>
+      <h2 className={styles.title}>{title ? title : "[No Title]"}</h2>
       {!loading ? (
         <ul className={styles.metadata}>
           {metaData.artist ? <li>Artist: {metaData.artist}</li> : null}
@@ -131,7 +130,7 @@ function PlayerBig({
           height="70"
           width="70"
           onClick={!loading ? () => playPrevious() : null}
-          disable={currentId === 0 ? "true" : "false"}
+          disable={currentId === 0 || loading ? "true" : "false"}
         />
         {!isPlay ? (
           <PlayButton
@@ -152,6 +151,7 @@ function PlayerBig({
           height="70"
           width="70"
           onClick={!loading ? () => playNext() : null}
+          disable={loading ? "true" : "false"}
         />
       </div>
       <ArrowIcon

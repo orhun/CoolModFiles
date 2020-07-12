@@ -14,13 +14,11 @@ import {
 function PlayerMin({
   title,
   loading,
-  metaData,
   trackId,
   progress,
   max,
   isPlay,
   player,
-  setIsPlay,
   togglePlay,
   setProgress,
   changeSize
