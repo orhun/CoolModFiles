@@ -33,7 +33,7 @@ function useKeyPress(targetKey) {
       //  handle space
       setKeyPressed(true);
     }
-    if (key === targetKey) {
+    if (key.toLowerCase() === targetKey.toLowerCase()) {
       setKeyPressed(true);
     }
   }
@@ -45,7 +45,7 @@ function useKeyPress(targetKey) {
       //  handle space
       setKeyPressed(false);
     }
-    if (key === targetKey) {
+    if (key.toLowerCase() === targetKey.toLowerCase()) {
       setKeyPressed(false);
     }
   };
