@@ -7,6 +7,9 @@ import LeftButton from "./LeftIcon";
 import GithubIcon from "./GithubIcon";
 import TwitterIcon from "./TwitterIcon";
 import ShareIcon from "./ShareIcon";
+import CodeIcon from "./CodeIcon";
+import ClipIcon from "./ClipIcon";
+import TwitterOutlineIcon from "./TwitterOutlineIcon";
 
 export {
   PlayButton,
@@ -18,4 +21,7 @@ export {
   GithubIcon,
   ShareIcon,
   TwitterIcon,
+  CodeIcon,
+  ClipIcon,
+  TwitterOutlineIcon
 };
