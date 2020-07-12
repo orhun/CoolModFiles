@@ -26,18 +26,16 @@ function Player({ sharedTrackId }) {
   const spaceKey = useKeyPress("space");
   const nextKey = useKeyPress("n");
   const backKey = useKeyPress("p");
+  const rightKey = useKeyPress("ArrowRight");
+  const leftKey = useKeyPress("ArrowLeft");
 
   React.useEffect(() => {
     if (spaceKey) togglePlay();
-  }, [spaceKey]);
-
-  React.useEffect(() => {
     if (nextKey) playNext();
-  }, [nextKey]);
-
-  React.useEffect(() => {
     if (backKey) playPrevious();
-  }, [backKey]);
+    if (rightKey && isPlay) player.seek(player.getPosition() + 5);
+    if (leftKey && isPlay) player.seek(player.getPosition() - 5);
+  }, [spaceKey, nextKey, backKey, rightKey, leftKey]);
 
   useInterval(
     () => {
