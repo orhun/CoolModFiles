@@ -175,6 +175,7 @@ function Player({ sharedTrackId }) {
           playPrevious={playPrevious}
           playNext={playNext}
           currentId={currentId}
+          downloadTrack={downloadTrack}
         />
       ) : (
         <PlayerMin
@@ -188,6 +189,7 @@ function Player({ sharedTrackId }) {
           togglePlay={togglePlay}
           setProgress={setProgress}
           changeSize={changeSize}
+          downloadTrack={downloadTrack}
         />
       )}
     </div>

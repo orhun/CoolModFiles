@@ -37,6 +37,7 @@ function PlayerBig({
   playPrevious,
   playNext,
   currentId,
+  downloadTrack,
 }) {
   const [drowdownClass, setDrowdownClass] = React.useState(dropDownClose);
 
@@ -47,9 +48,7 @@ function PlayerBig({
           <DownloadButton
             height="30"
             width="60"
-            onClick={() => {
-              window.location.href = `https://api.modarchive.org/downloads.php?moduleid=${trackId}`;
-            }}
+            onClick={() => downloadTrack()}
           />
         </div>
         <img
