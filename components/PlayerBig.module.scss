@@ -170,7 +170,6 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  
 }
 
 .arrow {
@@ -181,6 +180,10 @@
 .question {
   margin: 0 0 10px 0;
   cursor: pointer;
+
+  &:active:hover {
+    opacity: 0.7;
+  }
 }
 
 .hidden {
