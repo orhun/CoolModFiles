@@ -58,6 +58,7 @@ function PlayerBig({
       setDropDownClass(
         dropDownClass === dropDownClose ? dropDownOpen : dropDownClose
       );
+    if (twitterKey) shareOnTwitter();
     if (embedKey) copy(generateEmbedString(trackId, title));
   }, [shareKey, twitterKey, embedKey]);
 
@@ -68,6 +69,18 @@ function PlayerBig({
       } catch (error) {}
     }, 1000);
   });
+
+  const shareOnTwitter = () => {
+    const twUrl = new URL("https://twitter.com/intent/tweet");
+    twUrl.searchParams.append(
+      "text",
+      `${getRandomFromArray(SHARE_MESSAGES)} ${
+        process.env.DOMAIN
+      }/trackId=${trackId}`
+    );
+    window.open(twUrl.href, "_blank").focus();
+  };
+
   return (
     <React.Fragment>
       <div className={styles.wheader}>
@@ -97,16 +110,7 @@ function PlayerBig({
             <TwitterOutlineIcon
               height="30"
               width="30"
-              onClick={() => {
-                const twUrl = new URL("https://twitter.com/intent/tweet");
-                twUrl.searchParams.append(
-                  "text",
-                  `${getRandomFromArray(SHARE_MESSAGES)} ${
-                    process.env.DOMAIN
-                  }/trackId=${trackId}`
-                );
-                window.open(twUrl.href, "_blank").focus();
-              }}
+              onClick={() => shareOnTwitter()}
             />
             <CodeIcon
               height="30"
