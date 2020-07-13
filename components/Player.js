@@ -198,6 +198,8 @@ function Player({ sharedTrackId }) {
               currentId={currentId}
               toggleDrawer={toggleDrawer}
               downloadTrack={downloadTrack}
+              repeat={repeat}
+              setRepeat={setRepeat}
             />
           </div>
           <div id="backside" className={backClass.join(" ")}>

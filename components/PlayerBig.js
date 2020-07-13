@@ -45,6 +45,8 @@ function PlayerBig({
   currentId,
   toggleDrawer,
   downloadTrack,
+  repeat,
+  setRepeat,
 }) {
   const [dropDownClass, setDropDownClass] = React.useState(dropDownClose);
   const [shareKey, embedKey] = [useKeyPress("s"), useKeyPress("e")];
@@ -180,7 +182,14 @@ function PlayerBig({
         />
       </div>
       <div className={styles.footer}>
-        <QuestionIcon className={styles.hidden} height="30" width="30" />
+        <QuestionIcon
+          className={styles.question}
+          height="30"
+          width="30"
+          onClick={() => {
+            setRepeat(!repeat);
+          }}
+        />
         <ArrowIcon
           className={styles.arrow}
           height="20"
