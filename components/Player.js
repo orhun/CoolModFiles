@@ -3,11 +3,12 @@ import React from "react";
 import styles from "./Player.module.scss";
 import PlayerBig from "./PlayerBig";
 import PlayerMin from "./PlayerMin";
+import BackSide from "./BackSide";
 
 import { useInterval, useKeyPress } from "../hooks";
 import { getRandomInt, RANDOM_MAX } from "../utils";
 
-function Player({ sharedTrackId }) {
+function Player({ sharedTrackId, backSideContent }) {
   const [isPlay, setIsPlay] = React.useState(false);
   const [player, setPlayer] = React.useState(null);
   const [trackId, setTrackId] = React.useState(
@@ -165,7 +166,7 @@ function Player({ sharedTrackId }) {
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
-  }
+  };
 
   const downloadTrack = () => {
     window.location.href = `https://api.modarchive.org/downloads.php?moduleid=${trackId}`;
@@ -206,31 +207,7 @@ function Player({ sharedTrackId }) {
             <h1>Help</h1>
             <hr className={styles.fancyHr} />
             <div className={styles.backSideContent}>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Praesent gravida viverra diam at tempus. Sed sit amet convallis
-                lectus. Nunc convallis nisl a convallis tincidunt. Nulla sit
-                amet libero non dui consequat luctus. Sed pellentesque lobortis
-                turpis, sit amet tempor risus ultricies nec. Nulla a molestie
-                elit, nec eleifend ligula. Etiam in hendrerit urna. Sed dapibus
-                purus eget semper venenatis. Maecenas et enim nulla. Sed gravida
-                luctus sem, ut convallis tellus feugiat vel. Morbi et maximus
-                diam. Vivamus tristique lacinia sollicitudin. Fusce eleifend
-                facilisis sapien, non eleifend ante lacinia ut. Sed efficitur
-                eros at sapien eleifend, eu placerat leo finibus. Pellentesque
-                habitant morbi tristique senectus et netus et malesuada fames ac
-                turpis egestas. Fusce dapibus suscipit mi quis consectetur.
-                Integer varius molestie bibendum. Donec gravida tortor et erat
-                volutpat aliquam. Nunc vel felis suscipit, lobortis erat at,
-                volutpat felis. Fusce metus orci, tempor in turpis in,
-                vestibulum ornare metus. Morbi tortor libero, mattis vitae
-                aliquet at, aliquam id lectus. Pellentesque mi tellus, congue
-                vel commodo et, laoreet eget massa. Etiam iaculis efficitur
-                magna quis lacinia. Interdum et malesuada fames ac ante ipsum
-                primis in faucibus. Pellentesque vitae quam vitae massa ornare
-                posuere. Curabitur congue ipsum sed elit facilisis lacinia.
-                Nullam malesuada feugiat nulla in viverra. Etiam vitae eros
-              </p>
+              <BackSide content={backSideContent} />
             </div>
           </div>
         </div>

@@ -34,6 +34,12 @@
   border-radius: 5px;
   visibility: hidden;
   padding: 10px 10px 10px 10px;
+
+  h1 {
+    background: linear-gradient(to left, #c200ff, #00b8ff);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
 
 .backSideContent {
@@ -41,6 +47,7 @@
   margin: 10px 5px 10px 5px;
   scrollbar-color: #bd00ff transparent;
   scrollbar-width: thin;
+  overflow-x: hidden;
 
   &::-webkit-scrollbar-track {
     border-radius: 10px;

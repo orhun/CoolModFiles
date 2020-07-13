@@ -1,5 +1,7 @@
 import React from "react";
 import ReactGA from "react-ga";
+import fetch from "isomorphic-unfetch";
+
 import Player from "../components/Player";
 import Footer from "../components/Footer";
 import {
@@ -11,7 +13,7 @@ import {
 } from "../utils";
 import { useKeyPress } from "../hooks";
 
-function Index({ trackId }) {
+function Index({ trackId, backSideContent }) {
   const [start, setStart] = React.useState(false);
   const [randomMsg, setRandomMsg] = React.useState(
     getRandomFromArray(getRandomInt(0, 1000) ? MESSAGES : EE_MESSAGES)
@@ -30,10 +32,11 @@ function Index({ trackId }) {
       "app"
     ).style.backgroundImage = `url('/images/${getRandomFromArray(BG_IMAGES)}')`;
   }, []);
+
   if (start) {
     return (
       <div id="app">
-        <Player sharedTrackId={trackId} />
+        <Player sharedTrackId={trackId} backSideContent={backSideContent} />
         <Footer />
       </div>
     );
@@ -48,7 +51,28 @@ function Index({ trackId }) {
 }
 
 Index.getInitialProps = async ({ query }) => {
-  return { trackId: query.trackId };
+  const req = await fetch("https://api.github.com/graphql", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+    },
+    body: JSON.stringify({
+      query: `{
+      repository(owner: "orhun", name: "CoolModFiles") {
+        content: object(expression: "master:HELP.md") {
+          ... on Blob {
+            text
+          }
+        }
+      }
+    }`,
+    }),
+  });
+  const json = await req.json();
+  return {
+    trackId: query.trackId,
+    backSideContent: json.data?.repository?.content?.text
+  };
 };
 
 export default Index;
