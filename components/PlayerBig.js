@@ -58,7 +58,7 @@ function PlayerBig({
         dropDownClass === dropDownClose ? dropDownOpen : dropDownClose
       );
     if (embedKey) copy(generateEmbedString(trackId, title));
-    if (t) shareOnTwitter();
+    if (tweetKey) shareOnTwitter();
   }, [shareKey, embedKey, tweetKey]);
 
   React.useEffect(() => {
