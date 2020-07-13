@@ -23,6 +23,8 @@ import {
   SHARE_MESSAGES,
 } from "../utils";
 
+import { useKeyPress } from "../hooks";
+
 const dropDownOpen = [styles.dropdownContent, styles.dropdownOpen].join(" ");
 const dropDownClose = styles.dropdownContent;
 
@@ -45,6 +47,15 @@ function PlayerBig({
   downloadTrack,
 }) {
   const [dropDownClass, setDropDownClass] = React.useState(dropDownClose);
+  const shareKey = useKeyPress("s");
+
+  React.useEffect(() => {
+    if (shareKey)
+      setDropDownClass(
+        dropDownClass === dropDownClose ? dropDownOpen : dropDownClose
+      );
+  }, [shareKey]);
+
   React.useEffect(() => {
     setTimeout(() => {
       try {
