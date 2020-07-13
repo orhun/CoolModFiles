@@ -50,7 +50,7 @@ function PlayerBig({
   setRepeat,
 }) {
   const [dropDownClass, setDropDownClass] = React.useState(dropDownClose);
-  const [shareKey, embedKey, tweetKey] = [useKeyPress("s"), useKeyPress("e"), useKeyPress("t")];
+  const [shareKey, embedKey] = [useKeyPress("s"), useKeyPress("e")];
 
   React.useEffect(() => {
     if (shareKey)
@@ -58,8 +58,7 @@ function PlayerBig({
         dropDownClass === dropDownClose ? dropDownOpen : dropDownClose
       );
     if (embedKey) copy(generateEmbedString(trackId, title));
-    if (tweetKey) shareOnTwitter();
-  }, [shareKey, embedKey, tweetKey]);
+  }, [shareKey, embedKey]);
 
   React.useEffect(() => {
     setTimeout(() => {
@@ -81,7 +80,7 @@ function PlayerBig({
         process.env.DOMAIN
       }/trackId=${trackId}`
     );
-    window.open(twUrl.href, "_blank");
+    window.open(twUrl.href, "_blank").focus();
   };
 
   return (
