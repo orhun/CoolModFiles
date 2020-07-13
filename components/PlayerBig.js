@@ -44,7 +44,7 @@ function PlayerBig({
   toggleDrawer,
   downloadTrack,
 }) {
-  const [drowdownClass, setDrowdownClass] = React.useState(dropDownClose);
+  const [dropDownClass, setDropDownClass] = React.useState(dropDownClose);
   React.useEffect(() => {
     setTimeout(() => {
       try {
@@ -72,12 +72,12 @@ function PlayerBig({
             height="30"
             width="60"
             onClick={() => {
-              setDrowdownClass(
-                drowdownClass === dropDownClose ? dropDownOpen : dropDownClose
+              setDropDownClass(
+                dropDownClass === dropDownClose ? dropDownOpen : dropDownClose
               );
             }}
           />
-          <div className={drowdownClass}>
+          <div className={dropDownClass}>
             <TwitterOutlineIcon
               height="30"
               width="30"
