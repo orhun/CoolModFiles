@@ -47,14 +47,19 @@ function PlayerBig({
   downloadTrack,
 }) {
   const [dropDownClass, setDropDownClass] = React.useState(dropDownClose);
-  const shareKey = useKeyPress("s");
+  const [shareKey, twitterKey, embedKey] = [
+    useKeyPress("s"),
+    useKeyPress("t"),
+    useKeyPress("e"),
+  ];
 
   React.useEffect(() => {
     if (shareKey)
       setDropDownClass(
         dropDownClass === dropDownClose ? dropDownOpen : dropDownClose
       );
-  }, [shareKey]);
+    if (embedKey) copy(generateEmbedString(trackId, title));
+  }, [shareKey, twitterKey, embedKey]);
 
   React.useEffect(() => {
     setTimeout(() => {
