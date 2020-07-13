@@ -186,6 +186,20 @@
   }
 }
 
+.repeat {
+  margin: 0 0 5px 0;
+  cursor: pointer;
+  opacity: 1;
+
+  &:active:hover {
+    opacity: 0.5;
+  }
+}
+
+.deactive {
+  opacity: 0.7;
+}
+
 .hidden {
   visibility: hidden;
 }

@@ -15,6 +15,7 @@ import {
   CodeIcon,
   QuestionIcon,
   TwitterOutlineIcon,
+  RepeatIcon,
 } from "../icons";
 import LoadingState from "./LoadingState";
 import {
@@ -65,7 +66,11 @@ function PlayerBig({
         document.getElementById("backside").style.visibility = "visible";
       } catch (error) {}
     }, 1000);
-  });
+  }, []);
+
+  React.useEffect(() => {
+    document.getElementById("repeat").classList.toggle(styles.deactive);
+  }, [repeat]);
 
   const shareOnTwitter = () => {
     const twUrl = new URL("https://twitter.com/intent/tweet");
@@ -182,8 +187,9 @@ function PlayerBig({
         />
       </div>
       <div className={styles.footer}>
-        <QuestionIcon
-          className={styles.question}
+        <RepeatIcon
+          id="repeat"
+          className={styles.repeat}
           height="30"
           width="30"
           onClick={() => {

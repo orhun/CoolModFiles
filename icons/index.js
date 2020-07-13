@@ -13,6 +13,7 @@ import TwitterOutlineIcon from "./TwitterOutlineIcon";
 import ArrowSimpleIcon from "./ArrowSimpleIcon";
 import QuestionIcon from "./QuestionIcon";
 import PatreonIcon from "./PatreonIcon";
+import RepeatIcon from "./RepeatIcon";
 
 export {
   PlayButton,
@@ -30,4 +31,5 @@ export {
   ArrowSimpleIcon,
   QuestionIcon,
   PatreonIcon,
+  RepeatIcon,
 };
