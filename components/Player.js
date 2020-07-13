@@ -27,6 +27,7 @@ function Player({ sharedTrackId }) {
 
   const [spaceKey, enterKey] = [useKeyPress(" "), useKeyPress("Enter")];
   const [tabKey, shiftKey] = [useKeyPress("Tab"), useKeyPress("Shift")];
+  const [helpKey, quitKey] = [useKeyPress("/"), useKeyPress("q")];
   const downloadKey = useKeyPress("d");
   const [upKey, nextKey, nextKeyVim] = [
     useKeyPress("ArrowUp"),
@@ -44,6 +45,7 @@ function Player({ sharedTrackId }) {
   React.useEffect(() => {
     if (spaceKey || enterKey) togglePlay();
     if (tabKey || shiftKey) changeSize();
+    if (helpKey || quitKey) toggleDrawer();
     if (downloadKey) downloadTrack();
     if (upKey || nextKey || nextKeyVim) playNext();
     if (downKey || backKey || backKeyVim) playPrevious();
@@ -56,6 +58,8 @@ function Player({ sharedTrackId }) {
     enterKey,
     tabKey,
     shiftKey,
+    helpKey,
+    quitKey,
     downloadKey,
     upKey,
     nextKey,
