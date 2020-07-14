@@ -11,8 +11,8 @@ function BackSide({ content }) {
         overrides: {
           p: {
             props: {
-              className: styles.p
-            }
+              className: styles.p,
+            },
           },
           h2: {
             props: {
