@@ -1,6 +1,6 @@
 .h2 {
   margin: 10px 0 10px 0;
-  font-size: 24px;
+  font-size: 20px;
   background: linear-gradient(to left, #c200ff, #00b8ff);
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -8,6 +8,7 @@
 
 .p {
   font-size: 13px;
+  white-space: pre-line;
 }
 
 .a {
