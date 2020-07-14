@@ -1,7 +1,7 @@
 {
   "name": "coolmodfiles",
   "version": "1.0.0",
-  "description": "Cool & chill mod file player",
+  "description": "A web player that plays some cool MOD files randomly 🎶",
   "main": "index.js",
   "scripts": {
     "dev": "next",
@@ -10,10 +10,12 @@
     "export": "next export"
   },
   "keywords": [
-    "cool",
-    "chill",
+    "mod-player",
+    "chiptune-player",
+    "chiptune",
+    "retro",
     "music",
-    "nostalgia"
+    "amiga"
   ],
   "author": "",
   "license": "ISC",
