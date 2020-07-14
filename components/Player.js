@@ -204,7 +204,7 @@ function Player({ sharedTrackId, backSideContent }) {
             />
           </div>
           <div id="backside" className={backClass.join(" ")}>
-            <h1>Help</h1>
+            <h2>Help</h2>
             <hr className={styles.fancyHr} />
             <div className={styles.backSideContent}>
               <BackSide content={backSideContent} />
