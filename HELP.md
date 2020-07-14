@@ -2,7 +2,7 @@
 
 It's a web player that works by simply fetching a random module from [modarchive.org](https://modarchive.org) and playing it. **No black magic involved!**
 
-## How do I use this?
+## How do I use it?
 
 You can whether use your mouse/touchpad to click on the cyberpunk-themed cool icons or choose the dark path of hacky key bindings.
 
@@ -35,5 +35,5 @@ When the awesome tracks started piling up, however, it naturally brought about a
 The programmer friends' idea, unfortunately, was beaten by [modarchive.org](https://modarchive.org) many years ago. Realizing how unnecessary creating another internet archive was, the project evolved into a cool web player instead. A group of 3 came together to create what is known today as [CoolModFiles.com](https://CoolModFiles.com).
 With it's modern look, it continues to surface thousands of long-forgotten mod files to introduce newer generations to the world of old-school digital music.
 
-**With** ♥,  
+**With 💛**,  
 \- [@orhun](https://github.com/orhun), [@wkfo](https://github.com/wkfo), [@bufgix](https://github.com/bufgix)
