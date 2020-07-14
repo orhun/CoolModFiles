@@ -25,6 +25,11 @@ function BackSide({ content }) {
               target: "_blank",
             },
           },
+          strong: {
+            props: {
+              className: styles.strong,
+            },
+          },
           table: {
             props: {
               className: styles.table,
