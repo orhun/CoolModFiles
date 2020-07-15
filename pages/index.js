@@ -12,6 +12,7 @@ import {
   BG_IMAGES,
 } from "../utils";
 import { useKeyPress } from "../hooks";
+import { isMobile } from "react-device-detect";
 
 function Index({ trackId, backSideContent }) {
   const [start, setStart] = React.useState(false);
@@ -22,7 +23,7 @@ function Index({ trackId, backSideContent }) {
   const enterKey = useKeyPress("Enter");
 
   React.useEffect(() => {
-    if (enterKey) setStart(true);
+    if (enterKey && !isMobile) setStart(true);
   }, [enterKey]);
 
   React.useEffect(() => {
@@ -43,8 +44,15 @@ function Index({ trackId, backSideContent }) {
   }
   return (
     <div id="app">
-      <div className="randombtn" onClick={() => setStart(true)}>
-        <p suppressHydrationWarning>{randomMsg}</p>
+      <div
+        className="randombtn"
+        onClick={() => (isMobile ? null : setStart(true))}
+      >
+        <p suppressHydrationWarning>
+          {isMobile
+            ? "Player is not working stable on mobile, sorry :("
+            : randomMsg}
+        </p>
       </div>
     </div>
   );
@@ -71,7 +79,7 @@ Index.getInitialProps = async ({ query }) => {
   const json = await req.json();
   return {
     trackId: query.trackId,
-    backSideContent: json.data?.repository?.content?.text
+    backSideContent: json.data?.repository?.content?.text,
   };
 };
 
