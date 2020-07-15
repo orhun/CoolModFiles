@@ -28,7 +28,7 @@ class MyDocument extends Document {
           />
           <meta
             name="twitter:image"
-            content="./favicon.ico"
+            content="https://coolmodfiles.com/favicon-310.png"
           />
 
           <link rel="shortcut icon" href="/favicon.ico" />
