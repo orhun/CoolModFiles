@@ -24,10 +24,12 @@ function Index({ trackId, backSideContent, latestId }) {
   );
 
   const getMessage = () => {
-    if (trackId) {
+    if (isMobile) {
+      return getRandomFromArray(MOBILE_MESSAGES);
+    } else if (trackId) {
       return `Play the track #${trackId}`;
     } else {
-      return isMobile ? getRandomFromArray(MOBILE_MESSAGES) : randomMsg;
+      return randomMsg;
     }
   };
 
