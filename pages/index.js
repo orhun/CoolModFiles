@@ -23,7 +23,7 @@ function Index({ trackId, backSideContent }) {
   const enterKey = useKeyPress("Enter");
 
   React.useEffect(() => {
-    if (enterKey && !isMobile) setStart(true);
+    if (enterKey) setStart(true);
   }, [enterKey]);
 
   React.useEffect(() => {
@@ -44,10 +44,7 @@ function Index({ trackId, backSideContent }) {
   }
   return (
     <div id="app">
-      <div
-        className="randombtn"
-        onClick={() => (isMobile ? null : setStart(true))}
-      >
+      <div className="randombtn" onClick={() => setStart(true)}>
         <p suppressHydrationWarning>
           {isMobile
             ? "Player is not working stable on mobile, sorry :("
