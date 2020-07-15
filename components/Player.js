@@ -113,7 +113,7 @@ function Player({ sharedTrackId, backSideContent }) {
   };
 
   const playNext = () => {
-    if (currentId < prevIds.length) {
+    if (currentId < prevIds.length - 1) {
       let cid = currentId + 1;
       setTrackId(prevIds[cid]);
       playMusic(prevIds[cid]);
