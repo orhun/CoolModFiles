@@ -1,4 +1,4 @@
-const RANDOM_MAX = 189573;
+const RANDOM_MAX = 189623;
 
 const BG_IMAGES = [
   "bg_1.jpg",
