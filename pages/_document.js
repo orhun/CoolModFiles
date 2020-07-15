@@ -26,6 +26,10 @@ class MyDocument extends Document {
             name="twitter:description"
             content="A web player that plays some cool MOD files randomly 🎶"
           />
+          <meta
+            name="twitter:image"
+            content="./favicon.ico"
+          />
 
           <link rel="shortcut icon" href="/favicon.ico" />
           <link rel="icon" sizes="16x16 32x32 64x64" href="/favicon.ico" />
