@@ -9,6 +9,7 @@ import {
   getRandomFromArray,
   MESSAGES,
   EE_MESSAGES,
+  MOBILE_MESSAGES,
   BG_IMAGES,
 } from "../utils";
 import { useKeyPress } from "../hooks";
@@ -46,9 +47,7 @@ function Index({ trackId, backSideContent }) {
     <div id="app">
       <div className="randombtn" onClick={() => setStart(true)}>
         <p suppressHydrationWarning>
-          {isMobile
-            ? "Player is not working stable on mobile, sorry :("
-            : randomMsg}
+          {isMobile ? getRandomFromArray(MOBILE_MESSAGES) : randomMsg}
         </p>
       </div>
     </div>
