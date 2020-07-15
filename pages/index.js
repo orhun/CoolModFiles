@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import {
   getRandomInt,
   getRandomFromArray,
+  RANDOM_MAX,
   MESSAGES,
   EE_MESSAGES,
   MOBILE_MESSAGES,
@@ -15,7 +16,7 @@ import {
 import { useKeyPress } from "../hooks";
 import { isMobile } from "react-device-detect";
 
-function Index({ trackId, backSideContent }) {
+function Index({ trackId, backSideContent, latestId }) {
   const [start, setStart] = React.useState(false);
   const [randomMsg, setRandomMsg] = React.useState(
     getRandomFromArray(getRandomInt(0, 1000) ? MESSAGES : EE_MESSAGES)
@@ -38,7 +39,7 @@ function Index({ trackId, backSideContent }) {
   if (start) {
     return (
       <div id="app">
-        <Player sharedTrackId={trackId} backSideContent={backSideContent} />
+        <Player sharedTrackId={trackId} backSideContent={backSideContent} latestId={latestId} />
         <Footer />
       </div>
     );
@@ -55,7 +56,7 @@ function Index({ trackId, backSideContent }) {
 }
 
 Index.getInitialProps = async ({ query }) => {
-  const req = await fetch("https://api.github.com/graphql", {
+  const gh_req = await fetch("https://api.github.com/graphql", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
@@ -72,10 +73,21 @@ Index.getInitialProps = async ({ query }) => {
     }`,
     }),
   });
-  const json = await req.json();
+  const rss_req = await fetch("https://modarchive.org/rss.php?request=uploads", {
+    method: "GET"
+  });
+  const json = await gh_req.json();
+  const rss = await rss_req.text();
+  let latestId;
+  try {
+    latestId = rss.split("downloads.php?moduleid=")[1].split("#")[0];
+  } catch {
+    latestId = RANDOM_MAX;
+  }
   return {
     trackId: query.trackId,
     backSideContent: json.data?.repository?.content?.text,
+    latestId,
   };
 };
 
