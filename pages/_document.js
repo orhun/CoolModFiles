@@ -94,7 +94,7 @@ class MyDocument extends Document {
             sizes="180x180"
             href="/favicon-180.png"
           />
-          <meta name="msapplication-TileColor" content="#FFFFFF" />
+          <meta name="msapplication-TileColor" content="#000000" />
           <meta name="msapplication-TileImage" content="/favicon-144.png" />
           <meta name="msapplication-config" content="/browserconfig.xml" />
           <script src="/chiptune2.js"></script>
