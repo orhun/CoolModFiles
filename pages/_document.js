@@ -27,7 +27,7 @@ class MyDocument extends Document {
             content="A web player that plays some cool MOD files randomly 🎶"
           />
 
-         
+          <link rel="apple-touch-icon" sizes="180x180" href="./favicon.ico" />
           <link rel="icon" type="image/x-icon" href="./favicon.ico" />
           <script src="/chiptune2.js"></script>
           <script src="/libopenmpt.js"></script>
