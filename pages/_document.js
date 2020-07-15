@@ -31,6 +31,16 @@ class MyDocument extends Document {
             content="https://coolmodfiles.com/favicon-310.png"
           />
 
+          <link rel="manifest" href="/manifest.json" />
+          <meta name="theme-color" content="#fff" />
+          <meta name="application-name" content="CoolModFiles" />
+          <meta name="apple-mobile-web-app-title" content="CoolModFiles" />
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta
+            name="apple-mobile-web-app-status-bar-style"
+            content="default"
+          />
+
           <link rel="shortcut icon" href="/favicon.ico" />
           <link rel="icon" sizes="16x16 32x32 64x64" href="/favicon.ico" />
           <link
