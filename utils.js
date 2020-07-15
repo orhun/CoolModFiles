@@ -114,6 +114,32 @@ const SHARE_MESSAGES = [
   "OMG!",
 ];
 
+const MOBILE_MESSAGES = [
+  "Player is not working stable on mobile, sorry :(",
+  "Sorry, mobile devices aren't supported. But I won't stop you...",
+  "Mobile devices are not fully supported. Sorry for the inconvenience.",
+  "The mobile version may be broken.",
+  "Please try not to use mobile devices, they frighten the mods.",
+  "We usually don't serve mobile devices here.",
+  "Mobile devices ain't supported dogg",
+  "Someone stole our mobile support. Can't have s**t in Detroit.",
+  "No one told you that we don't support mobile, eh?",
+  "Mobile player went belly up. Don't enable the desktop site.",
+  "Unfortunately, our mobile support isn't top-notch. I would suggest that you try a desktop browser instead.",
+  "Get off your phone, PC master race!",
+  "We support no phones, no tablets, no nothin'; just so you know... Only desktop.",
+  "You could as well just try playing it on a refrigerator... We only support desktop, duh.",
+  "Mobile devices are a big no no.",
+  "Nope. No mobile support. Sorry. If you choose to continue, you are on your own.",
+  "Just because it runs DOOM doesn't mean your mobile device will handle this player. Consider switching to a proper desktop.",
+  "On the Emperor's orders, we can't let mobile devices in; but I guess I could pretend not to see you...",
+  "No mobile support. I don't make the rules here.",
+  "Try using desktop, you will love it.",
+  "Mobile bad, desktop good.",
+  "We don't like your kind here. Go get a desktop.",
+  "Wait, there is no mobile support? WHAT!?",
+];
+
 function generateEmbedString(id, title) {
   return `<iframe
   width="100%"
@@ -142,4 +168,5 @@ export {
   MESSAGES,
   EE_MESSAGES,
   SHARE_MESSAGES,
+  MOBILE_MESSAGES,
 };
