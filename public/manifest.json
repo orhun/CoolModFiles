@@ -1,6 +1,6 @@
 {
-    "name": "Omer Faruk Oruç - Orhun Parmaksız",
-    "short_name": "bufgix - orhun",
+    "name": "A web player that plays some cool MOD files randomly",
+    "short_name": "CoolModFiles",
     "icons": [
       {
         "src": "/favicon-192.png",
