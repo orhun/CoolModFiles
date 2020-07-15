@@ -6,13 +6,14 @@ import PlayerMin from "./PlayerMin";
 import BackSide from "./BackSide";
 
 import { useInterval, useKeyPress } from "../hooks";
-import { getRandomInt, RANDOM_MAX } from "../utils";
+import { getRandomInt } from "../utils";
 
-function Player({ sharedTrackId, backSideContent }) {
+function Player({ sharedTrackId, backSideContent, latestId }) {
   const [isPlay, setIsPlay] = React.useState(false);
   const [player, setPlayer] = React.useState(null);
+  const [maxId] = React.useState(latestId);
   const [trackId, setTrackId] = React.useState(
-    sharedTrackId ? sharedTrackId : getRandomInt(0, RANDOM_MAX)
+    sharedTrackId ? sharedTrackId : getRandomInt(0, latestId)
   );
   const [metaData, setMetaData] = React.useState({});
   const [loading, setLoading] = React.useState(true);
@@ -119,7 +120,7 @@ function Player({ sharedTrackId, backSideContent }) {
       playMusic(prevIds[cid]);
       setCurrentId(cid);
     } else {
-      const newId = getRandomInt(0, RANDOM_MAX);
+      const newId = getRandomInt(0, maxId);
       setTrackId(newId);
       playMusic(newId);
     }
@@ -158,7 +159,7 @@ function Player({ sharedTrackId, backSideContent }) {
         document.title = `🎶 ${player.metadata().title} - CoolModFiles.com 🎶`;
       })
       .catch(() => {
-        const newId = getRandomInt(0, RANDOM_MAX);
+        const newId = getRandomInt(0, maxId);
         setTrackId(newId);
         playMusic(newId);
       });
