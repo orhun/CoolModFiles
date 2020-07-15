@@ -39,7 +39,11 @@ function Index({ trackId, backSideContent, latestId }) {
   if (start) {
     return (
       <div id="app">
-        <Player sharedTrackId={trackId} backSideContent={backSideContent} latestId={latestId} />
+        <Player
+          sharedTrackId={trackId}
+          backSideContent={backSideContent}
+          latestId={latestId}
+        />
         <Footer />
       </div>
     );
@@ -73,9 +77,12 @@ Index.getInitialProps = async ({ query }) => {
     }`,
     }),
   });
-  const rss_req = await fetch("https://modarchive.org/rss.php?request=uploads", {
-    method: "GET"
-  });
+  const rss_req = await fetch(
+    "https://modarchive.org/rss.php?request=uploads",
+    {
+      method: "GET",
+    }
+  );
   const json = await gh_req.json();
   const rss = await rss_req.text();
   let latestId;
