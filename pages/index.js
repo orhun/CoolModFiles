@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import ReactGA from "react-ga";
 import fetch from "isomorphic-unfetch";
 
@@ -46,22 +47,32 @@ function Index({ trackId, backSideContent, latestId }) {
 
   if (start) {
     return (
-      <div id="app">
-        <Player
-          sharedTrackId={trackId}
-          backSideContent={backSideContent}
-          latestId={latestId}
-        />
-        <Footer />
-      </div>
+      <React.Fragment>
+        <Head>
+          <title>CoolModFiles.com - Play some cool MOD files!</title>
+        </Head>
+        <div id="app">
+          <Player
+            sharedTrackId={trackId}
+            backSideContent={backSideContent}
+            latestId={latestId}
+          />
+          <Footer />
+        </div>
+      </React.Fragment>
     );
   }
   return (
-    <div id="app">
-      <div className="randombtn" onClick={() => setStart(true)}>
-        <p suppressHydrationWarning>{getMessage()}</p>
+    <React.Fragment>
+      <Head>
+        <title>CoolModFiles.com - Play some cool MOD files!</title>
+      </Head>
+      <div id="app">
+        <div className="randombtn" onClick={() => setStart(true)}>
+          <p suppressHydrationWarning>{getMessage()}</p>
+        </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 }
 
