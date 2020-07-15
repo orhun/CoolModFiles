@@ -22,6 +22,14 @@ function Index({ trackId, backSideContent, latestId }) {
     getRandomFromArray(getRandomInt(0, 1000) ? MESSAGES : EE_MESSAGES)
   );
 
+  const getMessage = () => {
+    if (trackId) {
+      return `Play the track #${trackId}`;
+    } else {
+      return isMobile ? getRandomFromArray(MOBILE_MESSAGES) : randomMsg;
+    }
+  };
+
   const enterKey = useKeyPress("Enter");
 
   React.useEffect(() => {
@@ -51,9 +59,7 @@ function Index({ trackId, backSideContent, latestId }) {
   return (
     <div id="app">
       <div className="randombtn" onClick={() => setStart(true)}>
-        <p suppressHydrationWarning>
-          {isMobile ? getRandomFromArray(MOBILE_MESSAGES) : randomMsg}
-        </p>
+        <p suppressHydrationWarning>{getMessage()}</p>
       </div>
     </div>
   );
