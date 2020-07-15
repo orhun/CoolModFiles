@@ -78,7 +78,7 @@ function PlayerBig({
       "text",
       `${getRandomFromArray(SHARE_MESSAGES)} ${
         process.env.DOMAIN
-      }/trackId=${trackId}`
+      }/?trackId=${trackId}`
     );
     window.open(twUrl.href, "_blank").focus();
   };
