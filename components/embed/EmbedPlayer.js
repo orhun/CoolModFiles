@@ -51,9 +51,7 @@ function EmbedPlayer({ sharedTrackId, sharedTitle }) {
         player.seek(0);
         document.title = `🎶 ${player.metadata().title} - CoolModFiles`;
       })
-      .catch((err) => {
-        // if any error reload track id and replay
-        console.log("restaring player");
+      .catch(() => {
         const newId = getRandomInt(0, RANDOM_MAX);
         setTrackId(newId);
         playMusic(newId);
