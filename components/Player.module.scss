@@ -116,9 +116,9 @@
 }
 
 @media screen and (max-height: 797px) {
-  .player {
-    height: 100%;
-    width: 100%;
+  .AppWrap {
+    scale: 0.7;
+    -webkit-transform:scale(0.7);
   }
 }
 

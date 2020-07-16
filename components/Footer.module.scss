@@ -1,5 +1,5 @@
 .footer {
-  position: fixed;
+  position: relative;
   bottom: 0;
   margin: 0 0 20px 0;
 
@@ -21,6 +21,13 @@
     position: relative;
   }
 }
+@media screen and (max-height: 797px) {
+  .footer {
+    position: relative;
+    scale: 0.7;
+  }
+}
+
 @media screen and (max-height: 1000px) {
   .footer {
     position: relative;
