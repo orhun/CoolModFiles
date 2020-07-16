@@ -44,7 +44,6 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
   const [rightKey, rightKeyVim] = [useKeyPress("ArrowRight"), useKeyPress("l")];
   const [leftKey, leftKeyVim] = [useKeyPress("ArrowLeft"), useKeyPress("h")];
 
-  const windowSize = useWindowSize();
   React.useEffect(() => {
     if (spaceKey || enterKey) togglePlay();
     if (tabKey || shiftKey) changeSize();
