@@ -117,8 +117,8 @@
 
 @media screen and (max-height: 797px) {
   .AppWrap {
-    scale: 0.7;
-    -webkit-transform:scale(0.7);
+    -webkit-transform:scale(0.8);
+    transform: scale(0.8);
   }
 }
 
