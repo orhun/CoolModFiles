@@ -115,6 +115,13 @@
   }
 }
 
+@media screen and (max-height: 797px) {
+  .player {
+    height: 100%;
+    width: 100%;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .player {
     max-width: 90%;
