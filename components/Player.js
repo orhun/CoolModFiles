@@ -178,7 +178,7 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
   };
 
   return (
-    <div className={styles.AppWrap}>
+    <div>
       {size === "big" ? (
         <div className={styles.playerWrapper}>
           <div className={styles.player}>

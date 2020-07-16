@@ -115,13 +115,6 @@
   }
 }
 
-@media screen and (max-height: 797px) {
-  .AppWrap {
-    -webkit-transform:scale(0.8);
-    transform: scale(0.8);
-  }
-}
-
 @media screen and (max-width: 600px) {
   .player {
     max-width: 90%;
