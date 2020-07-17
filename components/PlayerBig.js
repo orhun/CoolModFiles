@@ -119,7 +119,15 @@ function PlayerBig({
           {metaData.artist ? <li>Artist: {metaData.artist}</li> : null}
           {metaData.date ? <li>Date: {metaData.date}</li> : null}
           <li>Type: {metaData.type}</li>
-          <li>Track Id: #{trackId}</li>
+          <li>
+            <a
+              href={`https://modarchive.org/index.php?request=view_by_moduleid&query=${trackId}`}
+              target="_blank"
+              className={styles.modlink}
+            >
+              Track Id: #{trackId}
+            </a>
+          </li>
           {metaData.message ? (
             <li>Message: {metaData.message.replace(/\n{2,}/g, "\n")}</li>
           ) : null}
