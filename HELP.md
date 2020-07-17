@@ -13,7 +13,7 @@ You can whether use your mouse/touchpad to click on the cyberpunk-themed cool ic
 | [down][p][j]   | play the previous song       |
 | [right][l]     | skip forward 5 seconds       |
 | [left][h]      | skip back 5 seconds          |
-| [tab][shift]   | minimize/maximize the player |
+| [shift]        | minimize/maximize the player |
 | [d]            | download the song            |
 | [s]            | open the share menu          |
 | [e]            | copy the embed code          |
