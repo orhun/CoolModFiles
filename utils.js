@@ -147,7 +147,7 @@ function generateEmbedString(id, title) {
   return `<iframe
   width="100%"
   height="200"
-  src="${process.env.DOMAIN}/embed/${id}?title=${title}"
+  src="${process.env.DOMAIN}/embed/${id}?title=${encodeURIComponent(title)}"
   frameborder="0"
 ></iframe>`;
 }
