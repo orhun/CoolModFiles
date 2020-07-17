@@ -5,6 +5,7 @@ import PlayerBig from "./PlayerBig";
 import PlayerMin from "./PlayerMin";
 import BackSide from "./BackSide";
 
+import { ToastContainer } from "react-toastify";
 import { useInterval, useKeyPress } from "../hooks";
 import { getRandomInt, showToast } from "../utils";
 
@@ -184,6 +185,7 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
 
   return (
     <div>
+      <ToastContainer />
       {size === "big" ? (
         <div className={styles.playerWrapper}>
           <div className={styles.player}>

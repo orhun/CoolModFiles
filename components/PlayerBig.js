@@ -4,7 +4,6 @@ import moment from "moment";
 import copy from "copy-to-clipboard";
 
 import styles from "./PlayerBig.module.scss";
-import { ToastContainer } from "react-toastify";
 import {
   ArrowIcon,
   DownloadButton,
@@ -92,7 +91,6 @@ function PlayerBig({
 
   return (
     <React.Fragment>
-      <ToastContainer />
       <div className={styles.wheader}>
         <div className={styles.downloadWrap}>
           <DownloadButton
