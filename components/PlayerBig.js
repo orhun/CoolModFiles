@@ -195,6 +195,7 @@ function PlayerBig({
           height="30"
           width="30"
           onClick={() => {
+            showToast(`repeat ${!repeat ? "on" : "off"}`);
             setRepeat(!repeat);
           }}
         />
