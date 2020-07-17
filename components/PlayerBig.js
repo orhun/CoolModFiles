@@ -58,21 +58,7 @@ function PlayerBig({
       setDropDownClass(
         dropDownClass === dropDownClose ? dropDownOpen : dropDownClose
       );
-    if (embedKey) {
-      copy(generateEmbedString(trackId, title));
-      toast.dark("copied to clipboard!", {
-        position: "bottom-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        newestOnTop: false,
-        closeOnClick: true,
-        rtl: false,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        closeButton: false,
-      });
-    }
+    if (embedKey) copyEmbed();
   }, [shareKey, embedKey]);
 
   React.useEffect(() => {
@@ -96,6 +82,22 @@ function PlayerBig({
       }/?trackId=${trackId}`
     );
     window.open(twUrl.href, "_blank").focus();
+  };
+
+  const copyEmbed = () => {
+    copy(generateEmbedString(trackId, title));
+    toast.dark("copied to clipboard!", {
+      position: "bottom-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      newestOnTop: false,
+      closeOnClick: true,
+      rtl: false,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      closeButton: false,
+    });
   };
 
   return (
@@ -130,25 +132,7 @@ function PlayerBig({
               width="30"
               onClick={() => shareOnTwitter()}
             />
-            <CodeIcon
-              height="30"
-              width="30"
-              onClick={() => {
-                toast.dark("copied to clipboard!", {
-                  position: "bottom-center",
-                  autoClose: 2000,
-                  hideProgressBar: false,
-                  newestOnTop: false,
-                  closeOnClick: true,
-                  rtl: false,
-                  pauseOnHover: false,
-                  draggable: true,
-                  progress: undefined,
-                  closeButton: false,
-                });
-                copy(generateEmbedString(trackId, title));
-              }}
-            />
+            <CodeIcon height="30" width="30" onClick={() => copyEmbed()} />
           </div>
         </div>
       </div>
