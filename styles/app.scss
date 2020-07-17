@@ -63,6 +63,20 @@ img {
   }
 }
 
+.Toastify__toast--dark {
+  font-size: 1rem;
+  font-family: "Press Start 2P", cursive;
+  font-weight: 400;
+  line-height: 1.5;
+  color: white;
+  text-align: center;
+  background: #000000;
+}
+
+.Toastify__progress-bar--dark {
+  background: linear-gradient(to left, #c200ff, #00b8ff);
+}
+
 @media screen and (max-width: 600px) {
   .randombtn {
     max-width: 90%;
