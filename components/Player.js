@@ -6,7 +6,7 @@ import PlayerMin from "./PlayerMin";
 import BackSide from "./BackSide";
 
 import { useInterval, useKeyPress } from "../hooks";
-import { getRandomInt } from "../utils";
+import { getRandomInt, showToast } from "../utils";
 
 function Player({ sharedTrackId, backSideContent, latestId }) {
   const [isPlay, setIsPlay] = React.useState(false);
@@ -30,6 +30,7 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
   const [spaceKey, enterKey] = [useKeyPress(" "), useKeyPress("Enter")];
   const shiftKey = useKeyPress("Shift");
   const [helpKey, quitKey] = [useKeyPress("/"), useKeyPress("q")];
+  const repeatKey = useKeyPress("1");
   const downloadKey = useKeyPress("d");
   const [upKey, nextKey, nextKeyVim] = [
     useKeyPress("ArrowUp"),
@@ -49,6 +50,10 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
     if (shiftKey) changeSize();
     if (helpKey || quitKey) toggleDrawer();
     if (downloadKey) downloadTrack();
+    if (repeatKey) {
+      showToast(`repeat ${!repeat ? "on" : "off"}`);
+      setRepeat(!repeat);
+    }
     if (upKey || nextKey || nextKeyVim) playNext();
     if (downKey || backKey || backKeyVim) playPrevious();
     if ((rightKey || rightKeyVim) && isPlay)
@@ -61,6 +66,7 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
     shiftKey,
     helpKey,
     quitKey,
+    repeatKey,
     downloadKey,
     upKey,
     nextKey,
