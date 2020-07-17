@@ -1,7 +1,6 @@
 import React from "react";
 import Slider from "rc-slider";
 import moment from "moment";
-import copy from "copy-to-clipboard";
 
 import styles from "./PlayerBig.module.scss";
 import {
@@ -18,12 +17,7 @@ import {
   RepeatIcon,
 } from "../icons";
 import LoadingState from "./LoadingState";
-import {
-  generateEmbedString,
-  getRandomFromArray,
-  showToast,
-  SHARE_MESSAGES,
-} from "../utils";
+import { getRandomFromArray, showToast, SHARE_MESSAGES } from "../utils";
 
 import { useKeyPress } from "../hooks";
 
@@ -49,17 +43,17 @@ function PlayerBig({
   downloadTrack,
   repeat,
   setRepeat,
+  copyEmbed,
 }) {
   const [dropDownClass, setDropDownClass] = React.useState(dropDownClose);
-  const [shareKey, embedKey] = [useKeyPress("s"), useKeyPress("e")];
+  const shareKey = useKeyPress("s");
 
   React.useEffect(() => {
     if (shareKey)
       setDropDownClass(
         dropDownClass === dropDownClose ? dropDownOpen : dropDownClose
       );
-    if (embedKey) copyEmbed();
-  }, [shareKey, embedKey]);
+  }, [shareKey]);
 
   React.useEffect(() => {
     setTimeout(() => {
@@ -82,11 +76,6 @@ function PlayerBig({
       }/?trackId=${trackId}`
     );
     window.open(twUrl.href, "_blank").focus();
-  };
-
-  const copyEmbed = () => {
-    copy(generateEmbedString(trackId, title));
-    showToast("copied to clipboard!");
   };
 
   return (

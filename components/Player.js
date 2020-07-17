@@ -1,5 +1,6 @@
 import React from "react";
 
+import copy from "copy-to-clipboard";
 import styles from "./Player.module.scss";
 import PlayerBig from "./PlayerBig";
 import PlayerMin from "./PlayerMin";
@@ -7,7 +8,7 @@ import BackSide from "./BackSide";
 
 import { ToastContainer } from "react-toastify";
 import { useInterval, useKeyPress } from "../hooks";
-import { getRandomInt, showToast } from "../utils";
+import { generateEmbedString, getRandomInt, showToast } from "../utils";
 
 function Player({ sharedTrackId, backSideContent, latestId }) {
   const [isPlay, setIsPlay] = React.useState(false);
@@ -33,6 +34,7 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
   const [helpKey, quitKey] = [useKeyPress("/"), useKeyPress("q")];
   const repeatKey = useKeyPress("1");
   const downloadKey = useKeyPress("d");
+  const embedKey = useKeyPress("e");
   const [upKey, nextKey, nextKeyVim] = [
     useKeyPress("ArrowUp"),
     useKeyPress("n"),
@@ -50,11 +52,12 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
     if (spaceKey || enterKey) togglePlay();
     if (shiftKey) changeSize();
     if (helpKey || quitKey) toggleDrawer();
-    if (downloadKey) downloadTrack();
     if (repeatKey) {
       showToast(`repeat ${!repeat ? "on" : "off"}`);
       setRepeat(!repeat);
     }
+    if (downloadKey) downloadTrack();
+    if (embedKey) copyEmbed();
     if (upKey || nextKey || nextKeyVim) playNext();
     if (downKey || backKey || backKeyVim) playPrevious();
     if ((rightKey || rightKeyVim) && isPlay)
@@ -69,6 +72,7 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
     quitKey,
     repeatKey,
     downloadKey,
+    embedKey,
     upKey,
     nextKey,
     nextKeyVim,
@@ -117,6 +121,11 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
   const togglePlay = () => {
     setIsPlay(!isPlay);
     player.togglePause();
+  };
+
+  const copyEmbed = () => {
+    copy(generateEmbedString(trackId, title));
+    showToast("copied to clipboard!");
   };
 
   const playNext = () => {
@@ -209,6 +218,7 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
               downloadTrack={downloadTrack}
               repeat={repeat}
               setRepeat={setRepeat}
+              copyEmbed={copyEmbed}
             />
           </div>
           <div id="backside" className={backClass.join(" ")}>
