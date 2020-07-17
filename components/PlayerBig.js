@@ -4,6 +4,7 @@ import moment from "moment";
 import copy from "copy-to-clipboard";
 
 import styles from "./PlayerBig.module.scss";
+import { ToastContainer, toast } from "react-toastify";
 import {
   ArrowIcon,
   DownloadButton,
@@ -57,7 +58,21 @@ function PlayerBig({
       setDropDownClass(
         dropDownClass === dropDownClose ? dropDownOpen : dropDownClose
       );
-    if (embedKey) copy(generateEmbedString(trackId, title));
+    if (embedKey) {
+      copy(generateEmbedString(trackId, title));
+      toast.dark("copied to clipboard!", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        newestOnTop: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        closeButton: false,
+      });
+    }
   }, [shareKey, embedKey]);
 
   React.useEffect(() => {
@@ -85,6 +100,7 @@ function PlayerBig({
 
   return (
     <React.Fragment>
+      <ToastContainer />
       <div className={styles.wheader}>
         <div className={styles.downloadWrap}>
           <DownloadButton
@@ -118,6 +134,18 @@ function PlayerBig({
               height="30"
               width="30"
               onClick={() => {
+                toast.dark("copied to clipboard!", {
+                  position: "bottom-center",
+                  autoClose: 2000,
+                  hideProgressBar: false,
+                  newestOnTop: false,
+                  closeOnClick: true,
+                  rtl: false,
+                  pauseOnHover: false,
+                  draggable: true,
+                  progress: undefined,
+                  closeButton: false,
+                });
                 copy(generateEmbedString(trackId, title));
               }}
             />
