@@ -14,6 +14,7 @@ You can whether use your mouse/touchpad to click on the cyberpunk-themed cool ic
 | [right][l]     | skip forward 5 seconds       |
 | [left][h]      | skip back 5 seconds          |
 | [shift]        | minimize/maximize the player |
+| [1]            | turn on/off repeat           |
 | [d]            | download the song            |
 | [s]            | open the share menu          |
 | [e]            | copy the embed code          |
