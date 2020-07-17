@@ -4,7 +4,7 @@ import moment from "moment";
 import copy from "copy-to-clipboard";
 
 import styles from "./PlayerBig.module.scss";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import {
   ArrowIcon,
   DownloadButton,
@@ -22,6 +22,7 @@ import LoadingState from "./LoadingState";
 import {
   generateEmbedString,
   getRandomFromArray,
+  showToast,
   SHARE_MESSAGES,
 } from "../utils";
 
@@ -86,18 +87,7 @@ function PlayerBig({
 
   const copyEmbed = () => {
     copy(generateEmbedString(trackId, title));
-    toast.dark("copied to clipboard!", {
-      position: "bottom-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      newestOnTop: false,
-      closeOnClick: true,
-      rtl: false,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-      closeButton: false,
-    });
+    showToast("copied to clipboard!");
   };
 
   return (

@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 const RANDOM_MAX = 189623;
 
 const BG_IMAGES = [
@@ -143,6 +145,16 @@ const MOBILE_MESSAGES = [
   "Wait, there is no mobile support? WHAT!?",
 ];
 
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function getRandomFromArray(array) {
+  return array[Math.floor(Math.random() * array.length)];
+}
+
 function generateEmbedString(id, title) {
   return `<iframe
   width="100%"
@@ -152,20 +164,26 @@ function generateEmbedString(id, title) {
 ></iframe>`;
 }
 
-function getRandomFromArray(array) {
-  return array[Math.floor(Math.random() * array.length)];
-}
-
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+function showToast(msg) {
+  toast.dark(msg, {
+    position: "bottom-center",
+    autoClose: 2000,
+    hideProgressBar: false,
+    newestOnTop: false,
+    closeOnClick: true,
+    rtl: false,
+    pauseOnHover: false,
+    draggable: true,
+    progress: undefined,
+    closeButton: false,
+  });
 }
 
 export {
   getRandomInt,
   getRandomFromArray,
   generateEmbedString,
+  showToast,
   RANDOM_MAX,
   BG_IMAGES,
   MESSAGES,
