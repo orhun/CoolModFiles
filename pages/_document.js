@@ -113,6 +113,11 @@ class MyDocument extends Document {
           <meta name="msapplication-config" content="/browserconfig.xml" />
           <script src="/chiptune2.js"></script>
           <script src="/libopenmpt.js"></script>
+          <script
+            data-ad-client="ca-pub-6716088693199036"
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+          ></script>
         </Head>
         <body>
           <Main />
