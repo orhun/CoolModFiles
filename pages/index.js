@@ -20,7 +20,7 @@ import { isMobile } from "react-device-detect";
 function Index({ trackId, backSideContent, latestId }) {
   const [start, setStart] = React.useState(false);
   const [randomMsg] = React.useState(
-    getRandomFromArray(getRandomInt(0, 1000) ? MESSAGES : EE_MESSAGES)
+    getRandomFromArray(getRandomInt(0, 158) ? MESSAGES : EE_MESSAGES)
   );
 
   const getMessage = () => {
