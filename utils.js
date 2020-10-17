@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 
-const RANDOM_MAX = 189623;
+const RANDOM_MAX = 190580;
 
 const BG_IMAGES = [
   "bg_1.jpg",
