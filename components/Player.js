@@ -222,6 +222,15 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
     localStorage.setItem("favoriteMods", JSON.stringify(newFavoriteModsArray));
   }
 
+  const removeFavoriteModRuntime = (modToRemoveFromRuntimeList) => {
+    let newFavoriteModsArray = favoriteModsRuntime.filter((mod) => mod !== modToRemoveFromRuntimeList); 
+    setFavoriteModsRuntime(newFavoriteModsArray);
+      localStorage.setItem(
+        "favoriteMods",
+        JSON.stringify(newFavoriteModsArray)
+      );
+  };
+
   return (
     <div>
       <ToastContainer />
@@ -265,7 +274,11 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
             <h2>Favorite Mods</h2>
             <hr className={styles.fancyHr} />
             <div className={styles.likedModsContent}>
-              <LikedMods content={favoriteModsRuntime} />
+              <LikedMods
+                content={favoriteModsRuntime}
+                playMusic={playMusic}
+                removeFavoriteModRuntime={removeFavoriteModRuntime}
+              />
             </div>
           </div>
         </div>

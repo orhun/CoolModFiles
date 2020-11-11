@@ -49,6 +49,7 @@ function PlayerBig({
   copyEmbed,
   favoriteModsRuntime,
   updateFavoriteModsRuntime,
+  
 }) {
   const [dropDownClass, setDropDownClass] = React.useState(dropDownClose);
   const shareKey = useKeyPress("s");
