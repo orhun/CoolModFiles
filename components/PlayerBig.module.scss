@@ -58,16 +58,24 @@
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+  flex-direction: column;
 
   svg {
     margin-left: -15px;
+
     cursor: pointer;
 
     &:active:hover {
       opacity: 0.7;
     }
   }
+  .likeButton {
+    // border:1px white solid;
+    // background-color: white;
+     margin-top: 15px;
+  }
 }
+
 
 .shareWrap {
   flex: 1;
@@ -172,9 +180,38 @@
 }
 
 .footer {
+  width:100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  flex-direction: row;
   align-items: flex-end;
+  align-content: flex-end;
+  // border: red 1px solid;
+  .footerLeft {
+    width: 43%;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-end;
+    align-content: flex-end;
+    // border: #bd00ff solid 1px;
+  }
+  .footerCenter {
+    width: 15%;
+    justify-content: center !important;
+    flex-direction: row;
+    align-items: flex-end;
+    align-content: flex-end;
+      // border:blue solid 1px;
+  }
+  .footerRight {
+    width: 42%;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+        align-items: flex-end;
+    align-content: flex-end;
+      // border: green solid 1px;
+  }
 }
 
 .arrow {
@@ -183,7 +220,7 @@
 }
 
 .question {
-  margin: 0 0 10px 0;
+  margin: 0 0 0px 0;
   cursor: pointer;
 
   &:active:hover {
@@ -193,6 +230,15 @@
 
 .repeat {
   margin: 0 0 5px 0;
+  cursor: pointer;
+  opacity: 1;
+
+  &:active:hover {
+    opacity: 0.5;
+  }
+}
+.playlistButton {
+  margin: 0 10px 5px 0;
   cursor: pointer;
   opacity: 1;
 

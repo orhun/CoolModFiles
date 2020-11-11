@@ -15,6 +15,8 @@ import {
   QuestionIcon,
   TwitterOutlineIcon,
   RepeatIcon,
+  LikeButton,
+  PlayListButton,
 } from "../icons";
 import LoadingState from "./LoadingState";
 import { getRandomFromArray, showToast, SHARE_MESSAGES } from "../utils";
@@ -39,11 +41,14 @@ function PlayerBig({
   playPrevious,
   playNext,
   currentId,
-  toggleDrawer,
+  toggleHelpDrawer,
+  toggleLikedModsDrawer,
   downloadTrack,
   repeat,
   setRepeat,
   copyEmbed,
+  favoriteModsRuntime,
+  updateFavoriteModsRuntime,
 }) {
   const [dropDownClass, setDropDownClass] = React.useState(dropDownClose);
   const shareKey = useKeyPress("s");
@@ -59,6 +64,11 @@ function PlayerBig({
     setTimeout(() => {
       try {
         document.getElementById("backside").style.visibility = "visible";
+      } catch (error) {}
+    }, 1000);
+    setTimeout(() => {
+      try {
+        document.getElementById("liked-mods").style.visibility = "visible";
       } catch (error) {}
     }, 1000);
   }, []);
@@ -78,6 +88,34 @@ function PlayerBig({
     window.open(twUrl.href, "_blank").focus();
   };
 
+  const makeTrackIdCool = (id) => {
+    return `#${id}`;
+  };
+  const getTrackIdFromCoolId = (id) => {
+    return parseInt(id.replace("#", ""));
+  };
+  // localStorage.clear();
+  const likeCurrentTrack = (favoriteModsRuntime, updateFavoriteModsRuntime) => {
+    let trackIdInt = parseInt(trackId);
+    if (favoriteModsRuntime.length) {
+      console.log("OLD: ", favoriteModsRuntime);
+      favoriteModsRuntime = favoriteModsRuntime.filter((coolId) => {
+        // console.log(coolId);
+        let id = getTrackIdFromCoolId(coolId);
+        // console.log(trackIdInt !== id, trackIdInt, id);
+        return trackIdInt !== id;
+      });
+      let newFavoriteModsRuntime = [
+        ...favoriteModsRuntime,
+        makeTrackIdCool(trackIdInt),
+      ];
+      console.log("UPDATED: ", newFavoriteModsRuntime);
+      updateFavoriteModsRuntime(newFavoriteModsRuntime);
+    } else {
+      updateFavoriteModsRuntime([makeTrackIdCool(trackId)]);
+    }
+  };
+
   return (
     <React.Fragment>
       <div className={styles.wheader}>
@@ -86,6 +124,14 @@ function PlayerBig({
             height="30"
             width="60"
             onClick={() => downloadTrack()}
+          />
+          <LikeButton
+            className={styles.likeButton}
+            height="30"
+            width="60"
+            onClick={() =>
+              likeCurrentTrack(favoriteModsRuntime, updateFavoriteModsRuntime)
+            }
           />
         </div>
         <img
@@ -184,28 +230,42 @@ function PlayerBig({
         />
       </div>
       <div className={styles.footer}>
-        <RepeatIcon
-          id="repeat"
-          className={styles.repeat}
-          height="30"
-          width="30"
-          onClick={() => {
-            showToast(`repeat ${!repeat ? "on" : "off"}`);
-            setRepeat(!repeat);
-          }}
-        />
-        <ArrowIcon
-          className={styles.arrow}
-          height="20"
-          width="50"
-          onClick={() => changeSize()}
-        />
-        <QuestionIcon
-          className={styles.question}
-          height="30"
-          width="30"
-          onClick={() => toggleDrawer()}
-        />
+        <div className={styles.footerLeft}>
+          <QuestionIcon
+            className={styles.question}
+            height="30"
+            width="30"
+            onClick={() => toggleHelpDrawer()}
+          />
+        </div>
+        <div className={styles.footerCenter}>
+          <ArrowIcon
+            className={styles.arrow}
+            height="20"
+            width="50"
+            onClick={() => changeSize()}
+          />
+        </div>
+
+        <div className={styles.footerRight}>
+          <PlayListButton
+            id="playlistButton"
+            className={styles.playlistButton}
+            height="30"
+            width="30"
+            onClick={() => toggleLikedModsDrawer()}
+          />
+          <RepeatIcon
+            id="repeat"
+            className={styles.repeat}
+            height="30"
+            width="30"
+            onClick={() => {
+              showToast(`repeat ${!repeat ? "on" : "off"}`);
+              setRepeat(!repeat);
+            }}
+          />
+        </div>
       </div>
     </React.Fragment>
   );
