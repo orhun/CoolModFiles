@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./LikedMods.module.scss";
+import LikedMod from "./LikedMod"
 
 function LikedMods({ content }) {
 
@@ -11,16 +12,13 @@ function LikedMods({ content }) {
     )
   }
   else{
-    return (      
-        <ol>
-          {content.map((item, index) => (
-            <li key={index}>
-              {content[index]}
-              <a href="#">x</a>
-            </li>
+    return (
+      <ol>
+        {content.map((trackId, index) => (
+          <LikedMod trackId={trackId} index={index}></LikedMod>
         ))}
-        </ol>
-      )
+      </ol>
+    );
   }
 }
 

@@ -1,28 +1,15 @@
 import React from "react";
 import styles from "./LikedMods.module.scss";
 
-function LikedMods({ content }) {
-
-  if (!content.length) {      
-    return (  
-      <ol>
-        <li>Add some cool stuff here!</li>
-      </ol>
-    )
-  }
-  else{
-    return (      
-        <ol>
-          {content.map((item, index) => (
-            <li key={index}>
-              {content[index]}
-              <a href="#">x</a>
-            </li>
-        ))}
-        </ol>
-      )
-  }
+function LikedMod({ trackId, index }) {
+    return (
+      <li class={styles.likedMod} key={index}>
+        <div id={`liked_mod_${trackId}`}>{trackId}</div>
+        <div id={`removes_${trackId}`}>x</div>
+      </li>
+    );
+ 
 }
 
-export default LikedMods;
+export default LikedMod;
 
