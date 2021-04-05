@@ -88,20 +88,13 @@ function PlayerBig({
     window.open(twUrl.href, "_blank").focus();
   };
 
-  const getTrackIdFromCoolId = (id) => {
-    return parseInt(id.replace("#", ""));
-  };
   const likeCurrentTrack = (favoriteModsRuntime, updateFavoriteModsRuntime) => {
     let trackIdInt = parseInt(trackId);
     if (favoriteModsRuntime.length) {
       favoriteModsRuntime = favoriteModsRuntime.filter((coolId) => {
-        let id = getTrackIdFromCoolId(coolId);
-        return trackIdInt !== id;
+        return trackIdInt !== parseInt(coolId.replace("#", ""));
       });
-      let newFavoriteModsRuntime = [
-        ...favoriteModsRuntime,
-        `#${trackIdInt}`,
-      ];
+      let newFavoriteModsRuntime = [...favoriteModsRuntime, `#${trackIdInt}`];
       updateFavoriteModsRuntime(newFavoriteModsRuntime);
     } else {
       updateFavoriteModsRuntime([`#${trackId}`]);
