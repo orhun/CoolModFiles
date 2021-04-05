@@ -6,7 +6,7 @@ function LikedMods({ content, playMusic, removeFavoriteModRuntime }) {
   if (!content.length) {
     return (
       <ol>
-        <li>Add some cool stuff here!</li>
+        <li>Add some cool mod files here!</li>
       </ol>
     );
   } else {
