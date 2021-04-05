@@ -88,9 +88,6 @@ function PlayerBig({
     window.open(twUrl.href, "_blank").focus();
   };
 
-  const makeTrackIdCool = (id) => {
-    return `#${id}`;
-  };
   const getTrackIdFromCoolId = (id) => {
     return parseInt(id.replace("#", ""));
   };
@@ -103,11 +100,11 @@ function PlayerBig({
       });
       let newFavoriteModsRuntime = [
         ...favoriteModsRuntime,
-        makeTrackIdCool(trackIdInt),
+        `#${trackIdInt}`,
       ];
       updateFavoriteModsRuntime(newFavoriteModsRuntime);
     } else {
-      updateFavoriteModsRuntime([makeTrackIdCool(trackId)]);
+      updateFavoriteModsRuntime([`#${trackId}`]);
     }
   };
 
