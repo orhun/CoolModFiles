@@ -19,6 +19,7 @@ function LikedMods({ content, playMusic, removeFavoriteModRuntime }) {
             playMusic={playMusic}
             removeFavoriteModRuntime={removeFavoriteModRuntime}
             onClick={() => playLikedMod(trackId, index)}
+            key={index}
           ></LikedMod>
         ))}
       </ol>
