@@ -41,6 +41,7 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
       JSON.parse(favoriteModsJSON)
     );
   }
+  const [counter, setCounter] = React.useState(0);
 
 
   const [spaceKey, enterKey] = [useKeyPress(" "), useKeyPress("Enter")];
@@ -220,6 +221,16 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
   const updateFavoriteModsRuntime = (newFavoriteModsArray) => {
     setFavoriteModsRuntime(newFavoriteModsArray);
     localStorage.setItem("favoriteMods", JSON.stringify(newFavoriteModsArray));
+    if (counter >= 10 && counter < 15) {
+      showToast("WE'RE HIRING WEB DEVELOPERS");
+      setCounter(counter + 1);
+    } else if (counter == 15) {
+      showToast("CONTACT US");
+      setCounter(counter + 1);
+    } else if (counter < 10) {
+      showToast("added to favorites!");
+      setCounter(counter + 1);
+    }
   }
 
   const removeFavoriteModRuntime = (modToRemoveFromRuntimeList) => {
