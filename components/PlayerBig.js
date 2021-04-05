@@ -49,7 +49,6 @@ function PlayerBig({
   copyEmbed,
   favoriteModsRuntime,
   updateFavoriteModsRuntime,
-  
 }) {
   const [dropDownClass, setDropDownClass] = React.useState(dropDownClose);
   const shareKey = useKeyPress("s");
@@ -95,22 +94,17 @@ function PlayerBig({
   const getTrackIdFromCoolId = (id) => {
     return parseInt(id.replace("#", ""));
   };
-  // localStorage.clear();
   const likeCurrentTrack = (favoriteModsRuntime, updateFavoriteModsRuntime) => {
     let trackIdInt = parseInt(trackId);
     if (favoriteModsRuntime.length) {
-      console.log("OLD: ", favoriteModsRuntime);
       favoriteModsRuntime = favoriteModsRuntime.filter((coolId) => {
-        // console.log(coolId);
         let id = getTrackIdFromCoolId(coolId);
-        // console.log(trackIdInt !== id, trackIdInt, id);
         return trackIdInt !== id;
       });
       let newFavoriteModsRuntime = [
         ...favoriteModsRuntime,
         makeTrackIdCool(trackIdInt),
       ];
-      console.log("UPDATED: ", newFavoriteModsRuntime);
       updateFavoriteModsRuntime(newFavoriteModsRuntime);
     } else {
       updateFavoriteModsRuntime([makeTrackIdCool(trackId)]);
