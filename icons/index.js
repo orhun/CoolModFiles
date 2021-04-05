@@ -14,6 +14,8 @@ import ArrowSimpleIcon from "./ArrowSimpleIcon";
 import QuestionIcon from "./QuestionIcon";
 import PatreonIcon from "./PatreonIcon";
 import RepeatIcon from "./RepeatIcon";
+import LikeButton from "./LikeIcon";
+import PlayListButton from "./PlayListIcon";
 
 export {
   PlayButton,
@@ -32,4 +34,6 @@ export {
   QuestionIcon,
   PatreonIcon,
   RepeatIcon,
+  LikeButton,
+  PlayListButton,
 };

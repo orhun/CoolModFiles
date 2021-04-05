@@ -5,6 +5,7 @@ import styles from "./Player.module.scss";
 import PlayerBig from "./PlayerBig";
 import PlayerMin from "./PlayerMin";
 import BackSide from "./BackSide";
+import LikedMods from "./LikedMods";
 
 import { ToastContainer } from "react-toastify";
 import { useInterval, useKeyPress } from "../hooks";
@@ -26,8 +27,22 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
   const [prevIds, setPrevIds] = React.useState([]);
   const [currentId, setCurrentId] = React.useState(-1);
   const [repeat, setRepeat] = React.useState(false);
-  const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const [helpDrawerOpen, setHelpDrawerOpen] = React.useState(false);
+  const [likedModsDrawerOpen, setLikedModsDrawerOpen] = React.useState(false);
   const [backClass, setBackClass] = React.useState([styles.playerBack]);
+  const [likedModsClass, setLikedModsClass] = React.useState([styles.playerBack]);
+
+  let favoriteModsRuntime, setFavoriteModsRuntime;
+  let favoriteModsJSON = localStorage.getItem('favoriteMods')
+  if (favoriteModsJSON === null || !favoriteModsJSON) {
+    [favoriteModsRuntime, setFavoriteModsRuntime] = React.useState([]);
+  } else {
+    [favoriteModsRuntime, setFavoriteModsRuntime] = React.useState(
+      JSON.parse(favoriteModsJSON)
+    );
+  }
+  const [counter, setCounter] = React.useState(0);
+
 
   const [spaceKey, enterKey] = [useKeyPress(" "), useKeyPress("Enter")];
   const shiftKey = useKeyPress("Shift");
@@ -51,7 +66,7 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
   React.useEffect(() => {
     if (spaceKey || enterKey) togglePlay();
     if (shiftKey) changeSize();
-    if (helpKey || quitKey) toggleDrawer();
+    if (helpKey || quitKey) toggleHelpDrawer();
     if (repeatKey) {
       showToast(`repeat ${!repeat ? "on" : "off"}`);
       setRepeat(!repeat);
@@ -111,12 +126,20 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
   }, [player]);
 
   React.useEffect(() => {
-    if (drawerOpen) {
+    if (helpDrawerOpen) {
       setBackClass([backClass[0], styles.slideRight]);
     } else {
       setBackClass([backClass[0], styles.slideLeft]);
     }
-  }, [drawerOpen]);
+  }, [helpDrawerOpen]);
+
+  React.useEffect(() => {
+    if (likedModsDrawerOpen) {
+      setLikedModsClass([likedModsClass[0], styles.slideRight]);
+    } else {
+      setLikedModsClass([likedModsClass[0], styles.slideLeft]);
+    }
+  }, [likedModsDrawerOpen]);
 
   const togglePlay = () => {
     setIsPlay(!isPlay);
@@ -180,8 +203,11 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
       });
   };
 
-  const toggleDrawer = () => {
-    setDrawerOpen(!drawerOpen);
+  const toggleHelpDrawer = () => {
+    setHelpDrawerOpen(!helpDrawerOpen);
+  };
+  const toggleLikedModsDrawer = () => {
+    setLikedModsDrawerOpen(!likedModsDrawerOpen);
   };
 
   const downloadTrack = () => {
@@ -190,6 +216,30 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
 
   const changeSize = () => {
     setSize(size === "big" ? "small" : "big");
+  };
+
+  const updateFavoriteModsRuntime = (newFavoriteModsArray) => {
+    setFavoriteModsRuntime(newFavoriteModsArray);
+    localStorage.setItem("favoriteMods", JSON.stringify(newFavoriteModsArray));
+    if (counter >= 10 && counter < 15) {
+      showToast("WE'RE HIRING WEB DEVELOPERS");
+      setCounter(counter + 1);
+    } else if (counter == 15) {
+      showToast("CONTACT US");
+      setCounter(counter + 1);
+    } else if (counter < 10) {
+      showToast("added to favorites!");
+      setCounter(counter + 1);
+    }
+  }
+
+  const removeFavoriteModRuntime = (modToRemoveFromRuntimeList) => {
+    let newFavoriteModsArray = favoriteModsRuntime.filter((mod) => mod !== modToRemoveFromRuntimeList); 
+    setFavoriteModsRuntime(newFavoriteModsArray);
+      localStorage.setItem(
+        "favoriteMods",
+        JSON.stringify(newFavoriteModsArray)
+      );
   };
 
   return (
@@ -214,11 +264,14 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
               playPrevious={playPrevious}
               playNext={playNext}
               currentId={currentId}
-              toggleDrawer={toggleDrawer}
+              toggleLikedModsDrawer={toggleLikedModsDrawer}
+              toggleHelpDrawer={toggleHelpDrawer}
               downloadTrack={downloadTrack}
               repeat={repeat}
               setRepeat={setRepeat}
               copyEmbed={copyEmbed}
+              updateFavoriteModsRuntime={updateFavoriteModsRuntime}
+              favoriteModsRuntime={favoriteModsRuntime}
             />
           </div>
           <div id="backside" className={backClass.join(" ")}>
@@ -226,6 +279,17 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
             <hr className={styles.fancyHr} />
             <div className={styles.backSideContent}>
               <BackSide content={backSideContent} />
+            </div>
+          </div>
+          <div id="liked-mods" className={likedModsClass.join(" ")}>
+            <h2>Favorite Mods</h2>
+            <hr className={styles.fancyHr} />
+            <div className={styles.likedModsContent}>
+              <LikedMods
+                content={favoriteModsRuntime}
+                playMusic={playMusic}
+                removeFavoriteModRuntime={removeFavoriteModRuntime}
+              />
             </div>
           </div>
         </div>
