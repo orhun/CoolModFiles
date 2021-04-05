@@ -5,9 +5,6 @@ function LikedMod({ trackId, index, playMusic, removeFavoriteModRuntime }) {
   const playLikedMod = () => {
     playMusic(trackId.replace("#", ""));
   };
-  const removeLikedMod = () => {
-    removeFavoriteModRuntime(trackId);
-  };
 
   return (
     <li className={styles.likedMod} key={index}>
@@ -19,7 +16,7 @@ function LikedMod({ trackId, index, playMusic, removeFavoriteModRuntime }) {
       </div>
       <div
         id={`removes_${trackId}`}
-        onClick={() => removeLikedMod(trackId, index)}
+        onClick={() => removeFavoriteModRuntime(trackId, index)}
       >
         x
       </div>
@@ -28,4 +25,3 @@ function LikedMod({ trackId, index, playMusic, removeFavoriteModRuntime }) {
 }
 
 export default LikedMod;
-
