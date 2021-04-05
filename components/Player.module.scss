@@ -64,6 +64,28 @@
   }
 }
 
+.likedModsContent {
+  overflow-y: auto;
+  margin: 10px 5px 10px 5px;
+  scrollbar-color: #bd00ff transparent;
+  scrollbar-width: thin;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar {
+    width: 5px;
+    margin-right: 10px;
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #bd00ff;
+  }
+}
+
 .slideRight {
   animation-name: slideRight;
   animation-duration: 0.5s;
