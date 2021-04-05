@@ -10,7 +10,7 @@ function LikedMod({ trackId, index, playMusic, removeFavoriteModRuntime }) {
   };
 
   return (
-    <li class={styles.likedMod} key={index}>
+    <li className={styles.likedMod} key={index}>
       <div
         id={`liked_mod_${trackId}`}
         onClick={() => playLikedMod(trackId, index)}
