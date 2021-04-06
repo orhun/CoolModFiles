@@ -22,6 +22,7 @@
   "dependencies": {
     "copy-to-clipboard": "^3.3.1",
     "dotenv": "^8.2.0",
+    "file-saver": "^2.0.5",
     "isomorphic-unfetch": "^3.0.0",
     "markdown-to-jsx": "^6.11.4",
     "moment": "^2.27.0",

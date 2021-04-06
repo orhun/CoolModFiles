@@ -1,6 +1,7 @@
 import React from "react";
 
 import copy from "copy-to-clipboard";
+import { saveAs } from "file-saver";
 import styles from "./Player.module.scss";
 import PlayerBig from "./PlayerBig";
 import PlayerMin from "./PlayerMin";
@@ -30,10 +31,12 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
   const [helpDrawerOpen, setHelpDrawerOpen] = React.useState(false);
   const [likedModsDrawerOpen, setLikedModsDrawerOpen] = React.useState(false);
   const [backClass, setBackClass] = React.useState([styles.playerBack]);
-  const [likedModsClass, setLikedModsClass] = React.useState([styles.playerBack]);
+  const [likedModsClass, setLikedModsClass] = React.useState([
+    styles.playerBack,
+  ]);
 
   let favoriteModsRuntime, setFavoriteModsRuntime;
-  let favoriteModsJSON = localStorage.getItem('favoriteMods')
+  let favoriteModsJSON = localStorage.getItem("favoriteMods");
   if (favoriteModsJSON === null || !favoriteModsJSON) {
     [favoriteModsRuntime, setFavoriteModsRuntime] = React.useState([]);
   } else {
@@ -42,7 +45,6 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
     );
   }
   const [counter, setCounter] = React.useState(0);
-
 
   const [spaceKey, enterKey] = [useKeyPress(" "), useKeyPress("Enter")];
   const shiftKey = useKeyPress("Shift");
@@ -231,15 +233,21 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
       showToast("added to favorites!");
       setCounter(counter + 1);
     }
-  }
+  };
 
   const removeFavoriteModRuntime = (modToRemoveFromRuntimeList) => {
-    let newFavoriteModsArray = favoriteModsRuntime.filter((mod) => mod !== modToRemoveFromRuntimeList); 
+    let newFavoriteModsArray = favoriteModsRuntime.filter(
+      (mod) => mod !== modToRemoveFromRuntimeList
+    );
     setFavoriteModsRuntime(newFavoriteModsArray);
-      localStorage.setItem(
-        "favoriteMods",
-        JSON.stringify(newFavoriteModsArray)
-      );
+    localStorage.setItem("favoriteMods", JSON.stringify(newFavoriteModsArray));
+  };
+
+  const downloadFavoriteMods = () => {
+    var blob = new Blob([favoriteModsRuntime.join("\n")], {
+      type: "text/plain;charset=utf-8",
+    });
+    saveAs(blob, "coolmods.txt");
   };
 
   return (
@@ -282,7 +290,9 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
             </div>
           </div>
           <div id="liked-mods" className={likedModsClass.join(" ")}>
-            <h2>Favorite Mods</h2>
+            <h2 onClick={() => downloadFavoriteMods()}>
+              <a href="#">Favorite Mods</a>
+            </h2>
             <hr className={styles.fancyHr} />
             <div className={styles.likedModsContent}>
               <LikedMods
