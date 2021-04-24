@@ -130,6 +130,9 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
   React.useEffect(() => {
     if (helpDrawerOpen) {
       setBackClass([backClass[0], styles.slideRight]);
+      if (likedModsDrawerOpen) {
+        setLikedModsDrawerOpen(false);
+      }
     } else {
       setBackClass([backClass[0], styles.slideLeft]);
     }
@@ -138,6 +141,9 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
   React.useEffect(() => {
     if (likedModsDrawerOpen) {
       setLikedModsClass([likedModsClass[0], styles.slideRight]);
+      if (helpDrawerOpen) {
+        setHelpDrawerOpen(false);
+      }
     } else {
       setLikedModsClass([likedModsClass[0], styles.slideLeft]);
     }
