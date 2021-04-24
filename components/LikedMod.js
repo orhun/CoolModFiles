@@ -1,8 +1,15 @@
 import React from "react";
 import styles from "./LikedMods.module.scss";
 
-function LikedMod({ trackId, index, playMusic, removeFavoriteModRuntime }) {
+function LikedMod({
+  trackId,
+  index,
+  setTrackId,
+  playMusic,
+  removeFavoriteModRuntime,
+}) {
   const playLikedMod = () => {
+    setTrackId(trackId.replace("#", ""));
     playMusic(trackId.replace("#", ""));
   };
 

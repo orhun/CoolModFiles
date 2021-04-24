@@ -1,8 +1,13 @@
 import React from "react";
 import styles from "./LikedMods.module.scss";
-import LikedMod from "./LikedMod"
+import LikedMod from "./LikedMod";
 
-function LikedMods({ content, playMusic, removeFavoriteModRuntime }) {
+function LikedMods({
+  content,
+  setTrackId,
+  playMusic,
+  removeFavoriteModRuntime,
+}) {
   if (!content.length) {
     return (
       <ol>
@@ -16,6 +21,7 @@ function LikedMods({ content, playMusic, removeFavoriteModRuntime }) {
           <LikedMod
             trackId={trackId}
             index={index}
+            setTrackId={setTrackId}
             playMusic={playMusic}
             removeFavoriteModRuntime={removeFavoriteModRuntime}
             onClick={() => playLikedMod(trackId, index)}
@@ -28,4 +34,3 @@ function LikedMods({ content, playMusic, removeFavoriteModRuntime }) {
 }
 
 export default LikedMods;
-

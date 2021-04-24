@@ -297,6 +297,7 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
             <div className={styles.likedModsContent}>
               <LikedMods
                 content={favoriteModsRuntime}
+                setTrackId={setTrackId}
                 playMusic={playMusic}
                 removeFavoriteModRuntime={removeFavoriteModRuntime}
               />
