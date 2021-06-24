@@ -91,13 +91,21 @@ function PlayerBig({
   const likeCurrentTrack = (favoriteModsRuntime, updateFavoriteModsRuntime) => {
     let trackIdInt = parseInt(trackId);
     if (favoriteModsRuntime.length) {
-      favoriteModsRuntime = favoriteModsRuntime.filter((coolId) => {
-        return trackIdInt !== parseInt(coolId.replace("#", ""));
-      });
-      let newFavoriteModsRuntime = [...favoriteModsRuntime, `#${trackIdInt}`];
+      favoriteModsRuntime = favoriteModsRuntime.filter((track) => track.id !== trackIdInt)
+      let newFavoriteModsRuntime = [
+        ...favoriteModsRuntime, {
+          id: trackIdInt,
+          ...(metaData.artist && {artist: metaData.artist}),
+          ...(metaData.title && {title: metaData.title}),
+        }
+      ];
       updateFavoriteModsRuntime(newFavoriteModsRuntime);
     } else {
-      updateFavoriteModsRuntime([`#${trackId}`]);
+      updateFavoriteModsRuntime([{
+        id: trackIdInt,
+        ...(metaData.artist && {artist: metaData.artist}),
+        ...(metaData.title && {title: metaData.title}),
+      }]);
     }
   };
 

@@ -2,28 +2,33 @@ import React from "react";
 import styles from "./LikedMods.module.scss";
 
 function LikedMod({
-  trackId,
+  track,
   index,
   setTrackId,
   playMusic,
   removeFavoriteModRuntime,
 }) {
   const playLikedMod = () => {
-    setTrackId(trackId.replace("#", ""));
-    playMusic(trackId.replace("#", ""));
+    setTrackId(track.id);
+    playMusic(track.id);
   };
 
   return (
     <li className={styles.likedMod} key={index}>
       <div
-        id={`liked_mod_${trackId}`}
-        onClick={() => playLikedMod(trackId, index)}
+        id={`liked_mod_${track.id}`}
+        onClick={() => playLikedMod(track.id, index)}
+        title={
+          `#${track.id}`
+          + ` - ${track.artist || "[No Artist]"}`
+          + ` - ${track.title || "[No Title]"}`
+        }
       >
-        {trackId}
+        {track.title || `#${track.id}`}
       </div>
       <div
-        id={`removes_${trackId}`}
-        onClick={() => removeFavoriteModRuntime(trackId, index)}
+        id={`removes_${track.id}`}
+        onClick={() => removeFavoriteModRuntime(track.id, index)}
       >
         x
       </div>
