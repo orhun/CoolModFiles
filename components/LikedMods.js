@@ -17,16 +17,15 @@ function LikedMods({
   } else {
     return (
       <ol>
-        {content.map((trackId, index) => (
+        {content.map((track, index) => (
           <LikedMod
-            trackId={trackId}
+            track={track}
             index={index}
             setTrackId={setTrackId}
             playMusic={playMusic}
             removeFavoriteModRuntime={removeFavoriteModRuntime}
-            onClick={() => playLikedMod(trackId, index)}
             key={index}
-          ></LikedMod>
+          />
         ))}
       </ol>
     );

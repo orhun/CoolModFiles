@@ -40,9 +40,17 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
   if (favoriteModsJSON === null || !favoriteModsJSON) {
     [favoriteModsRuntime, setFavoriteModsRuntime] = React.useState([]);
   } else {
-    [favoriteModsRuntime, setFavoriteModsRuntime] = React.useState(
-      JSON.parse(favoriteModsJSON)
-    );
+    let initFavMods = JSON.parse(favoriteModsJSON);
+    if (initFavMods.length
+      && (typeof initFavMods[0] === 'string' || initFavMods[0] instanceof String)) {
+
+      initFavMods = initFavMods.map((oldTrackId) => {
+        return {
+          id: parseInt(oldTrackId.replace("#", "")),
+        };
+      });
+    }
+    [favoriteModsRuntime, setFavoriteModsRuntime] = React.useState(initFavMods);
   }
   const [counter, setCounter] = React.useState(0);
 
@@ -243,17 +251,17 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
 
   const removeFavoriteModRuntime = (modToRemoveFromRuntimeList) => {
     let newFavoriteModsArray = favoriteModsRuntime.filter(
-      (mod) => mod !== modToRemoveFromRuntimeList
+      (mod) => mod.id !== modToRemoveFromRuntimeList
     );
     setFavoriteModsRuntime(newFavoriteModsArray);
     localStorage.setItem("favoriteMods", JSON.stringify(newFavoriteModsArray));
   };
 
   const downloadFavoriteMods = () => {
-    var blob = new Blob([favoriteModsRuntime.join("\n")], {
-      type: "text/plain;charset=utf-8",
+    let blob = new Blob([JSON.stringify(favoriteModsRuntime, null, 2)], {
+      type: "application/json;charset=utf-8",
     });
-    saveAs(blob, "coolmods.txt");
+    saveAs(blob, "coolmods.json");
   };
 
   return (
