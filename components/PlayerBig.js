@@ -74,7 +74,7 @@ function PlayerBig({
   }, []);
 
   React.useEffect(() => {
-    document.getElementById("repeat").classList.toggle(styles.deactive);
+    document.getElementById("repeat").classList.toggle(styles.deactive, !repeat);
   }, [repeat]);
 
   const shareOnTwitter = () => {
