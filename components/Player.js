@@ -116,7 +116,7 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
       if (player.getPosition() === 0 && player.duration() === 0) {
         setIsPlay(false);
         if (repeat) {
-          playMusic(prevIds[currentId]);
+          playMusic(trackId);
         } else {
           playNext();
         }
