@@ -34,6 +34,8 @@ function PlayerBig({
   progress,
   max,
   player,
+  volume,
+  setVolume,
   isPlay,
   togglePlay,
   setProgress,
@@ -222,6 +224,23 @@ function PlayerBig({
           disable={loading ? "true" : "false"}
         />
       </div>
+      <Slider
+        railStyle={{ backgroundColor: "white", height: 6 }}
+        trackStyle={{ backgroundColor: "#bd00ff", height: 6 }}
+        handleStyle={{
+          borderColor: "#bd00ff",
+          backgroundColor: "#bd00ff",
+        }}
+        className={styles.seekbar}
+        value={volume}
+        min={0}
+        max={100}
+        step={1}
+        onChange={(val) => {
+          setVolume(val);
+          player.setVolume(val);
+        }}
+      />
       <div className={styles.footer}>
         <div className={styles.footerLeft}>
           <QuestionIcon

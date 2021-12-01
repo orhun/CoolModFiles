@@ -15,6 +15,7 @@ import { generateEmbedString, getRandomInt, showToast } from "../utils";
 function Player({ sharedTrackId, backSideContent, latestId }) {
   const [isPlay, setIsPlay] = React.useState(false);
   const [player, setPlayer] = React.useState(null);
+  const [volume, setVolume] = React.useState(80);
   const [maxId] = React.useState(latestId);
   const [trackId, setTrackId] = React.useState(
     sharedTrackId ? sharedTrackId : getRandomInt(0, latestId)
@@ -126,7 +127,7 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
   );
 
   React.useEffect(() => {
-    setPlayer(new ChiptuneJsPlayer(new ChiptuneJsConfig(0)));
+    setPlayer(new ChiptuneJsPlayer(new ChiptuneJsConfig(0, volume)));
   }, []);
 
   React.useEffect(() => {
@@ -279,6 +280,8 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
               progress={progress}
               max={max}
               player={player}
+              volume={volume}
+              setVolume={setVolume}
               isPlay={isPlay}
               togglePlay={togglePlay}
               setProgress={setProgress}
