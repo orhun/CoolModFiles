@@ -1,3 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.volumeBar {
+  margin: 0 15px 0 0;
+}
+
 .dropdownContent {
   position: absolute;
   top: 40px;
@@ -72,7 +86,7 @@
   .likeButton {
     // border:1px white solid;
     // background-color: white;
-     margin-top: 15px;
+    margin-top: 15px;
   }
 }
 
@@ -201,16 +215,16 @@
     flex-direction: row;
     align-items: flex-end;
     align-content: flex-end;
-      // border:blue solid 1px;
+    // border:blue solid 1px;
   }
   .footerRight {
     width: 42%;
     display: flex;
     justify-content: flex-end;
     flex-direction: row;
-        align-items: flex-end;
+    align-items: flex-end;
     align-content: flex-end;
-      // border: green solid 1px;
+    // border: green solid 1px;
   }
 }
 
@@ -220,7 +234,7 @@
 }
 
 .question {
-  margin: 0 0 0px 0;
+  margin: 0 0 0 0;
   cursor: pointer;
 
   &:active:hover {

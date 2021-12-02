@@ -113,170 +113,177 @@ function PlayerBig({
 
   return (
     <React.Fragment>
-      <div className={styles.wheader}>
-        <div className={styles.downloadWrap}>
-          <DownloadButton
-            height="30"
-            width="60"
-            onClick={() => downloadTrack()}
-          />
-          <LikeButton
-            className={styles.likeButton}
-            height="30"
-            width="60"
-            onClick={() =>
-              likeCurrentTrack(favoriteModsRuntime, updateFavoriteModsRuntime)
-            }
-          />
-        </div>
-        <img
-          className={styles.banner}
-          src={`/images/disc_${isPlay ? "anim" : "idle"}.gif`}
-          alt="anim"
-        />
-        <div className={styles.shareWrap}>
-          <ShareIcon
-            height="30"
-            width="60"
-            onClick={() => {
-              setDropDownClass(
-                dropDownClass === dropDownClose ? dropDownOpen : dropDownClose
-              );
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <Slider
+            railStyle={{backgroundColor: "white", width: 6}}
+            trackStyle={{backgroundColor: "#bd00ff", width: 6}}
+            handleStyle={{
+              borderColor: "#bd00ff",
+              backgroundColor: "#bd00ff",
+            }}
+            className={styles.volumeBar}
+            value={volume}
+            min={0}
+            max={100}
+            step={1}
+            vertical={true}
+            onChange={(val) => {
+              setVolume(val);
+              player.setVolume(val);
             }}
           />
-          <div className={dropDownClass}>
-            <TwitterOutlineIcon
-              height="30"
-              width="30"
-              onClick={() => shareOnTwitter()}
+        </div>
+        <div className={styles.content}>
+          <div className={styles.wheader}>
+            <div className={styles.downloadWrap}>
+              <DownloadButton
+                height="30"
+                width="60"
+                onClick={() => downloadTrack()}
+              />
+              <LikeButton
+                className={styles.likeButton}
+                height="30"
+                width="60"
+                onClick={() =>
+                  likeCurrentTrack(favoriteModsRuntime, updateFavoriteModsRuntime)
+                }
+              />
+            </div>
+            <img
+              className={styles.banner}
+              src={`/images/disc_${isPlay ? "anim" : "idle"}.gif`}
+              alt="anim"
             />
-            <CodeIcon height="30" width="30" onClick={() => copyEmbed()} />
+            <div className={styles.shareWrap}>
+              <ShareIcon
+                height="30"
+                width="60"
+                onClick={() => {
+                  setDropDownClass(
+                    dropDownClass === dropDownClose ? dropDownOpen : dropDownClose
+                  );
+                }}
+              />
+              <div className={dropDownClass}>
+                <TwitterOutlineIcon
+                  height="30"
+                  width="30"
+                  onClick={() => shareOnTwitter()}
+                />
+                <CodeIcon height="30" width="30" onClick={() => copyEmbed()}/>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <h2 className={styles.title}>{title ? title : "[No Title]"}</h2>
-      {!loading ? (
-        <ul className={styles.metadata}>
-          {metaData.artist ? <li>Artist: {metaData.artist}</li> : null}
-          {metaData.date ? <li>Date: {metaData.date}</li> : null}
-          <li>Type: {metaData.type}</li>
-          <li>
-            <a
-              href={`https://modarchive.org/index.php?request=view_by_moduleid&query=${trackId}`}
-              target="_blank"
-              className={styles.modlink}
-            >
-              Track Id: #{trackId}
-            </a>
-          </li>
-          {metaData.message ? (
-            <li>Message: {metaData.message.replace(/\n{2,}/g, "\n")}</li>
-          ) : null}
-        </ul>
-      ) : (
-        <LoadingState />
-      )}
-      <Slider
-        railStyle={{ backgroundColor: "white", height: 6 }}
-        trackStyle={{ backgroundColor: "#bd00ff", height: 6 }}
-        handleStyle={{
-          borderColor: "#bd00ff",
-          backgroundColor: "#bd00ff",
-        }}
-        className={styles.seekbar}
-        value={progress}
-        max={max}
-        onChange={(val) => {
-          setProgress(val);
-          player.seek(val);
-        }}
-      />
-      <div className={styles.seekNumbers}>
-        <span>{moment().startOf("day").seconds(progress).format("mm:ss")}</span>
-        <span>{moment().startOf("day").seconds(max).format("mm:ss")}</span>
-      </div>
-      <div className={styles.actionButtonsWrapper}>
-        <LeftButton
-          height="70"
-          width="70"
-          onClick={!loading ? () => playPrevious() : null}
-          disable={currentId === 0 || loading ? "true" : "false"}
-        />
-        {!isPlay ? (
-          <PlayButton
-            className={styles.actionbtn}
-            height="130"
-            width="130"
-            onClick={!loading ? () => togglePlay() : null}
-          />
-        ) : (
-          <PauseButton
-            className={styles.actionbtn}
-            height="130"
-            width="130"
-            onClick={() => togglePlay()}
-          />
-        )}
-        <RightButton
-          height="70"
-          width="70"
-          onClick={!loading ? () => playNext() : null}
-          disable={loading ? "true" : "false"}
-        />
-      </div>
-      <Slider
-        railStyle={{ backgroundColor: "white", height: 6 }}
-        trackStyle={{ backgroundColor: "#bd00ff", height: 6 }}
-        handleStyle={{
-          borderColor: "#bd00ff",
-          backgroundColor: "#bd00ff",
-        }}
-        className={styles.seekbar}
-        value={volume}
-        min={0}
-        max={100}
-        step={1}
-        onChange={(val) => {
-          setVolume(val);
-          player.setVolume(val);
-        }}
-      />
-      <div className={styles.footer}>
-        <div className={styles.footerLeft}>
-          <QuestionIcon
-            className={styles.question}
-            height="30"
-            width="30"
-            onClick={() => toggleHelpDrawer()}
-          />
-        </div>
-        <div className={styles.footerCenter}>
-          <ArrowIcon
-            className={styles.arrow}
-            height="20"
-            width="50"
-            onClick={() => changeSize()}
-          />
-        </div>
-
-        <div className={styles.footerRight}>
-          <PlayListButton
-            id="playlistButton"
-            className={styles.playlistButton}
-            height="30"
-            width="30"
-            onClick={() => toggleLikedModsDrawer()}
-          />
-          <RepeatIcon
-            id="repeat"
-            className={styles.repeat}
-            height="30"
-            width="30"
-            onClick={() => {
-              showToast(`repeat ${!repeat ? "on" : "off"}`);
-              setRepeat(!repeat);
+          <h2 className={styles.title}>{title ? title : "[No Title]"}</h2>
+          {!loading ? (
+            <ul className={styles.metadata}>
+              {metaData.artist ? <li>Artist: {metaData.artist}</li> : null}
+              {metaData.date ? <li>Date: {metaData.date}</li> : null}
+              <li>Type: {metaData.type}</li>
+              <li>
+                <a
+                  href={`https://modarchive.org/index.php?request=view_by_moduleid&query=${trackId}`}
+                  target="_blank"
+                  className={styles.modlink}
+                >
+                  Track Id: #{trackId}
+                </a>
+              </li>
+              {metaData.message ? (
+                <li>Message: {metaData.message.replace(/\n{2,}/g, "\n")}</li>
+              ) : null}
+            </ul>
+          ) : (
+            <LoadingState/>
+          )}
+          <Slider
+            railStyle={{backgroundColor: "white", height: 6}}
+            trackStyle={{backgroundColor: "#bd00ff", height: 6}}
+            handleStyle={{
+              borderColor: "#bd00ff",
+              backgroundColor: "#bd00ff",
+            }}
+            className={styles.seekbar}
+            value={progress}
+            max={max}
+            onChange={(val) => {
+              setProgress(val);
+              player.seek(val);
             }}
           />
+          <div className={styles.seekNumbers}>
+            <span>{moment().startOf("day").seconds(progress).format("mm:ss")}</span>
+            <span>{moment().startOf("day").seconds(max).format("mm:ss")}</span>
+          </div>
+          <div className={styles.actionButtonsWrapper}>
+            <LeftButton
+              height="70"
+              width="70"
+              onClick={!loading ? () => playPrevious() : null}
+              disable={currentId === 0 || loading ? "true" : "false"}
+            />
+            {!isPlay ? (
+              <PlayButton
+                className={styles.actionbtn}
+                height="130"
+                width="130"
+                onClick={!loading ? () => togglePlay() : null}
+              />
+            ) : (
+              <PauseButton
+                className={styles.actionbtn}
+                height="130"
+                width="130"
+                onClick={() => togglePlay()}
+              />
+            )}
+            <RightButton
+              height="70"
+              width="70"
+              onClick={!loading ? () => playNext() : null}
+              disable={loading ? "true" : "false"}
+            />
+          </div>
+          <div className={styles.footer}>
+            <div className={styles.footerLeft}>
+              <QuestionIcon
+                className={styles.question}
+                height="30"
+                width="30"
+                onClick={() => toggleHelpDrawer()}
+              />
+            </div>
+            <div className={styles.footerCenter}>
+              <ArrowIcon
+                className={styles.arrow}
+                height="20"
+                width="50"
+                onClick={() => changeSize()}
+              />
+            </div>
+
+            <div className={styles.footerRight}>
+              <PlayListButton
+                id="playlistButton"
+                className={styles.playlistButton}
+                height="30"
+                width="30"
+                onClick={() => toggleLikedModsDrawer()}
+              />
+              <RepeatIcon
+                id="repeat"
+                className={styles.repeat}
+                height="30"
+                width="30"
+                onClick={() => {
+                  showToast(`repeat ${!repeat ? "on" : "off"}`);
+                  setRepeat(!repeat);
+                }}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </React.Fragment>
