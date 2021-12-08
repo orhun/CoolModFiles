@@ -114,7 +114,7 @@ function PlayerBig({
   return (
     <React.Fragment>
       <div className={styles.container}>
-        <div className={styles.content}>
+        <div className={styles.contentVolume}>
           <Slider
             railStyle={{backgroundColor: "white", width: 6}}
             trackStyle={{backgroundColor: "#bd00ff", width: 6}}
@@ -122,7 +122,6 @@ function PlayerBig({
               borderColor: "#bd00ff",
               backgroundColor: "#bd00ff",
             }}
-            className={styles.volumeBar}
             value={volume}
             min={0}
             max={100}
@@ -134,7 +133,7 @@ function PlayerBig({
             }}
           />
         </div>
-        <div className={styles.content}>
+        <div className={styles.contentPlayer}>
           <div className={styles.wheader}>
             <div className={styles.downloadWrap}>
               <DownloadButton

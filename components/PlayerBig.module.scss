@@ -3,13 +3,16 @@
   flex-direction: row;
 }
 
-.content {
+.contentVolume {
   display: flex;
   flex-direction: column;
+  width: 7%;
 }
 
-.volumeBar {
-  margin: 0 15px 0 0;
+.contentPlayer {
+  display: flex;
+  flex-direction: column;
+  width: 93%;
 }
 
 .dropdownContent {
