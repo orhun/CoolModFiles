@@ -6,13 +6,23 @@
 .contentVolume {
   display: flex;
   flex-direction: column;
-  width: 7%;
+  width: 4%;
+  transition: width 0.5s, opacity 0.5s;
+  opacity: 0;
+  filter: alpha(opacity=40);
+}
+
+.contentVolume:hover {
+  transition: width 0.5s, opacity 0.5s;
+  opacity: 0.8;
+  width: 8%;
+  filter: alpha(opacity=100);
 }
 
 .contentPlayer {
   display: flex;
   flex-direction: column;
-  width: 93%;
+  width: 100%;
 }
 
 .dropdownContent {
@@ -92,7 +102,6 @@
     margin-top: 15px;
   }
 }
-
 
 .shareWrap {
   flex: 1;
@@ -197,7 +206,7 @@
 }
 
 .footer {
-  width:100%;
+  width: 100%;
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
