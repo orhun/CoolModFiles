@@ -1,3 +1,5 @@
+const OPENMPT_MODULE_RENDER_MASTERGAIN_MILLIBEL = 1
+
 var libopenmpt = {};
 
 libopenmpt.locateFile = function(name) {
@@ -8,8 +10,9 @@ let ChiptuneAudioContext = {};
 
 ChiptuneAudioContext = window.AudioContext || window.webkitAudioContext;
 
-function ChiptuneJsConfig(repeatCount) {
+function ChiptuneJsConfig(repeatCount, volume) {
   this.repeatCount = repeatCount;
+  this.volume = volume;
 }
 
 function ChiptuneJsPlayer(config) {
@@ -124,7 +127,22 @@ ChiptuneJsPlayer.prototype.play = function(buffer) {
   processNode.connect(this.context.destination);
 };
 
-ChiptuneJsPlayer.prototype.stop = function() {
+/**
+ * Set player volume
+ * @param volume [0..100],
+ */
+ChiptuneJsPlayer.prototype.setVolume = function (volume) {
+  this.config.volume = volume
+  if (this.currentPlayingNode != null) {
+    libopenmpt._openmpt_module_set_render_param(
+      this.currentPlayingNode.modulePtr,
+      OPENMPT_MODULE_RENDER_MASTERGAIN_MILLIBEL,
+      percToMillibel(volume),
+    );
+  }
+};
+
+ChiptuneJsPlayer.prototype.stop = function () {
   if (this.currentPlayingNode != null) {
     this.currentPlayingNode.disconnect();
     this.currentPlayingNode.cleanup();
@@ -166,6 +184,11 @@ ChiptuneJsPlayer.prototype.createLibopenmptNode = function(buffer, config) {
     0,
     0,
     0
+  );
+  libopenmpt._openmpt_module_set_render_param(
+    processNode.modulePtr,
+    OPENMPT_MODULE_RENDER_MASTERGAIN_MILLIBEL,
+    percToMillibel(config.volume),
   );
   var stack = stackSave();
   libopenmpt._openmpt_module_ctl_set(
@@ -284,4 +307,27 @@ function asciiToStack(str) {
   var stackStr = stackAlloc(str.length + 1);
   writeAsciiToMemory(str, stackStr);
   return stackStr;
+}
+
+// Convert range of decibel to percentage and back again
+// https://gist.github.com/below9k/cf17e10341cb5c61a03a53a64cc35fb2
+function percToMillibel(perc) {
+  let mB = 0;
+
+  if (perc === 0) {
+    mB = -6000;
+  } else if (perc <= 80) {
+    // 0..80% = -6000..0 millibel
+    mB = Math.round(100 *
+      20 * Math.log(perc * (100 / 80) * 0.01) / Math.log(10)
+    );
+  } else if (perc <= 100) {
+    // 80..100% = 0..1000 millibel
+    // 10 db ~= 316.227766%
+    mB = Math.round(100 *
+      20 * Math.log((100 + (perc - 80) / 20 * 216.227766) * 0.01) / Math.log(10)
+    );
+  }
+
+  return mB;
 }
