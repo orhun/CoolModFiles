@@ -15,14 +15,14 @@
 .contentVolume:hover {
   transition: width 0.5s, opacity 0.5s;
   opacity: 0.8;
-  width: 8%;
+  width: 7%;
   filter: alpha(opacity=100);
 }
 
 .contentPlayer {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 94%;
 }
 
 .dropdownContent {
