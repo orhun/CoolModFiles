@@ -19,12 +19,12 @@ function LikedMod({
         id={`liked_mod_${track.id}`}
         onClick={() => playLikedMod(track.id, index)}
         title={
-          `#${track.id}`
-          + ` - ${track.artist || "[No Artist]"}`
-          + ` - ${track.title || "[No Title]"}`
+          `#${track.id}` +
+          ` - ${track.artist || "[No Artist]"}` +
+          ` - ${track.title || "[No Title]"}`
         }
       >
-        {track.title || `#${track.id}`}
+        {getSanitizedTrackTitle(track)}
       </div>
       <div
         id={`removes_${track.id}`}
@@ -34,6 +34,18 @@ function LikedMod({
       </div>
     </li>
   );
+}
+
+function getSanitizedTrackTitle(track) {
+  if (track.title) {
+    if (track.title.length == (track.title.match(/[^a-zA-Z ]/g) || []).length) {
+      return "\uFFFD".repeat(3);
+    } else {
+      return track.title;
+    }
+  } else {
+    return `#${track.id}`;
+  }
 }
 
 export default LikedMod;
