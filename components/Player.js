@@ -1,7 +1,7 @@
 import React from "react";
+import JSZip from "jszip";
 
 import copy from "copy-to-clipboard";
-import { saveAs } from "file-saver";
 import styles from "./Player.module.scss";
 import PlayerBig from "./PlayerBig";
 import PlayerMin from "./PlayerMin";
@@ -42,9 +42,10 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
     [favoriteModsRuntime, setFavoriteModsRuntime] = React.useState([]);
   } else {
     let initFavMods = JSON.parse(favoriteModsJSON);
-    if (initFavMods.length
-      && (typeof initFavMods[0] === 'string' || initFavMods[0] instanceof String)) {
-
+    if (
+      initFavMods.length &&
+      (typeof initFavMods[0] === "string" || initFavMods[0] instanceof String)
+    ) {
       initFavMods = initFavMods.map((oldTrackId) => {
         return {
           id: parseInt(oldTrackId.replace("#", "")),
@@ -227,8 +228,22 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
     setLikedModsDrawerOpen(!likedModsDrawerOpen);
   };
 
-  const downloadTrack = () => {
-    window.location.href = `https://api.modarchive.org/downloads.php?moduleid=${trackId}`;
+  const downloadTrack = async () => {
+    try {
+      const res = await fetch(
+        `https://api.modarchive.org/downloads.php?moduleid=${trackId}`
+      );
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", `${metaData.title}.mod`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const changeSize = () => {
@@ -258,11 +273,24 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
     localStorage.setItem("favoriteMods", JSON.stringify(newFavoriteModsArray));
   };
 
-  const downloadFavoriteMods = () => {
-    let blob = new Blob([JSON.stringify(favoriteModsRuntime, null, 2)], {
-      type: "application/json;charset=utf-8",
-    });
-    saveAs(blob, "coolmods.json");
+  const downloadFavoriteMods = async () => {
+    const zip = new JSZip();
+    const mods = zip.folder("mods");
+    for (let mod of favoriteModsRuntime) {
+      const res = await fetch(
+        `https://api.modarchive.org/downloads.php?moduleid=${mod.id}`
+      );
+      const blob = await res.blob();
+      await mods.file(`${mod.title}.mod`, blob, { binary: true });
+    }
+    const zipContent = await zip.generateAsync({ type: "blob" });
+    const url = window.URL.createObjectURL(zipContent);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "FavoriteMods.zip");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -307,9 +335,11 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
             </div>
           </div>
           <div id="liked-mods" className={likedModsClass.join(" ")}>
-            <h2 onClick={() => downloadFavoriteMods()}>
-              <a href="#">Favorite Mods</a>
-            </h2>
+            <header className={styles.favoriteHeader}>
+              <h2 onClick={() => downloadFavoriteMods()}>
+                <a href="#">Favorite Mods</a>
+              </h2>
+            </header>
             <hr className={styles.fancyHr} />
             <div className={styles.likedModsContent}>
               <LikedMods
