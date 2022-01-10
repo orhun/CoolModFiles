@@ -274,6 +274,7 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
   };
 
   const downloadFavoriteMods = async () => {
+    showToast("Preparing...");
     const zip = new JSZip();
     const mods = zip.folder("mods");
     for (let mod of favoriteModsRuntime) {
