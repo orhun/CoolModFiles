@@ -108,6 +108,12 @@
   color: #bd00ff;
 }
 
+.downloadAll {
+  svg {
+    cursor: pointer;
+  }
+}
+
 @keyframes slideRight {
   0% {
     left: 0%;

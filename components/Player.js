@@ -354,11 +354,13 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
               <h2 onClick={downloadFavoriteModsJson}>
                 <a href="#">Favorite Mods</a>
               </h2>
-              <DownloadButton
-                onClick={downloadFavoriteMods}
-                height="25"
-                width="25"
-              />
+              <div className={styles.downloadAll}>
+                <DownloadButton
+                  onClick={downloadFavoriteMods}
+                  height="25"
+                  width="25"
+                />
+              </div>
             </header>
             <hr className={styles.fancyHr} />
             <div className={styles.likedModsContent}>
