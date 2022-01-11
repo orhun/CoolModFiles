@@ -42,6 +42,12 @@
   }
 }
 
+.favoriteHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .backSideContent {
   overflow-y: auto;
   margin: 10px 5px 10px 5px;
@@ -100,6 +106,12 @@
 
 .fancyHr {
   color: #bd00ff;
+}
+
+.downloadAll {
+  svg {
+    cursor: pointer;
+  }
 }
 
 @keyframes slideRight {
