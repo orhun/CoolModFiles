@@ -1,5 +1,6 @@
 import React from "react";
 import JSZip from "jszip";
+import { saveAs } from "file-saver";
 
 import copy from "copy-to-clipboard";
 import styles from "./Player.module.scss";
@@ -11,6 +12,7 @@ import LikedMods from "./LikedMods";
 import { ToastContainer } from "react-toastify";
 import { useInterval, useKeyPress } from "../hooks";
 import { generateEmbedString, getRandomInt, showToast } from "../utils";
+import { DownloadButton } from "../icons";
 
 function Player({ sharedTrackId, backSideContent, latestId }) {
   const [isPlay, setIsPlay] = React.useState(false);
@@ -274,6 +276,7 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
   };
 
   const downloadFavoriteMods = async () => {
+    if (favoriteModsRuntime.length === 0) return;
     showToast("Preparing...");
     const zip = new JSZip();
     const mods = zip.folder("mods");
@@ -292,6 +295,17 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  };
+
+  const downloadFavoriteModsJson = () => {
+    const jsonContent = favoriteModsRuntime.map((mod) => ({
+      ...mod,
+      downloadUrl: `https://api.modarchive.org/downloads.php?moduleid=${mod.id}`,
+    }));
+    let blob = new Blob([JSON.stringify(jsonContent, null, 2)], {
+      type: "application/json;charset=utf-8",
+    });
+    saveAs(blob, "coolmods.json");
   };
 
   return (
@@ -337,9 +351,14 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
           </div>
           <div id="liked-mods" className={likedModsClass.join(" ")}>
             <header className={styles.favoriteHeader}>
-              <h2 onClick={() => downloadFavoriteMods()}>
+              <h2 onClick={downloadFavoriteModsJson}>
                 <a href="#">Favorite Mods</a>
               </h2>
+              <DownloadButton
+                onClick={downloadFavoriteMods}
+                height="25"
+                width="25"
+              />
             </header>
             <hr className={styles.fancyHr} />
             <div className={styles.likedModsContent}>
