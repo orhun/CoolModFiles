@@ -285,7 +285,7 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
         `https://api.modarchive.org/downloads.php?moduleid=${mod.id}`
       );
       const blob = await res.blob();
-      await mods.file(`${mod.title}.mod`, blob, { binary: true });
+      await mods.file(`${mod.title || mod.id}.mod`, blob, { binary: true });
     }
     const zipContent = await zip.generateAsync({ type: "blob" });
     const url = window.URL.createObjectURL(zipContent);
