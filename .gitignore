@@ -3,6 +3,8 @@
 /.pnp
 .pnp.js
 
+.svelte-kit
+
 # testing
 /coverage
 
