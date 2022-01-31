@@ -5,13 +5,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 body {
-	@apply text-white;
-	font-family: 'Press Start 2P', cursive;
-	background: rgb(0, 0, 0);
-	background: linear-gradient(
-		162deg,
-		rgba(0, 0, 0, 1) 0%,
-		rgba(84, 7, 65, 1) 61%,
-		rgba(119, 5, 90, 1) 100%
-	);
+    @apply text-white;
+    font-family: 'Press Start 2P', cursive;
+    background: rgb(0, 0, 0);
+    background: linear-gradient(
+        162deg,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(84, 7, 65, 1) 61%,
+        rgba(119, 5, 90, 1) 100%
+    );
 }
