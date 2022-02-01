@@ -1,5 +1,6 @@
 /// <reference types="@sveltejs/kit" />
 
+// ChiptuneJsPlayer class inject to global scope
 export interface ChiptuneJsPlayer {
     seek: (duration: number) => void;
     play: (buffer: unknown) => void;
@@ -10,4 +11,5 @@ export interface ChiptuneJsPlayer {
     pause: () => void;
     togglePause: () => void;
     setRepeatCount: (repeatCount: number) => void;
+    getPosition: () => number;
 }

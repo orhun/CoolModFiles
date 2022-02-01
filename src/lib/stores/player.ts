@@ -6,6 +6,11 @@ class PlayerStore {
     playerInstance: ChiptuneJsPlayer;
     buffer: AudioBuffer;
     loading: Writable<boolean> = writable(true);
+    isPlaying: Writable<boolean> = writable(false);
+
+    get position() {
+        return this.playerInstance.getPosition();
+    }
 
     setup() {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -22,16 +27,19 @@ class PlayerStore {
 
     async play() {
         this.playerInstance.play(this.buffer);
+        this.isPlaying.set(true);
         console.log('[player] Player start');
     }
 
     async pause() {
         this.playerInstance.pause();
+        this.isPlaying.set(false);
         console.log('[player] Player pause');
     }
 
     async stop() {
         this.playerInstance.stop();
+        this.isPlaying.set(false);
         console.log('[player] Player stop');
     }
 }

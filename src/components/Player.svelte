@@ -1,15 +1,24 @@
 <script lang="ts">
     import PlayerStore from '$lib/stores/player';
-    import { onDestroy, onMount } from 'svelte';
+    import { onMount } from 'svelte';
 
-    const { loading } = PlayerStore;
+    const { loading, isPlaying } = PlayerStore;
+    let interval;
 
     onMount(async () => {
         PlayerStore.setup();
-        PlayerStore.load('59664');
+        await PlayerStore.load('59664');
     });
 
-    onDestroy(() => {});
+    $: {
+        if ($isPlaying) {
+            interval = setInterval(() => {
+                console.log(PlayerStore.position);
+            }, 500);
+        } else {
+            clearInterval(interval);
+        }
+    }
 </script>
 
 <div class="player w-full md:w-3/5 lg:w-3/12">
