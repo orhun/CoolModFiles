@@ -1,5 +1,5 @@
 import type { ChiptuneJsPlayer } from 'src/global';
-import { derived, get, writable } from 'svelte/store';
+import { get, writable } from 'svelte/store';
 import type { Writable } from 'svelte/store';
 
 class PlayerStore {

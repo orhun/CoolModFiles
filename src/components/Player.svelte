@@ -35,8 +35,6 @@
             clearInterval(interval);
         }
     }
-
-    $: console.log(sliderValue);
 </script>
 
 <div class="player w-full md:w-3/5 lg:w-3/12">
@@ -46,8 +44,10 @@
         <button on:click={() => PlayerStore.togglePause()}> Pause</button>
 
         <Slider
+            range="min"
             min={0}
             max={duration}
+            springValues={{ stiffness: 1, damping: 1 }}
             bind:values={sliderValue}
             on:change={({ detail: { value } }) => onSliderChange(value)}
         />

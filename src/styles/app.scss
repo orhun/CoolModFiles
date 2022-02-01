@@ -15,3 +15,14 @@ body {
         rgba(119, 5, 90, 1) 100%
     );
 }
+
+.rangeSlider > .rangeHandle > .rangeNub {
+    top: 1px;
+    left: 1px;
+    background: #bd00ff !important;
+    width: 20px;
+    height: 20px;
+}
+.rangeSlider.hoverable > .rangeBar {
+    background: #bd00ff !important;
+}
