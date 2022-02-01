@@ -1,16 +1,12 @@
 import type { ChiptuneJsPlayer } from 'src/global';
-import { writable } from 'svelte/store';
+import { derived, get, writable } from 'svelte/store';
 import type { Writable } from 'svelte/store';
 
 class PlayerStore {
-    playerInstance: ChiptuneJsPlayer;
+    playerInstance?: ChiptuneJsPlayer;
     buffer: AudioBuffer;
     loading: Writable<boolean> = writable(true);
     isPlaying: Writable<boolean> = writable(false);
-
-    get position() {
-        return this.playerInstance.getPosition();
-    }
 
     setup() {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -25,22 +21,34 @@ class PlayerStore {
         console.log('[player] buffer loaded, id:', id);
     }
 
-    async play() {
+    play() {
         this.playerInstance.play(this.buffer);
         this.isPlaying.set(true);
         console.log('[player] Player start');
     }
 
-    async pause() {
-        this.playerInstance.pause();
-        this.isPlaying.set(false);
-        console.log('[player] Player pause');
+    togglePause() {
+        this.playerInstance.togglePause();
+        this.isPlaying.set(!get(this.isPlaying));
+        console.log(`[player] Player ${get(this.isPlaying) ? 'resume' : 'pause'}`);
     }
 
-    async stop() {
+    stop() {
         this.playerInstance.stop();
         this.isPlaying.set(false);
         console.log('[player] Player stop');
+    }
+
+    getPosition() {
+        return this.playerInstance.getPosition();
+    }
+
+    seek(value: number) {
+        return this.playerInstance.seek(value);
+    }
+
+    duration() {
+        return this.playerInstance.duration();
     }
 }
 
