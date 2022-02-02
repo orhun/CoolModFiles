@@ -1,4 +1,4 @@
-import type { ChiptuneJsPlayer } from 'src/global';
+import type { ChiptuneJsPlayer, MetaData } from 'src/global';
 import { get, writable } from 'svelte/store';
 import type { Writable } from 'svelte/store';
 
@@ -7,6 +7,7 @@ class PlayerStore {
     buffer: AudioBuffer;
     loading: Writable<boolean> = writable(true);
     isPlaying: Writable<boolean> = writable(false);
+    metaData: Writable<MetaData> = writable(null);
 
     setup() {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -18,12 +19,14 @@ class PlayerStore {
     async load(id: string) {
         this.buffer = await this.playerInstance.load(`jsplayer.php?moduleid=${id}`);
         this.loading.set(false);
+
         console.log('[player] buffer loaded, id:', id);
     }
 
     play() {
         this.playerInstance.play(this.buffer);
         this.isPlaying.set(true);
+        this.metaData.set(this.getMetaData());
         console.log('[player] Player start');
     }
 
@@ -49,6 +52,10 @@ class PlayerStore {
 
     duration() {
         return this.playerInstance.duration();
+    }
+
+    getMetaData() {
+        return this.playerInstance.metadata();
     }
 }
 

@@ -26,3 +26,7 @@ body {
 .rangeSlider.hoverable > .rangeBar {
     background: #bd00ff !important;
 }
+
+.rangeSlider.vertical {
+    min-height: 50px !important;
+}
