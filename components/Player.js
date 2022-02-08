@@ -17,7 +17,11 @@ const DEFAULT_VOLUME = 80
 function Player({ sharedTrackId, backSideContent, latestId }) {
   const [isPlay, setIsPlay] = React.useState(false);
   const [player, setPlayer] = React.useState(null);
-  const [volume, setVolume] = React.useState(parseInt(localStorage.getItem("volume")) ?? DEFAULT_VOLUME);
+  const [volume, setVolume] = React.useState(() => {
+    const rememberedVolume = parseInt(localStorage.getItem("volume"));
+    if(rememberedVolume > -1) return rememberedVolume
+    return DEFAULT_VOLUME;
+  });
   const [maxId] = React.useState(latestId);
   const [trackId, setTrackId] = React.useState(
     sharedTrackId || getRandomInt(0, latestId)
@@ -133,10 +137,8 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
     setPlayer(new ChiptuneJsPlayer(new ChiptuneJsConfig(0, volume)));
   }, []);
 
-
   React.useEffect(() => {
-  
-    if (volume > -1 && volume !== DEFAULT_VOLUME) localStorage.setItem("volume", volume.toString());
+    localStorage.setItem("volume", volume.toString());
   }, [volume]);
 
   React.useEffect(() => {
