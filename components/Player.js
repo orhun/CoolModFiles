@@ -13,14 +13,18 @@ import { ToastContainer } from "react-toastify";
 import { useInterval, useKeyPress } from "../hooks";
 import { generateEmbedString, getRandomInt, showToast } from "../utils";
 import { DownloadButton } from "../icons";
-
+const DEFAULT_VOLUME = 80
 function Player({ sharedTrackId, backSideContent, latestId }) {
   const [isPlay, setIsPlay] = React.useState(false);
   const [player, setPlayer] = React.useState(null);
-  const [volume, setVolume] = React.useState(80);
+  const [volume, setVolume] = React.useState(() => {
+    const rememberedVolume = parseInt(localStorage.getItem("volume"));
+    if(rememberedVolume > -1) return rememberedVolume
+    return DEFAULT_VOLUME;
+  });
   const [maxId] = React.useState(latestId);
   const [trackId, setTrackId] = React.useState(
-    sharedTrackId ? sharedTrackId : getRandomInt(0, latestId)
+    sharedTrackId || getRandomInt(0, latestId)
   );
   const [metaData, setMetaData] = React.useState({});
   const [loading, setLoading] = React.useState(true);
@@ -132,6 +136,10 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
   React.useEffect(() => {
     setPlayer(new ChiptuneJsPlayer(new ChiptuneJsConfig(0, volume)));
   }, []);
+
+  React.useEffect(() => {
+    localStorage.setItem("volume", volume.toString());
+  }, [volume]);
 
   React.useEffect(() => {
     if (player) {
@@ -257,14 +265,12 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
     localStorage.setItem("favoriteMods", JSON.stringify(newFavoriteModsArray));
     if (counter >= 10 && counter < 15) {
       showToast("WE'RE HIRING WEB DEVELOPERS");
-      setCounter(counter + 1);
     } else if (counter == 15) {
       showToast("CONTACT US");
-      setCounter(counter + 1);
-    } else if (counter < 10) {
+    } else if (counter < 10 || counter > 15) {
       showToast("added to favorites!");
-      setCounter(counter + 1);
     }
+    setCounter(counter + 1);
   };
 
   const removeFavoriteModRuntime = (modToRemoveFromRuntimeList) => {
@@ -283,7 +289,7 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
     for (let mod of favoriteModsRuntime) {
       const res = await fetch(
         `https://api.modarchive.org/downloads.php?moduleid=${mod.id}`
-      );
+        );
       const blob = await res.blob();
       await mods.file(`${mod.title || mod.id}.mod`, blob, { binary: true });
     }
@@ -355,7 +361,7 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
                 <a href="#">Favorite Mods</a>
               </h2>
               <div className={styles.downloadAll}>
-                <DownloadButton
+              <DownloadButton
                   onClick={downloadFavoriteMods}
                   height="25"
                   width="25"
