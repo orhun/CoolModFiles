@@ -263,7 +263,6 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
   const updateFavoriteModsRuntime = (newFavoriteModsArray) => {
     setFavoriteModsRuntime(newFavoriteModsArray);
     localStorage.setItem("favoriteMods", JSON.stringify(newFavoriteModsArray));
-    // I have no fucking idea why this piece of code added.
     if (counter >= 10 && counter < 15) {
       showToast("WE'RE HIRING WEB DEVELOPERS");
     } else if (counter == 15) {
