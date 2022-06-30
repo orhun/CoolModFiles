@@ -38,6 +38,6 @@
     "sass": "^1.26.9"
   },
   "devDependencies": {
-    "@svgr/cli": "^5.4.0"
+    "@svgr/cli": "^6.2.1"
   }
 }
