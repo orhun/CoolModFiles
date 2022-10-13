@@ -50,7 +50,6 @@ const MESSAGES = [
   "Let the modules hit the floor!",
   "Play sth nice!",
   "Let's roll!",
-  "Stop refreshing, just click me!",
   "Why so silent?",
   "You want to click here.",
   "Hit me!",
