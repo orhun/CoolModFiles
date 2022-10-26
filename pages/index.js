@@ -13,14 +13,27 @@ import {
   EE_MESSAGES,
   MOBILE_MESSAGES,
   BG_IMAGES,
+  RANDOM_MESSAGES,
 } from "../utils";
 import { useKeyPress } from "../hooks";
 import { isMobile } from "react-device-detect";
 
 function Index({ trackId, backSideContent, latestId }) {
   const [start, setStart] = React.useState(false);
+
+  const getRandomMessage = () => {
+    const n = getRandomInt(0,158)
+    if(n < 54){
+      return MESSAGES;
+    }else if(n < 108){
+      return EE_MESSAGES;
+    }else{
+      return RANDOM_MESSAGES;
+    }
+  }
+
   const [randomMsg] = React.useState(
-    getRandomFromArray(getRandomInt(0, 158) ? MESSAGES : EE_MESSAGES)
+    getRandomFromArray(getRandomMessage())
   );
 
   const getMessage = () => {
