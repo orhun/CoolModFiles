@@ -20,20 +20,8 @@ import { isMobile } from "react-device-detect";
 
 function Index({ trackId, backSideContent, latestId }) {
   const [start, setStart] = React.useState(false);
-
-  const getRandomMessage = () => {
-    const n = getRandomInt(0,158)
-    if(n < 54){
-      return MESSAGES;
-    }else if(n < 108){
-      return EE_MESSAGES;
-    }else{
-      return RANDOM_MESSAGES;
-    }
-  }
-
-  const [randomMsg] = React.useState(
-    getRandomFromArray(getRandomMessage())
+  const [randomMsg, setRandomMsg] = React.useState(
+    getRandomFromArray(getRandomInt(0, 158) ? MESSAGES : EE_MESSAGES)
   );
 
   const getMessage = () => {
@@ -53,11 +41,20 @@ function Index({ trackId, backSideContent, latestId }) {
   }, [enterKey]);
 
   React.useEffect(() => {
+    if (localStorage.getItem("refresh") === "true"){
+      localStorage.setItem("refresh", false)
+      setRandomMsg(getRandomFromArray(RANDOM_MESSAGES))
+    } 
     ReactGA.initialize("UA-172416216-1");
     ReactGA.pageview(window.location.pathname + window.location.search);
     document.getElementById(
       "app"
     ).style.backgroundImage = `url('/images/${getRandomFromArray(BG_IMAGES)}')`;
+    window.onbeforeunload = function () {
+      console.log("reload")
+      localStorage.setItem("refresh", true)
+      return true;
+    };
   }, []);
 
   if (start) {
