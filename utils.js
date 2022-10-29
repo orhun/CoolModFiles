@@ -139,7 +139,7 @@ const SHARE_MESSAGES = [
   "OMG!",
 ];
 
-const RANDOM_MESSAGES = [
+const REFRESH_MESSAGES = [
   "What a nice weather to listen to the music today.",
   "A newcomer?",
   "I think I have seen you somewhere before.",
@@ -237,5 +237,5 @@ export {
   EE_MESSAGES,
   SHARE_MESSAGES,
   MOBILE_MESSAGES,
-  RANDOM_MESSAGES,
+  REFRESH_MESSAGES,
 };
