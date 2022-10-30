@@ -139,6 +139,33 @@ const SHARE_MESSAGES = [
   "OMG!",
 ];
 
+const REFRESH_MESSAGES = [
+  "What a nice weather to listen to the music today.",
+  "A newcomer?",
+  "I think I have seen you somewhere before.",
+  "Come and join us!",
+  "Finally!",
+  "Let's get this party started!",
+  "How about a new song?",
+  "NOT ERROR 404, you found it!",
+  "Let's do this!",
+  "Put your seatbelt on, we are just starting!",
+  "Let's make this fun.",
+  "Those who wish to sing always find a song.",
+  "Pain is temporary, music is eternal",
+  "You only have to click once, fool.",
+  "One, two, three, four!",
+  "Are you going to listen?",
+  "New track?",
+  "Why are you refreshing?",
+  "Where words fail, music speaks.",
+  "Understandable. Have a nice day!",
+  "Music is the strongest form of magic.",
+  "Getting bored? Just find a new one!",
+  "Just take a seat, the show is about to begin",
+  "Beats. Beats. Beats.",
+];
+
 const MOBILE_MESSAGES = [
   "Player is not working stable on mobile, sorry :(",
   "Sorry, mobile devices aren't supported. But I won't stop you...",
@@ -210,4 +237,5 @@ export {
   EE_MESSAGES,
   SHARE_MESSAGES,
   MOBILE_MESSAGES,
+  REFRESH_MESSAGES,
 };

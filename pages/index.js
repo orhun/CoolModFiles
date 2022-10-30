@@ -13,13 +13,14 @@ import {
   EE_MESSAGES,
   MOBILE_MESSAGES,
   BG_IMAGES,
+  REFRESH_MESSAGES,
 } from "../utils";
 import { useKeyPress } from "../hooks";
 import { isMobile } from "react-device-detect";
 
 function Index({ trackId, backSideContent, latestId }) {
   const [start, setStart] = React.useState(false);
-  const [randomMsg] = React.useState(
+  const [randomMsg, setRandomMsg] = React.useState(
     getRandomFromArray(getRandomInt(0, 158) ? MESSAGES : EE_MESSAGES)
   );
 
@@ -40,11 +41,19 @@ function Index({ trackId, backSideContent, latestId }) {
   }, [enterKey]);
 
   React.useEffect(() => {
+    if (localStorage.getItem("refresh") === "true"){
+      localStorage.setItem("refresh", false)
+      setRandomMsg(getRandomFromArray(REFRESH_MESSAGES))
+    } 
     ReactGA.initialize("UA-172416216-1");
     ReactGA.pageview(window.location.pathname + window.location.search);
     document.getElementById(
       "app"
     ).style.backgroundImage = `url('/images/${getRandomFromArray(BG_IMAGES)}')`;
+    window.onbeforeunload = function () {
+      localStorage.setItem("refresh", true)
+      return;
+    };
   }, []);
 
   if (start) {
