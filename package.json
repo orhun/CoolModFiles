@@ -24,7 +24,7 @@
     "dotenv": "^8.2.0",
     "file-saver": "^2.0.5",
     "isomorphic-unfetch": "^3.0.0",
-    "jszip": "^3.7.1",
+    "jszip": "^3.8.0",
     "markdown-to-jsx": "^6.11.4",
     "moment": "^2.29.4",
     "next": "^12.1.0",
