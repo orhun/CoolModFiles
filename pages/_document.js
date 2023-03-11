@@ -111,13 +111,14 @@ class MyDocument extends Document {
           <meta name="msapplication-TileColor" content="#000000" />
           <meta name="msapplication-TileImage" content="/favicon-144.png" />
           <meta name="msapplication-config" content="/browserconfig.xml" />
+          <script
+            async
+            defer
+            data-website-id="1f72dec7-782c-474c-9222-a7652f8e9b5f"
+            src="https://umami.orhun.dev/umami.js"
+          ></script>
           <script src="/chiptune2.js"></script>
           <script src="/libopenmpt.js"></script>
-          <script
-            data-ad-client="ca-pub-6716088693199036"
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-          ></script>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
           <link

@@ -33,7 +33,6 @@
     "react-device-detect": "^1.13.1",
     "react-dom": "^16.13.1",
     "react-drag-listview": "^0.1.7",
-    "react-ga": "^3.1.2",
     "react-toastify": "^6.0.8",
     "sass": "^1.26.9"
   },

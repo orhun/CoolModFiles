@@ -1,6 +1,5 @@
 import React from "react";
 import Head from "next/head";
-import ReactGA from "react-ga";
 import fetch from "isomorphic-unfetch";
 
 import Player from "../components/Player";
@@ -45,8 +44,6 @@ function Index({ trackId, backSideContent, latestId }) {
       localStorage.setItem("refresh", false)
       setRandomMsg(getRandomFromArray(REFRESH_MESSAGES))
     } 
-    ReactGA.initialize("UA-172416216-1");
-    ReactGA.pageview(window.location.pathname + window.location.search);
     document.getElementById(
       "app"
     ).style.backgroundImage = `url('/images/${getRandomFromArray(BG_IMAGES)}')`;
