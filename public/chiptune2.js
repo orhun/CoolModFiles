@@ -52,6 +52,11 @@ ChiptuneJsPlayer.prototype.duration = function() {
   );
 };
 
+/**
+ * Set approximate current song position.
+ * @param position Seconds to seek to. If seconds is out of range, the position
+ * gets set to song start or end respectively.
+ */
 ChiptuneJsPlayer.prototype.seek = function(position) {
   libopenmpt._openmpt_module_set_position_seconds(
     this.currentPlayingNode.modulePtr,
@@ -162,11 +167,41 @@ ChiptuneJsPlayer.prototype.togglePause = function() {
   }
 };
 
+/**
+ * Set Repeat Count.
+ * @param repeatCount Repeat Count
+ * <li> -1: repeat forever
+ * <li> 0: play once, repeat zero times (the default)
+ * <li> n>0: play once and repeat n times after that
+ */
 ChiptuneJsPlayer.prototype.setRepeatCount = function(repeatCount) {
   this.config.repeatCount = repeatCount;
   libopenmpt._openmpt_module_set_repeat_count(
     this.currentPlayingNode.modulePtr,
     repeatCount
+  );
+};
+
+/**
+ * Get the number of sub-songs.
+ * @return The number of sub-songs in the module. This includes any "hidden"
+ * songs (songs that share the same sequence, but start at different order
+ * indices) and "normal" sub-songs or "sequences" (if the format supports them).
+ */
+ChiptuneJsPlayer.prototype.getNumSubsongs = function () {
+  return libopenmpt._openmpt_module_get_num_subsongs(
+    this.currentPlayingNode.modulePtr
+  );
+};
+
+/**
+ * Select a sub-song from a multi-song module.
+ * @param subsong Index of the sub-song. -1 plays all sub-songs consecutively.
+ */
+ChiptuneJsPlayer.prototype.selectSubsong = function (subsong) {
+  libopenmpt._openmpt_module_select_subsong(
+    this.currentPlayingNode.modulePtr,
+    subsong
   );
 };
 
@@ -189,6 +224,10 @@ ChiptuneJsPlayer.prototype.createLibopenmptNode = function(buffer, config) {
     processNode.modulePtr,
     OPENMPT_MODULE_RENDER_MASTERGAIN_MILLIBEL,
     percToMillibel(config.volume),
+  );
+  libopenmpt._openmpt_module_set_repeat_count(
+    processNode.modulePtr,
+    config.repeatCount
   );
   var stack = stackSave();
   libopenmpt._openmpt_module_ctl_set(

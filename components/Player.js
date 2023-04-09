@@ -87,6 +87,7 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
     if (helpKey || quitKey) toggleHelpDrawer();
     if (repeatKey) {
       showToast(`repeat ${!repeat ? "on" : "off"}`);
+      player.setRepeatCount(!repeat ? -1 : 0)
       setRepeat(!repeat);
     }
     if (downloadKey) downloadTrack();
@@ -120,7 +121,7 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
 
   useInterval(
     () => {
-      setProgress(player.getPosition());
+      setProgress(player.getPosition() % player.duration());
       if (player.getPosition() === 0 && player.duration() === 0) {
         setIsPlay(false);
         if (repeat) {
@@ -134,7 +135,7 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
   );
 
   React.useEffect(() => {
-    setPlayer(new ChiptuneJsPlayer(new ChiptuneJsConfig(0, volume)));
+    setPlayer(new ChiptuneJsPlayer(new ChiptuneJsConfig(repeat ? -1 : 0, volume)));
   }, []);
 
   React.useEffect(() => {
