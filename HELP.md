@@ -7,7 +7,7 @@ It's a web player that works by simply fetching a random module from [modarchive
 You can whether use your mouse/touchpad to click on the cyberpunk-themed cool icons or choose the dark path of hacky key bindings.
 
 | Key            | Action                       |
-|----------------|------------------------------|
+| -------------- | ---------------------------- |
 | [enter][space] | play/pause                   |
 | [up][n][k]     | play the next (random) song  |
 | [down][p][j]   | play the previous song       |
