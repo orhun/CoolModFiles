@@ -278,6 +278,7 @@ function PlayerBig({
                 width="30"
                 onClick={() => {
                   showToast(`repeat ${!repeat ? "on" : "off"}`);
+                  player.setRepeatCount(!repeat ? -1 : 0)
                   setRepeat(!repeat);
                 }}
               />
