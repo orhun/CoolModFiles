@@ -15,6 +15,8 @@ When the awesome tracks started piling up, however, it naturally brought about a
 
 The programmer friends' idea, unfortunately, was beaten by [modarchive.org](https://modarchive.org) many years ago. Realizing how unnecessary creating another internet archive was, the project evolved into a cool web player instead. A group of 3 came together to create what is known today as [CoolModFiles.com](https://CoolModFiles.com). With it's modern look, it continues to surface thousands of long-forgotten mod files to introduce newer generations to the world of old-school digital music.
 
+[Click here to watch the introduction video](https://www.youtube.com/watch?v=NZa5hne8Noo).
+
 ## License
 
 GNU General Public License[\*](https://www.gnu.org/licenses/gpl.txt)
