@@ -12,7 +12,7 @@ import ClipIcon from "./ClipIcon";
 import TwitterOutlineIcon from "./TwitterOutlineIcon";
 import ArrowSimpleIcon from "./ArrowSimpleIcon";
 import QuestionIcon from "./QuestionIcon";
-import PatreonIcon from "./PatreonIcon";
+import SupportIcon from "./SupportIcon";
 import RepeatIcon from "./RepeatIcon";
 import LikeButton from "./LikeIcon";
 import PlayListButton from "./PlayListIcon";
@@ -32,7 +32,7 @@ export {
   TwitterOutlineIcon,
   ArrowSimpleIcon,
   QuestionIcon,
-  PatreonIcon,
+  SupportIcon,
   RepeatIcon,
   LikeButton,
   PlayListButton,

@@ -1,7 +1,7 @@
 import React from "react";
 
 import styles from "./Footer.module.scss";
-import { TwitterIcon, GithubIcon, PatreonIcon } from "../icons";
+import { TwitterIcon, GithubIcon, SupportIcon } from "../icons";
 
 function Footer() {
   return (
@@ -12,8 +12,8 @@ function Footer() {
       <a href="https://github.com/orhun/CoolModFiles" target="_blank">
         <GithubIcon height="40" width="40" />
       </a>
-      <a href="https://www.patreon.com/orhunp" target="_blank">
-        <PatreonIcon height="40" width="40" />
+      <a href="https://donate.orhun.dev" target="_blank">
+        <SupportIcon height="40" width="40" />
       </a>
     </footer>
   );
