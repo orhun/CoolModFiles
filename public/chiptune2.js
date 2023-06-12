@@ -53,6 +53,26 @@ ChiptuneJsPlayer.prototype.duration = function() {
 };
 
 /**
+ * Get the libopenmpt version number.
+ * Returns the libopenmpt version number.
+ */
+ChiptuneJsPlayer.prototype.getLibraryVersion = function() {
+  // The value represents (major << 24 + minor << 16 + patch << 0).
+  const libVer = libopenmpt._openmpt_get_library_version();
+  return `OpenMPT Lib v${libVer >> 24}.${libVer >> 16 & 0xFF}.${libVer & 0xFFFF}`;
+}
+
+/**
+ * Get the core version number.
+ * Return the OpenMPT core version number.
+ */
+ChiptuneJsPlayer.prototype.getCoreVersion = function() {
+  // The value represents (majormajor << 24 + major << 16 + minor << 8 + minorminor).
+  const libVer = libopenmpt._openmpt_get_core_version();
+  return `OpenMPT Core v${libVer >> 24}.${libVer >> 16 & 0xFF}.${libVer >> 8 & 0xFF}.${libVer & 0xFF}`;
+}
+
+/**
  * Set approximate current song position.
  * @param position Seconds to seek to. If seconds is out of range, the position
  * gets set to song start or end respectively.
@@ -206,7 +226,7 @@ ChiptuneJsPlayer.prototype.selectSubsong = function (subsong) {
 };
 
 ChiptuneJsPlayer.prototype.createLibopenmptNode = function(buffer, config) {
-  var maxFramesPerChunk = 4096;
+  const maxFramesPerChunk = 4096;
   var processNode = this.context.createScriptProcessor(2048, 0, 2);
   processNode.config = config;
   processNode.player = this;
@@ -245,15 +265,15 @@ ChiptuneJsPlayer.prototype.createLibopenmptNode = function(buffer, config) {
   processNode.leftBufferPtr = libopenmpt._malloc(4 * maxFramesPerChunk);
   processNode.rightBufferPtr = libopenmpt._malloc(4 * maxFramesPerChunk);
   processNode.cleanup = function() {
-    if (this.modulePtr != 0) {
+    if (this.modulePtr !== 0) {
       libopenmpt._openmpt_module_destroy(this.modulePtr);
       this.modulePtr = 0;
     }
-    if (this.leftBufferPtr != 0) {
+    if (this.leftBufferPtr !== 0) {
       libopenmpt._free(this.leftBufferPtr);
       this.leftBufferPtr = 0;
     }
-    if (this.rightBufferPtr != 0) {
+    if (this.rightBufferPtr !== 0) {
       libopenmpt._free(this.rightBufferPtr);
       this.rightBufferPtr = 0;
     }
@@ -280,7 +300,7 @@ ChiptuneJsPlayer.prototype.createLibopenmptNode = function(buffer, config) {
     var outputL = e.outputBuffer.getChannelData(0);
     var outputR = e.outputBuffer.getChannelData(1);
     var framesToRender = outputL.length;
-    if (this.ModulePtr == 0) {
+    if (this.modulePtr === 0) {
       for (var i = 0; i < framesToRender; ++i) {
         outputL[i] = 0;
         outputR[i] = 0;
@@ -308,7 +328,7 @@ ChiptuneJsPlayer.prototype.createLibopenmptNode = function(buffer, config) {
         this.leftBufferPtr,
         this.rightBufferPtr
       );
-      if (actualFramesPerChunk == 0) {
+      if (actualFramesPerChunk === 0) {
         ended = true;
         error = !this.modulePtr;
       }
@@ -343,7 +363,7 @@ ChiptuneJsPlayer.prototype.createLibopenmptNode = function(buffer, config) {
 };
 
 function asciiToStack(str) {
-  var stackStr = stackAlloc(str.length + 1);
+  const stackStr = stackAlloc(str.length + 1);
   writeAsciiToMemory(str, stackStr);
   return stackStr;
 }

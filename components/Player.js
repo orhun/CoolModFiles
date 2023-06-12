@@ -135,7 +135,10 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
   );
 
   React.useEffect(() => {
-    setPlayer(new ChiptuneJsPlayer(new ChiptuneJsConfig(repeat ? -1 : 0, volume)));
+    const jsPlayer = new ChiptuneJsPlayer(new ChiptuneJsConfig(repeat ? -1 : 0, volume));
+    setPlayer(jsPlayer);
+    console.log("%c " + jsPlayer.getLibraryVersion(), "color: red")
+    console.log("%c " + jsPlayer.getCoreVersion(), "color: red")
   }, []);
 
   React.useEffect(() => {
