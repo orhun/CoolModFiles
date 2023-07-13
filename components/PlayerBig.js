@@ -17,6 +17,7 @@ import {
   RepeatIcon,
   LikeButton,
   PlayListButton,
+  VolumeIcon,
 } from "../icons";
 import LoadingState from "./LoadingState";
 import { getRandomFromArray, showToast, SHARE_MESSAGES } from "../utils";
@@ -131,6 +132,13 @@ function PlayerBig({
               setVolume(val);
               player.setVolume(val);
             }}
+          />
+          <span className={styles.volumePercent}>{volume}%</span>
+          <VolumeIcon
+            className={styles.volume}
+            height="30"
+            width="30"
+            volume={volume}
           />
         </div>
         <div className={styles.contentPlayer}>

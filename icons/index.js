@@ -16,6 +16,7 @@ import SupportIcon from "./SupportIcon";
 import RepeatIcon from "./RepeatIcon";
 import LikeButton from "./LikeIcon";
 import PlayListButton from "./PlayListIcon";
+import VolumeIcon from "./VolumeIcon";
 
 export {
   PlayButton,
@@ -36,4 +37,5 @@ export {
   RepeatIcon,
   LikeButton,
   PlayListButton,
+  VolumeIcon,
 };
