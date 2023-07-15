@@ -116,6 +116,7 @@ function PlayerBig({
     <React.Fragment>
       <div className={styles.container}>
         <div className={styles.contentVolume}>
+          <span className={styles.volumePercent}>{volume}%</span>
           <Slider
             railStyle={{backgroundColor: "white", width: 6}}
             trackStyle={{backgroundColor: "#bd00ff", width: 6}}
@@ -133,9 +134,8 @@ function PlayerBig({
               player.setVolume(val);
             }}
           />
-          <span className={styles.volumePercent}>{volume}%</span>
           <VolumeIcon
-            className={styles.volume}
+            className={styles.volumeIcon}
             height="30"
             width="30"
             volume={volume}
