@@ -13,6 +13,9 @@ You can whether use your mouse/touchpad to click on the cyberpunk-themed cool ic
 | [down][p][j]   | play the previous song       |
 | [right][l]     | skip forward 5 seconds       |
 | [left][h]      | skip back 5 seconds          |
+| [a]            | volume up 5%                 |
+| [z]            | volume down 5%               |
+| [x]            | mute/unmute volume           |
 | [shift]        | minimize/maximize the player |
 | [1]            | turn on/off repeat           |
 | [d]            | download the song            |
