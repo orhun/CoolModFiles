@@ -22,6 +22,7 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
     if(rememberedVolume > -1) return rememberedVolume
     return DEFAULT_VOLUME;
   });
+  const [unmuteVolume, setUnmuteVolume] = React.useState(DEFAULT_VOLUME);
   const [maxId] = React.useState(latestId);
   const [trackId, setTrackId] = React.useState(
     sharedTrackId || getRandomInt(0, latestId)
@@ -235,6 +236,17 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
       });
   };
 
+  const toggleMute = () => {
+    if (volume > 0) {
+      setUnmuteVolume(volume);
+      setVolume(0);
+      player.setVolume(0);
+    } else {
+      setVolume(unmuteVolume);
+      player.setVolume(unmuteVolume);
+    }
+  };
+
   const toggleHelpDrawer = () => {
     setHelpDrawerOpen(!helpDrawerOpen);
   };
@@ -335,6 +347,7 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
               player={player}
               volume={volume}
               setVolume={setVolume}
+              toggleMute={toggleMute}
               isPlay={isPlay}
               togglePlay={togglePlay}
               setProgress={setProgress}

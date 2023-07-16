@@ -37,6 +37,7 @@ function PlayerBig({
   player,
   volume,
   setVolume,
+  toggleMute,
   isPlay,
   togglePlay,
   setProgress,
@@ -139,6 +140,7 @@ function PlayerBig({
             height="30"
             width="30"
             volume={volume}
+            onClick={toggleMute}
           />
         </div>
         <div className={styles.contentPlayer}>
