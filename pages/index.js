@@ -40,17 +40,14 @@ function Index({ trackId, backSideContent, latestId }) {
   }, [enterKey]);
 
   React.useEffect(() => {
-    if (localStorage.getItem("refresh") === "true"){
-      localStorage.setItem("refresh", false)
+    if (sessionStorage.getItem("refresh") === "true"){
       setRandomMsg(getRandomFromArray(REFRESH_MESSAGES))
-    } 
+    } else {
+      sessionStorage.setItem("refresh", "true")
+    }
     document.getElementById(
       "app"
     ).style.backgroundImage = `url('/images/${getRandomFromArray(BG_IMAGES)}')`;
-    window.onbeforeunload = function () {
-      localStorage.setItem("refresh", true)
-      return;
-    };
   }, []);
 
   if (start) {
