@@ -17,6 +17,7 @@ import {
   RepeatIcon,
   LikeButton,
   PlayListButton,
+  VolumeIcon,
 } from "../icons";
 import LoadingState from "./LoadingState";
 import { getRandomFromArray, showToast, SHARE_MESSAGES } from "../utils";
@@ -36,6 +37,7 @@ function PlayerBig({
   player,
   volume,
   setVolume,
+  toggleMute,
   isPlay,
   togglePlay,
   setProgress,
@@ -115,6 +117,7 @@ function PlayerBig({
     <React.Fragment>
       <div className={styles.container}>
         <div className={styles.contentVolume}>
+          <span className={styles.volumePercent}>{volume}%</span>
           <Slider
             railStyle={{backgroundColor: "white", width: 6}}
             trackStyle={{backgroundColor: "#bd00ff", width: 6}}
@@ -131,6 +134,13 @@ function PlayerBig({
               setVolume(val);
               player.setVolume(val);
             }}
+          />
+          <VolumeIcon
+            className={styles.volumeIcon}
+            height="30"
+            width="30"
+            volume={volume}
+            onClick={toggleMute}
           />
         </div>
         <div className={styles.contentPlayer}>

@@ -22,6 +22,7 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
     if(rememberedVolume > -1) return rememberedVolume
     return DEFAULT_VOLUME;
   });
+  const [unmuteVolume, setUnmuteVolume] = React.useState(DEFAULT_VOLUME);
   const [maxId] = React.useState(latestId);
   const [trackId, setTrackId] = React.useState(
     sharedTrackId || getRandomInt(0, latestId)
@@ -80,6 +81,9 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
   ];
   const [rightKey, rightKeyVim] = [useKeyPress("ArrowRight"), useKeyPress("l")];
   const [leftKey, leftKeyVim] = [useKeyPress("ArrowLeft"), useKeyPress("h")];
+  const volumeUpKey = useKeyPress("a");
+  const volumeDownKey = useKeyPress("z");
+  const volumeMuteKey = useKeyPress("x");
 
   React.useEffect(() => {
     if (spaceKey || enterKey) togglePlay();
@@ -98,6 +102,15 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
       player.seek(player.getPosition() + 5);
     if ((leftKey || leftKeyVim) && isPlay)
       player.seek(player.getPosition() - 5);
+    if (volumeUpKey) {
+      setVolume(Math.min(100, volume + 5));
+      player.setVolume(Math.min(100, volume + 5));
+    }
+    if (volumeDownKey) {
+      setVolume(Math.max(0, volume - 5));
+      player.setVolume(Math.max(0, volume - 5));
+    }
+    if (volumeMuteKey) toggleMute();
   }, [
     spaceKey,
     enterKey,
@@ -117,6 +130,9 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
     rightKeyVim,
     leftKey,
     leftKeyVim,
+    volumeUpKey,
+    volumeDownKey,
+    volumeMuteKey,
   ]);
 
   useInterval(
@@ -235,6 +251,17 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
       });
   };
 
+  const toggleMute = () => {
+    if (volume > 0) {
+      setUnmuteVolume(volume);
+      setVolume(0);
+      player.setVolume(0);
+    } else {
+      setVolume(unmuteVolume);
+      player.setVolume(unmuteVolume);
+    }
+  };
+
   const toggleHelpDrawer = () => {
     setHelpDrawerOpen(!helpDrawerOpen);
   };
@@ -335,6 +362,7 @@ function Player({ sharedTrackId, backSideContent, latestId }) {
               player={player}
               volume={volume}
               setVolume={setVolume}
+              toggleMute={toggleMute}
               isPlay={isPlay}
               togglePlay={togglePlay}
               setProgress={setProgress}
