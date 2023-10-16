@@ -113,9 +113,8 @@ class MyDocument extends Document {
           <meta name="msapplication-config" content="/browserconfig.xml" />
           <script
             async
-            defer
+            src="https://umami.orhun.dev/script.js"
             data-website-id="1f72dec7-782c-474c-9222-a7652f8e9b5f"
-            src="https://umami.orhun.dev/umami.js"
           ></script>
           <script src="/chiptune2.js"></script>
           <script src="/libopenmpt.js"></script>
