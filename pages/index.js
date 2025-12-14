@@ -15,10 +15,13 @@ import {
   REFRESH_MESSAGES,
 } from "../utils";
 import { useKeyPress } from "../hooks";
-import { isMobile } from "react-device-detect";
+
+const MOBILE_UA_REGEX =
+  /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
 
 function Index({ trackId, backSideContent, latestId }) {
   const [start, setStart] = React.useState(false);
+  const [isMobile, setIsMobile] = React.useState(false);
   const [randomMsg, setRandomMsg] = React.useState(
     getRandomFromArray(getRandomInt(0, 158) ? MESSAGES : EE_MESSAGES)
   );
@@ -38,6 +41,12 @@ function Index({ trackId, backSideContent, latestId }) {
   React.useEffect(() => {
     if (enterKey) setStart(true);
   }, [enterKey]);
+
+  React.useEffect(() => {
+    if (typeof navigator === "undefined") return;
+    const ua = navigator.userAgent || navigator.vendor || "";
+    setIsMobile(MOBILE_UA_REGEX.test(ua));
+  }, []);
 
   React.useEffect(() => {
     if (sessionStorage.getItem("refresh") === "true"){
