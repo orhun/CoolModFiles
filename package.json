@@ -30,7 +30,7 @@
     "jszip": "^3.8.0",
     "markdown-to-jsx": "^7.4.0",
     "moment": "^2.29.4",
-    "next": "^14.2.35",
+    "next": "^16.1.5",
     "rc-slider": "^9.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
